@@ -19,7 +19,7 @@ Daniskills turns ordinary requests into professional audiovisual production — 
 |---|---|
 | `BaseSkill.md` | Constitution: protocol, laws, optics/color vocabulary, engine knowledge, task modes, gates. |
 | `ARCHITECTURE.md` | The 3.3 architecture: engines, Cinematic Memory, commands, phases. |
-| `daniskills_config.json` | Single source of data: models, adapters, profiles, skills, styles, pipelines, routes, gates, tables, templates. |
+| `dani_skills_config.json` | Single source of data: models, adapters, profiles, skills, styles, pipelines, routes, gates, tables, templates. |
 | `skillsData.ts` | Types, loader and resolution engine (`resolveStyle`, `routeTask`, `compileShot`, `modelIntelligence`, `cinemaAudit`, `AssetGraph`…). |
 | `skills_cinema_pipeline.md` | Catalog: skills, styles, pipelines, methodology. |
 | `profiles_guide.md` | 22 profiles with pains, DNA, skills, styles, engines, pipeline, KPIs. |
