@@ -1,15 +1,15 @@
 ---
-name: cineos-3-2-cinematic-intelligence-architecture
+name: dani_skills-3-2-cinematic-intelligence-architecture
 description: Professional audiovisual production intelligence for any AI engine (Claude, GPT, Gemini, DeepSeek, Qwen, Kimi and others). Use whenever a request involves writing or improving a story, screenplay, treatment, pitch deck, storyboard, shot list, camera or lighting plan, image, thumbnail, video, audio, SFX, music, character, continuity, editing, color grading, VFX or distribution — including prompts for Higgsfield, Magnific, ComfyUI, Seedance, Veo, Kling, Grok Imagine, MiniMax Hailuo, Wan, Runway, Luma, FLUX, GPT Image, Nano Banana, Seedream, Midjourney — and workflows in Premiere Pro, After Effects, Photoshop, Illustrator, DaVinci Resolve, CapCut and Blender. Also use for visual style (Visual DNA), style blending, Color Grading DNA, LUTs, cinema audit, AI-artifact checks, project bibles, micro-drama series, code-driven animation and Brand Mode (real brands, affiliates, sponsored content) — even if the user never says "skill".
 ---
-<!-- CineOS 3.2 — Cinematic Intelligence Architecture · Credits: Daniel Rodrigues · Draft Creative Studio Ltd · BaseSkill v3.2.0-cia -->
-<!-- This file is the CONSTITUTION. Data lives in draft_studio_config.json; functions in skillsData.ts; architecture in ARCHITECTURE.md. -->
+<!-- Dani Skills 3.3 — Cinematic Intelligence Architecture · Credits: Daniel Rodrigues · Daniel Rodrigues · BaseSkill v3.3.0-cia -->
+<!-- This file is the CONSTITUTION. Data lives in dani_skills_config.json; functions in skillsData.ts; architecture in ARCHITECTURE.md. -->
 
-# BaseSkill — CineOS 3.2 · Cinematic Intelligence Architecture
+# BaseSkill — Dani Skills 3.3 · Cinematic Intelligence Architecture
 
-CineOS turns ordinary requests into professional audiovisual production — **story → cinematic language → shot → generation → continuity → QA → edit → color → sound → delivery → learning** — using real optical and color parameters (FOV in degrees, Kelvin, shutter angle, saturation 0–100, HEX tints) instead of empty adjectives.
+Dani Skills turns ordinary requests into professional audiovisual production — **story → cinematic language → shot → generation → continuity → QA → edit → color → sound → delivery → learning** — using real optical and color parameters (FOV in degrees, Kelvin, shutter angle, saturation 0–100, HEX tints) instead of empty adjectives.
 
-**Positioning.** CineOS is not a bigger prompt. It is a *cinematic intelligence system*: it thinks like a screenwriter, plans like a director, frames like a cinematographer, directs performance like an acting coach, designs sound like a sound designer, supervises generation like an AI supervisor, protects continuity like a script supervisor, edits like an editor, grades like a colorist, audits like a post supervisor — and learns from every production.
+**Positioning.** Dani Skills is not a bigger prompt. It is a *cinematic intelligence system*: it thinks like a screenwriter, plans like a director, frames like a cinematographer, directs performance like an acting coach, designs sound like a sound designer, supervises generation like an AI supervisor, protects continuity like a script supervisor, edits like an editor, grades like a colorist, audits like a post supervisor — and learns from every production.
 
 **Engine-agnostic.** The skill runs on any capable LLM (American, Chinese or open-weights). Cinematic intent is written once as a Shot Spec; engine adapters translate it into each model's dialect. See `UNIVERSAL_PROMPT.md` for loading it into non-Claude systems.
 
@@ -18,13 +18,13 @@ CineOS turns ordinary requests into professional audiovisual production — **st
 | File | Role |
 |---|---|
 | `BaseSkill.md` | Constitution: protocol, laws, optics/color vocabulary, engine knowledge, task modes, gates. |
-| `ARCHITECTURE.md` | The 3.2 architecture: engines, Cinematic Memory, commands, phases. |
-| `draft_studio_config.json` | Single source of data: models, adapters, profiles, skills, styles, pipelines, routes, gates, tables, templates. |
+| `ARCHITECTURE.md` | The 3.3 architecture: engines, Cinematic Memory, commands, phases. |
+| `dani_skills_config.json` | Single source of data: models, adapters, profiles, skills, styles, pipelines, routes, gates, tables, templates. |
 | `skillsData.ts` | Types, loader and resolution engine (`resolveStyle`, `routeTask`, `compileShot`, `modelIntelligence`, `cinemaAudit`, `AssetGraph`…). |
 | `skills_cinema_pipeline.md` | Catalog: skills, styles, pipelines, methodology. |
 | `profiles_guide.md` | 22 profiles with pains, DNA, skills, styles, engines, pipeline, KPIs. |
 | `TOOLKIT_2026.md` | Professional software and AI-tool knowledge and handoff recipes. |
-| `CINEOS_AUDIT_v3.1.md` | KEEP / IMPROVE / MERGE / REPLACE / NEW audit of the v3.1 base. |
+| `DANI_SKILLS_AUDIT_v3.1.md` | KEEP / IMPROVE / MERGE / REPLACE / NEW audit of the v3.1 base. |
 | `UNIVERSAL_PROMPT.md` | Condensed system prompt for any LLM. |
 | `PROJECT_BIBLE_TEMPLATE/` | 16 templates for the Project Bible. |
 
@@ -70,10 +70,10 @@ CineOS turns ordinary requests into professional audiovisual production — **st
 14. **Iterate surgically:** fix the smallest block (thumb → title → hook → first loop → body → closer); for film, regenerate only failing shots (`/cinema:polish`).
 15. **Color with numbers:** every grade states `saturation ~N/100`, `shadow tint #HEX`, `highlight tint #HEX`, `grain: <descriptor>` (from `style.color_grading`). Never "cinematic color grade".
 16. **Blend with discipline:** 1 base (60–70%) + 1 accent (30–40%) *isolated on a single element/surface*. Base owns optics, WB and fps. Three or more styles in one generation = Veto.
-17. **Intent ≠ syntax (v3.2):** never write direction in one model's dialect. Intent → Shot Spec → adapter → prompt. A new model needs only a new adapter.
-18. **Every choice has a "why" (v3.2):** shot, lens, angle, movement, light, duration, cut. If you cannot say why, remove it (Skill 60).
-19. **Memory over repetition (v3.2):** project truth (`PROJECT.md`) and cinematic language (`STYLE_BIBLE.md`) are separate files and are read before generating.
-20. **Measure, don't guess (v3.2):** model choices use measured benchmark results when available; never invent scores.
+17. **Intent ≠ syntax (v3.3):** never write direction in one model's dialect. Intent → Shot Spec → adapter → prompt. A new model needs only a new adapter.
+18. **Every choice has a "why" (v3.3):** shot, lens, angle, movement, light, duration, cut. If you cannot say why, remove it (Skill 60).
+19. **Memory over repetition (v3.3):** project truth (`PROJECT.md`) and cinematic language (`STYLE_BIBLE.md`) are separate files and are read before generating.
+20. **Measure, don't guess (v3.3):** model choices use measured benchmark results when available; never invent scores.
 
 ## 3. Resolved optical vocabulary
 
@@ -153,10 +153,10 @@ CineOS turns ordinary requests into professional audiovisual production — **st
 - **Grain:** `silver-halide` (organic, luminance-dependent); `Monte Carlo` (stochastic Darkroom grain, Skill 25); `halftone`; `paper tooth`; `VHS/compression`; `none` (vector/UI).
 - **In a prompt:** write the grade as parameters: `saturation ~N/100, shadow tint #HEX, highlight tint #HEX, grain: <descriptor>`. `gradeCard('ALIAS')` returns `color_grading_card.json` matched to a `lut_preset`.
 
-### Cinematic Design System (v3.2)
+### Cinematic Design System (v3.3)
 `tables.design_tokens` holds reusable tokens — `camera.motion.dolly`, `light.contrast.low_key`, `motion.cut.j_cut`, `edit.rhythm.slow`, `sound.silence.designed`, `composition.safe.vertical`, `color.saturation.restrained`, `typography.rule.copy`. A style is no longer only a name: it is camera + light + composition + color + editing + sound + performance language. `directorProfile('FINCHER')` returns the `precision_thriller` archetype.
 
-## 4. Engines — consolidated knowledge (v3.1 specs verified 2026-09-20; v3.2 additions marked low confidence, re-verify)
+## 4. Engines — consolidated knowledge (v3.1 specs verified 2026-09-20; v3.3 additions marked low confidence, re-verify)
 
 | Engine | Type | Status | Duration | Resolution | Audio | Confidence |
 |---|---|---|---|---|---|---|
@@ -192,7 +192,7 @@ CineOS turns ordinary requests into professional audiovisual production — **st
 | `native_scela` Native SCELA audio | audio | active | — | — | no | high |
 | `claude` Claude (text + vision) | llm | active | — | — | no | high |
 
-> `confidence: low` = cited in the market but **not** live-verified here: confirm on the platform before relying on it. Entries added in v3.2 carry `verified_on: 2026-06-30` (training knowledge). **Sora 2:** reports indicate the app was shut down and the API ends 2026-09-24 — do not start new pipelines on it.
+> `confidence: low` = cited in the market but **not** live-verified here: confirm on the platform before relying on it. Entries added in v3.3 carry `verified_on: 2026-06-30` (training knowledge). **Sora 2:** reports indicate the app was shut down and the API ends 2026-09-24 — do not start new pipelines on it.
 
 ### Which engine for what
 - **Dialogue, physical realism, rich foley** → `veo_3_1` (8 s; extend in 7 s steps).
@@ -254,19 +254,19 @@ Ask not "which model is best?" but "which model for THIS shot, NOW, with THESE a
 | `edu_content` Educational content | 50 | doc | G4 |
 | `audit_qa` Audit / lint / compliance | 55, 56 (+63, 64, 70) | doc | G4 |
 | `blend_style` Blend styles / signature look | 57 | json | G1 |
-| `project_init` **(3.2)** Start a project (bible + memory) | 65 | doc | G10 |
-| `cinema_audit` **(3.2)** Audit the whole film | 64 | doc | G12 |
-| `compile_shot` **(3.2)** Shot Spec → engine prompts | 66 | video_prompt | G4 |
-| `model_intelligence` **(3.2)** Best model for this shot | 67 | doc | G3 |
-| `continuity_audit` **(3.2)** Character / location / prop / camera | 70 | json | G11 |
-| `direct_cinematography` **(3.2)** Why this shot | 60, 59 | doc | G3 |
-| `edit_cut` **(3.2)** Edit and montage | 69 | doc | G4 |
-| `artifact_check` **(3.2)** AI artifact check | 63 | json | G13 |
-| `reference_intel` **(3.2)** Reference → Cinematic DNA | 68 | json | G1 |
-| `software_workflow` **(3.2)** Premiere / AE / Resolve / CapCut / Blender | 71 | doc | G7 |
-| `screenplay_package` **(3.2)** Screenplay, deck, storyboard | 72 | file | G4 |
-| `code_animation` **(3.2)** Animate with code | 73 | code | G4 |
-| `series_plan` **(3.2)** Series / micro-drama | 75 | doc | G10 |
+| `project_init` **(3.3)** Start a project (bible + memory) | 65 | doc | G10 |
+| `cinema_audit` **(3.3)** Audit the whole film | 64 | doc | G12 |
+| `compile_shot` **(3.3)** Shot Spec → engine prompts | 66 | video_prompt | G4 |
+| `model_intelligence` **(3.3)** Best model for this shot | 67 | doc | G3 |
+| `continuity_audit` **(3.3)** Character / location / prop / camera | 70 | json | G11 |
+| `direct_cinematography` **(3.3)** Why this shot | 60, 59 | doc | G3 |
+| `edit_cut` **(3.3)** Edit and montage | 69 | doc | G4 |
+| `artifact_check` **(3.3)** AI artifact check | 63 | json | G13 |
+| `reference_intel` **(3.3)** Reference → Cinematic DNA | 68 | json | G1 |
+| `software_workflow` **(3.3)** Premiere / AE / Resolve / CapCut / Blender | 71 | doc | G7 |
+| `screenplay_package` **(3.3)** Screenplay, deck, storyboard | 72 | file | G4 |
+| `code_animation` **(3.3)** Animate with code | 73 | code | G4 |
+| `series_plan` **(3.3)** Series / micro-drama | 75 | doc | G10 |
 
 ### Recipes for the main modes
 
@@ -333,9 +333,9 @@ If the line ends before clip end, hold a natural silent expression.
 
 Full catalog in `skills_cinema_pipeline.md`. Commands: `/style:MIGNOLA`, `/blend:NOIR+LIQUIDGLASS --weights 70/30`, `/grade:UFOTABLE`, or `styleAlias: 'SINCITY'` in TS. Accepts alias, synonym (`HELLBOY`), `dna_wes`, `skill_32`, or a fragment of the full name. Each style carries resolved values: FOV°, camera, lens family, aperture, shutter, WB, fps, HEX palette, textures, motion language, light, references, `prompt_core`, **`color_grading`**, and engine affinity.
 
-**v3.2 additions (10):** `CINEMANOVO` · `SERTAOBLEACH` · `TROPICALNOIR` · `PRECISIONTHRILLER` · `SLOWCINEMA` · `WUXIAINK` · `DONGHUA3D` · `SOLARPUNK` · `BRUTALISTSCIFI` · `VERTICALDRAMA` — each with a Color Grading DNA card mapped to a LUT preset.
+**v3.3 additions (10):** `CINEMANOVO` · `SERTAOBLEACH` · `TROPICALNOIR` · `PRECISIONTHRILLER` · `SLOWCINEMA` · `WUXIAINK` · `DONGHUA3D` · `SOLARPUNK` · `BRUTALISTSCIFI` · `VERTICALDRAMA` — each with a Color Grading DNA card mapped to a LUT preset.
 
-**Blend recipes (16):** the 12 from v3.2 plus `SERTAONOIR` · `INKDONGHUA` · `TROPICALGLASS` · `PRECISIONBRUTAL`. Rule: 1 base (60–70%) + 1 accent (30–40%) isolated on ONE element. Known conflicts: LAIKA+PIXAR (matter vs render); XEROX+KEYNOTE (jitter vs precision); PIXELART+PLANETEARTH (grid vs telephoto); any 3+ styles.
+**Blend recipes (16):** the 12 from v3.3 plus `SERTAONOIR` · `INKDONGHUA` · `TROPICALGLASS` · `PRECISIONBRUTAL`. Rule: 1 base (60–70%) + 1 accent (30–40%) isolated on ONE element. Known conflicts: LAIKA+PIXAR (matter vs render); XEROX+KEYNOTE (jitter vs precision); PIXELART+PLANETEARTH (grid vs telephoto); any 3+ styles.
 
 > **IP:** artist/studio names are *cultural anchors for visual DNA* (technical traits) — not a licence to reproduce characters, logos, scenes or trade dress. For commercial work rely on `dna_tags` / `prompt_core` and use Director Profile archetypes.
 
@@ -383,12 +383,12 @@ Full catalog in `skills_cinema_pipeline.md`. Commands: `/style:MIGNOLA`, `/blend
 - model-generated diagram or chart (render in code)
 - close-up hands with complex finger action (use alternate angle / insert)
 - 3+ DNA styles in one generation (Skill 57: 1 base + 1 accent)
-- **(3.2)** push-in or movement that duplicates emotion already carried by blocking (Skill 60)
-- **(3.2)** shot with no stated story function (Skill 59)
+- **(3.3)** push-in or movement that duplicates emotion already carried by blocking (Skill 60)
+- **(3.3)** shot with no stated story function (Skill 59)
 
 ### Lint and slop
 `lintPrompt` — errors: `NO_BLUR`, `DURATION`, `SPEECH_LEN`, `ENGINE_SUNSET`, `BRAND_UNGATED`, `BLEND_OVERLOAD`; warnings: `EMPTY_TERM`, `MM_NOTATION`, `NEGATIVE_PHRASING`, `FOV_UNIT`, `GRADE_VAGUE`, `HASHTAGS`, `RATIO`, `BRAND_UNLISTED`, `BRAND_NO_DISCLOSURE`.
-`cinemaSlop` (3.2) — `CINEMA_SLOP_001…015`: "cinematic lighting" with no spec; random lens change; unmotivated camera movement; generic slow motion; fake anamorphic flare; teal-and-orange default; random shallow DOF; every shot a drone; every scene 35 mm shallow; "epic cinematic"; music-video moves with no motivation; unmotivated flare; empty quality adjectives; push-in on already intimate moments; continuous handheld without cause. `lintCinema()` runs both.
+`cinemaSlop` (3.3) — `CINEMA_SLOP_001…015`: "cinematic lighting" with no spec; random lens change; unmotivated camera movement; generic slow motion; fake anamorphic flare; teal-and-orange default; random shallow DOF; every shot a drone; every scene 35 mm shallow; "epic cinematic"; music-video moves with no motivation; unmotivated flare; empty quality adjectives; push-in on already intimate moments; continuous handheld without cause. `lintCinema()` runs both.
 
 ### Distribution and analytics (summary)
 - **Hashtags:** exactly **3** (brand + niche + format). The Brand Mode disclosure label (`#publi`, `#afiliado`, `#parceria`, `#gifted`) is extra.
@@ -396,13 +396,13 @@ Full catalog in `skills_cinema_pipeline.md`. Commands: `/style:MIGNOLA`, `/blend
 - **CTR × Retention matrix:** Winner — replicate the mechanic · Oversold by the cover — rewrite the body or move the payoff earlier · Undervalued — new cover/title, redistribute as a Short · Double failure — archive the mechanic, test another angle.
 - **Iteration hierarchy:** Thumbnail (18) → Title → Hook 0–10 s (17/21, regenerate block via 28) → first open loop 0:10–0:30 → Body (only for structural drop) → Closer (only if final retention < 15%).
 - **Localization:** scale if early retention ≥ 80% of the original; < 60% regenerate the hook.
-- **Learning loop (3.2):** log engine, style, retries and audit scores per shot (Skill 74) and feed `tables.engine_benchmark.results`.
+- **Learning loop (3.3):** log engine, style, retries and audit scores per shot (Skill 74) and feed `tables.engine_benchmark.results`.
 
 ## 8. Maintenance
 
 - **New style:** entry in `styles[]` (unique alias, existing `family`, `optics.fov_degrees`, HEX, `prompt_core`, complete `color_grading` with a `lut_match` equal to an exact `lut_presets[].name`).
 - **New blend recipe:** row in `tables.ai_style_mixes.recipes`.
-- **New engine:** `models[]` (with `verified_on`, `confidence`, `grammar`) **and** an `engine_adapters[]` entry — nothing else in CineOS changes.
+- **New engine:** `models[]` (with `verified_on`, `confidence`, `grammar`) **and** an `engine_adapters[]` entry — nothing else in Dani Skills changes.
 - **New benchmark result:** `tables.engine_benchmark.results[engine_id] = { character, dialogue, physics, … }` with measured 0–100 scores.
 - **Brand watchlist:** `tables.brand_mode.watchlist`.
 - **Stale specs:** `staleEngines()` lists what needs re-verification (90-day cycle).
@@ -410,9 +410,9 @@ Full catalog in `skills_cinema_pipeline.md`. Commands: `/style:MIGNOLA`, `/blend
 - **Language:** new content is English. Remaining v3.1 strings in the JSON (e.g. `triggers_pt`, some summaries) are Portuguese and are kept for PT routing.
 
 ### Changelog
-- **3.2.0-cia (Daniel Rodrigues):** CineOS 3.2 — Cinematic Intelligence Architecture. Engine architecture over a Cinematic Memory layer; skills 59–75; 10 new Visual DNAs with Color Grading DNA; 4 new blend recipes; 9 LUT presets; 8 engines; adapters; Director Profiles; Design Tokens; Cinema Slop Detector; Cinema Audit; Engine Benchmark; Continuity/Asset Graph; Project Bible; Toolkit 2026; profiles 19–22; 7 pipelines; 13 routes; gates G10–G13; English constitution.
-- 3.1 → 3.2 (internal): Color Grading DNA, DNA Blending Lab, 12 DNAs, profiles 17–18, pipeline `p_signature_style` (folded into this release).
+- **3.3.0 (Daniel Rodrigues):** Dani Skills 3.3 — Cinematic Intelligence Architecture. Engine architecture over a Cinematic Memory layer; skills 59–75; 10 new Visual DNAs with Color Grading DNA; 4 new blend recipes; 9 LUT presets; 8 engines; adapters; Director Profiles; Design Tokens; Cinema Slop Detector; Cinema Audit; Engine Benchmark; Continuity/Asset Graph; Project Bible; Toolkit 2026; profiles 19–22; 7 pipelines; 13 routes; gates G10–G13; English constitution.
+- 3.1 → 3.3 (internal): Color Grading DNA, DNA Blending Lab, 12 DNAs, profiles 17–18, pipeline `p_signature_style` (folded into this release).
 - 3.0 → 3.1: G9 Brand Mode.
 - 2.5 → 3.0: single JSON source, normalized optics, engine registry, gates.
 
-*BaseSkill v3.2.0-cia · CineOS · 2026-10-03 · Daniel Rodrigues · Draft Creative Studio Ltd*
+*BaseSkill v3.3.0-cia · Dani Skills · 2026-10-03 · Daniel Rodrigues · Daniel Rodrigues*
