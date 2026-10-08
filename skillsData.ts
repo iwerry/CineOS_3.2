@@ -816,7 +816,7 @@ export function antiSlop(text: string, modality: Modality): AntiSlopResult {
   const rhythm = /timing|rhythm|beat|duration|cut|pause|silence|pace/i.test(text) ? 10 : 5;
   const cliché = Math.max(0, 10 - Math.min(10, hits.length * 2));
   const score = specificity + originality + technical + humanity + materiality + rhythm + cliché;
-  const status: AntiSlopStatus = score >= 80 ? 'PASS' : score >= 70 ? 'POLISH' : score >= 60 ? 'REGENERATE' : 'UNASSESSED';
+  const status: AntiSlopStatus = score >= 90 ? 'PASS' : score >= 80 ? 'POLISH' : score >= 70 ? 'REGENERATE' : 'UNASSESSED';
   return { modality, score, status, hits, dimensions: { specificity, originality, technical, humanity, materiality, rhythm, absence_of_cliches: cliché } };
 }
 
