@@ -218,6 +218,12 @@ Uma peça forte é reconhecível pelo que faz, não por afirmar que é premium.
 
 Nunca regenerar um projeto inteiro por uma falha localizada.
 
+### Integração automática no compilador
+
+O Quality Loop roda automaticamente em `compilePrompt()` e `compileShot()` após a composição do prompt. O compilador acrescenta avisos `QUALITY_LOOP`, `QUALITY` e `QUALITY_FIX`, com score, achados e correções sugeridas. Se o status for `REGENERATE`, o aviso pede revisão localizada do prompt/shot.
+
+**Limite atual:** a integração é diagnóstica, não um bloqueio de entrega. O compilador ainda retorna o prompt junto com os avisos; uma camada de orquestração deve decidir se impede a entrega, solicita revisão ou permite override explícito. `UNASSESSED` deve ser usado apenas quando não há texto suficiente para avaliar, nunca como sinônimo de score baixo.
+
 ## 9. Saída esperada
 
 Quando aplicável, Daniskills deve devolver:
