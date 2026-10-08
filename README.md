@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🎬 CineOS 3.2 — Cinematic Intelligence Architecture
+# 🎬 Dani Skills 3.3 — Cinematic Intelligence Architecture
 
 ### Turn simple prompts into cinematic productions — and keep, audit, edit and improve the whole film.
 ### One engine-agnostic system: story → cinema → AI generation → continuity → QA → edit → post → distribution → learning
@@ -9,7 +9,7 @@
 
 `62 skills` · `69 Visual DNA styles (each with Color Grading DNA)` · `25 pipelines` · `22 profiles` · `31 engines + 20 adapters` · `35 task routes` · `13 quality gates` · `16 style blends` · `21 LUT presets`
 
-*Credits: **Daniel Rodrigues** · Draft Creative Studio Ltd*
+*Credits: **Daniel Rodrigues** · Daniel Rodrigues*
 
 *Runs on Claude, ChatGPT, Gemini, DeepSeek, Qwen, Kimi and any capable LLM — see `UNIVERSAL_PROMPT.md`.*
 
@@ -19,7 +19,7 @@
 
 ## 🧭 What is this
 
-Cinema OS is a *skill* that turns ordinary requests ("make a Reel about my coffee shop") into **structured professional production**: script, storyboard, shot list, per-engine generation prompts, synced audio, film-emulation post, editorial calendar and performance analysis.
+Dani Skills is a *skill* that turns ordinary requests ("make a Reel about my coffee shop") into **structured professional production**: script, storyboard, shot list, per-engine generation prompts, synced audio, film-emulation post, editorial calendar and performance analysis.
 
 > **A prompt is not guesswork. It is cinematography, written down.**
 
@@ -29,11 +29,11 @@ Visual identity is **locked before generation** (Style Bible) and composition is
 
 ---
 
-## 🚀 What's new in CineOS 3.2 — Cinematic Intelligence Architecture
+## 🚀 What's new in Dani Skills 3.3 — Cinematic Intelligence Architecture
 
 > **Not a bigger skill. A smarter cinematic system.** See `ARCHITECTURE.md`.
 
-| Layer | What 3.2 adds |
+| Layer | What 3.3 adds |
 |---|---|
 | **Cinematic Memory** | Skill 65 Project Bible (`PROJECT.md` = truth vs `STYLE_BIBLE.md` = language, 16 templates in `PROJECT_BIBLE_TEMPLATE/`) · Skill 70 Continuity Graph + `AssetGraph` ("if Helena's hair changes, which shots regenerate?") · Skill 74 Learning Loop |
 | **Intent ≠ syntax** | Skill 66 Shot DNA + Prompt Compiler: one `ShotSpec` → `compileShot()` → Veo / Kling / Seedance / Hailuo / Wan / Hunyuan / Higgsfield / Flux / Midjourney / ComfyUI dialects through 20 `engine_adapters` |
@@ -55,11 +55,11 @@ cinemaAudit({ story: 91, continuity: 71, /* … */ }, findings);   // score + CR
 new AssetGraph().add(...shots).impactOf('Helena');
 ```
 
-**Honest status.** Benchmark results and the learning loop are *schemas* until you feed them real data. Engines added in 3.2 are from training knowledge (verified 2026-06-30, confidence low). Some v3.1 strings in the JSON and the v3.1 catalog tables remain in Portuguese. Run `python scripts/validate_contract.py` and `tsc --strict` after edits. Audit of the base: `CINEOS_AUDIT_v3.1.md`.
+**Honest status.** Benchmark results and the learning loop are *schemas* until you feed them real data. Engines added in 3.3 are from training knowledge (verified 2026-06-30, confidence low). Some v3.1 strings in the JSON and the v3.1 catalog tables remain in Portuguese. Run `python scripts/validate_contract.py` and `tsc --strict` after edits. Audit of the base: `DANI_SKILLS_AUDIT_v3.1.md`.
 
 ---
 
-## 🆕 What was new in v3.2 (internal, earlier — now part of this release)
+## 🆕 What was new in v3.3 (internal, earlier — now part of this release)
 
 | Upgrade | What it gives you |
 |---|---|
@@ -102,13 +102,13 @@ new AssetGraph().add(...shots).impactOf('Helena');
 
 ## 🗂️ The files and how they talk
 
-Core five below; v3.2-CIA adds `ARCHITECTURE.md`, `CINEOS_AUDIT_v3.1.md`, `TOOLKIT_2026.md`, `UNIVERSAL_PROMPT.md`, `PROJECT_BIBLE_TEMPLATE/`, `scripts/validate_contract.py`, `CHANGELOG.md`.
+Core five below; v3.3 adds `ARCHITECTURE.md`, `DANI_SKILLS_AUDIT_v3.1.md`, `TOOLKIT_2026.md`, `UNIVERSAL_PROMPT.md`, `PROJECT_BIBLE_TEMPLATE/`, `scripts/validate_contract.py`, `CHANGELOG.md`.
 
 
 | File | Role |
 |---|---|
 | **`BaseSkill.md`** | 🏛️ The constitution: execution protocol, 16 universal laws, optical + color vocabulary, engine knowledge, task modes, quality gates |
-| **`draft_studio_config.json`** | 💾 Single source of data: models, profiles, skills, styles, pipelines, routes, resolved tables, templates, characters, clients |
+| **`dani_skills_config.json`** | 💾 Single source of data: models, profiles, skills, styles, pipelines, routes, resolved tables, templates, characters, clients |
 | **`skillsData.ts`** | ⚙️ Types + typed loader + resolution engine: `resolveStyle`, `routeTask`, `recommendEngines`, `compilePrompt`, `lintPrompt`, `profileKit`, **`blendStyles`**, **`gradeCard`**, helpers |
 | **`skills_cinema_pipeline.md`** | 📚 Catalog: 45 skills + 59 styles + Color Grading table + 18 pipelines + methodology |
 | **`profiles_guide.md`** | 👥 18 profiles with pains, technical DNA, skills, styles, engines, pipeline and KPIs pre-resolved |
@@ -171,7 +171,7 @@ Each style is a **technical kit**, not a pretty reference: FOV°, camera, lens, 
 | Design / UI / Edu | `SWISS` · `ARTDECO` · `BLUEPRINT` · `NEUBRUTALIST` · `LIQUIDGLASS` · `CLAYMORPHISM` ⭐ · `KURZGESAGT` · `WHITEBOARD` · `STORYBOOK` |
 | Horror | `FOUNDFOOTAGE` · `DREAMCORE` ⭐ |
 
-⭐ = new in v3.2
+⭐ = new in v3.3
 
 ```bash
 /style:MIGNOLA            # by alias
@@ -319,8 +319,8 @@ Requirement: `tsconfig` with `"resolveJsonModule": true` (Vite/Next already ship
 
 ## 👤 Author
 
-**Daniel Rodrigues** · Draft Creative Studio Ltd
-*CineOS 3.2.0-cia · Cinematic Intelligence Architecture · Color Grading DNA · Style Blending · G9 Brand Mode*
+**Daniel Rodrigues** · Daniel Rodrigues
+*Dani Skills 3.3.0 · Cinematic Intelligence Architecture · Color Grading DNA · Style Blending · G9 Brand Mode*
 
 Idea, architecture and creative content: all rights reserved to the author. Contributions and bug reports are welcome via *Issues*.
 
