@@ -1,5 +1,5 @@
 /**
- * # Dani Skills 3.3 — Cinematic Intelligence Architecture
+ * # Daniskills 3.3 — Cinematic Intelligence Architecture
  * Credits: Daniel Rodrigues · Daniel Rodrigues · skillsData.ts v3.3.0-cia
  *
  * ROLE OF THIS FILE in the set:
@@ -467,7 +467,7 @@ export const ctrRetentionQuadrant = (ctrHigh: boolean, retentionHigh: boolean) =
 export const actingVerdict = (found: string[]) => ({ count: found.length, regenerate: found.length >= 2, symptoms: found.filter(f => TABLES.symptoms_15.includes(f)) });
 
 /* ═══════════════════════════════════════════════════════════════════════════
- * Dani Skills 3.3 — CINEMATIC INTELLIGENCE ARCHITECTURE  (credits: Daniel Rodrigues)
+ * Daniskills 3.3 — CINEMATIC INTELLIGENCE ARCHITECTURE  (credits: Daniel Rodrigues)
  * Intent → Shot Spec (Shot DNA) → Engine Adapter → Prompt  ·  Model Intelligence  ·  Continuity / Asset Graph
  * Cinema Audit · Cinema Slop Detector · Artifact verdicts · Director Profiles · Design Tokens
  * ═══════════════════════════════════════════════════════════════════════════ */
