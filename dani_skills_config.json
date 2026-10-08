@@ -1,5 +1,5 @@
 {
-  "project": "Dani Skills - Daniel Rodrigues",
+  "project": "Daniskills - Daniel Rodrigues",
   "studio": "Daniel Rodrigues",
   "author": "Daniel Rodrigues",
   "version": "3.3.0",
@@ -11,18 +11,18 @@
     "Correção: interface Skill estava fora de qualquer 'interface' no .ts; lentes legadas com mm inconsistentes com FOV foram normalizadas (lens_family + mm_equiv derivado).",
     "3.0.0 → 3.1.0: G9 Modo Marca (opt-in, desligado por padrão). Non-IP (Lei 11, Skill 56, G8) continua sendo o padrão. Marca/produto real só entra depois de 5 perguntas + regras (divulgação, sem endosso inventado, foto oficial de referência, contexto compatível, autorização escrita se anúncio pago). Rótulo de divulgação (#publi etc.) não conta entre as 3 hashtags. Novos: gate G9, tables.brand_mode, templates.brand_mode_prompt/brand_disclosure_block/brand_mode_input, lint BRAND_UNGATED/BRAND_UNLISTED/BRAND_NO_DISCLOSURE, brandGate()/detectBrands()/disclosureBlock() no .ts, comando /brand.",
     "3.1.0 → 3.3.0 (Daniel Rodrigues): Color Grading DNA — todo estilo ganha style.color_grading (saturation 0–100, contrast, shadow_tint, highlight_tint, grain, dynamic_range, lut_match) + tables.color_science (escala e vocabulário). +12 estilos (59 no total): UFOTABLE, MAPPA, WEBTOON, ISEKAI, GHIBLIPUNK, GLASSNOIR, CLAYMORPHISM, LIQUIDMETAL, GLITCHCORE, DREAMCORE, ANALOGDREAM, BIOLUMINESCENT. Receitas de mistura (tables.ai_style_mixes, 12 receitas) e style.blend_recipe. +2 skills: 57 DNA Blending Lab, 58 Color Grading DNA Engine (45 skills). +2 perfis (18): perfil_17 Animação Indie/Anime/Webtoon, perfil_18 Direção de Arte e Assinatura Visual. +1 pipeline p_signature_style (18), +1 rota blend_style (22). +2 LUT presets, veto de 3+ estilos, schema image_analysis com color_grading_estimate, gate G1 inclui cartão de grade.",
-    "3.3.0 (Cinematic Intelligence Architecture): Dani Skills shifts from a skill collection to an engine architecture (Story · Cinema · AI · Continuity · QA · Post · Distribution) over a Cinematic Memory layer. New: skills 59-75; 10 Visual DNAs with Color Grading DNA; 4 blend recipes; 9 LUT presets; 8 models (low confidence, to re-verify); engine_adapters (intent → spec → adapter → prompt); director_profiles; design_tokens; cinema_slop rules; audit_dimensions; engine_benchmark; continuity checks; project bible; software tools table; deliverable formats; learning loop; profiles 19-22; pipelines (7); routes (12); gates G10-G13; 22 new commands. Existing v3.1 data is preserved; earlier internal 3.3 labels are folded into this release."
+    "3.3.0 (Cinematic Intelligence Architecture): Daniskills shifts from a skill collection to an engine architecture (Story · Cinema · AI · Continuity · QA · Post · Distribution) over a Cinematic Memory layer. New: skills 59-75; 10 Visual DNAs with Color Grading DNA; 4 blend recipes; 9 LUT presets; 8 models (low confidence, to re-verify); engine_adapters (intent → spec → adapter → prompt); director_profiles; design_tokens; cinema_slop rules; audit_dimensions; engine_benchmark; continuity checks; project bible; software tools table; deliverable formats; learning loop; profiles 19-22; pipelines (7); routes (12); gates G10-G13; 22 new commands. Existing v3.1 data is preserved; earlier internal 3.3 labels are folded into this release."
   ],
   "files_contract": {
     "BaseSkill.md": "Constituição do engine: protocolo de execução, leis universais, Color Grading DNA, mistura de estilos, conhecimento de motores, modos de tarefa, qualidade. Lê: JSON (ids) e TS (funções).",
     "profiles_guide.md": "Guia de 18 perfis (dores, DNA, skills, estilos, motores, pipeline). Gerado a partir de profiles[] do JSON.",
     "skills_cinema_pipeline.md": "Acervo das 45 skills + 59 estilos (com Color Grading DNA) + 18 pipelines + receitas de mistura + metodologia pré/prod/pós/distribuição. Tabelas geradas do JSON.",
-    "dani_skills_config.json": "Fonte única de dados: modelos, perfis, skills, estilos, pipelines, rotas, tabelas resolvidas, templates, usuários, personagens, clientes.",
+    "daniskills_config.json": "Fonte única de dados: modelos, perfis, skills, estilos, pipelines, rotas, tabelas resolvidas, templates, usuários, personagens, clientes.",
     "skillsData.ts": "Tipos + carregador tipado + motor de resolução: resolveStyle, routeTask, recommendEngines, compilePrompt, lintPrompt, helpers (FOV↔mm, wpm, hashtags).",
-    "ARCHITECTURE.md": "Dani Skills 3.3 architecture: engines, memory layer, ID contract, command map, phases.",
+    "ARCHITECTURE.md": "Daniskills 3.3 architecture: engines, memory layer, ID contract, command map, phases.",
     "DANI_SKILLS_AUDIT_v3.1.md": "KEEP / IMPROVE / MERGE / REPLACE / NEW classification of the v3.1 base.",
     "TOOLKIT_2026.md": "Professional software and AI-tool knowledge (Premiere, After Effects, Photoshop, Illustrator, Resolve, CapCut, Blender, Higgsfield, Magnific, Flux, Seedance, Kling, Veo, MiniMax…).",
-    "UNIVERSAL_PROMPT.md": "Condensed system prompt to run Dani Skills on any LLM (Claude, GPT, Gemini, DeepSeek, Qwen, Kimi, Doubao…).",
+    "UNIVERSAL_PROMPT.md": "Condensed system prompt to run Daniskills on any LLM (Claude, GPT, Gemini, DeepSeek, Qwen, Kimi, Doubao…).",
     "PROJECT_BIBLE_TEMPLATE/": "16 template files for the Project Bible (PROJECT.md vs STYLE_BIBLE.md).",
     "scripts/validate_contract.py": "Checks the ID contract across JSON, docs and TS."
   },
@@ -4990,7 +4990,7 @@
       "code": "SKILL 74",
       "name": "Production Learning Loop (Performance Memory)",
       "creator": "Daniel Rodrigues",
-      "summary": "Dani Skills learns from each production. Logs which engine, style and shot recipe worked, how many retries each shot needed, audit scores and audience data, then feeds the Model Intelligence benchmark and the next project's defaults.",
+      "summary": "Daniskills learns from each production. Logs which engine, style and shot recipe worked, how many retries each shot needed, audit scores and audience data, then feeds the Model Intelligence benchmark and the next project's defaults.",
       "category": "Memory & Analytics",
       "aspect_ratios": [
         "Universal"
@@ -16139,7 +16139,7 @@
       }
     }
   ],
-  "product_name": "Dani Skills 3.3",
+  "product_name": "Daniskills 3.3",
   "codename": "Cinematic Intelligence Architecture",
   "credits": "Daniel Rodrigues · Daniel Rodrigues",
   "skill_language": "en",
