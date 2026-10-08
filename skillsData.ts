@@ -706,6 +706,18 @@ export const QUALITY_COMMANDS = {
   '/quality:loop': 'qualityLoop'
 } as const;
 
+export type QualityCommand = keyof typeof QUALITY_COMMANDS;
+export function executeQualityCommand(command: QualityCommand, input: HardnessInput, text = '') {
+  switch (command) {
+    case '/hardness': return hardness(input);
+    case '/anti-slop': return antiSlop(text, input.modality);
+    case '/smart-sharpen': return smartSharpen(input);
+    case '/humanize': return humanizeText(text);
+    case '/post-sharpen': return postSharpenPlan({ modality: input.modality, destination: input.destination });
+    case '/quality:loop': return qualityLoop(input, text);
+  }
+}
+
 export type Modality = 'image' | 'audio' | 'video' | 'text' | 'script';
 export type QualityStatus = 'PASS' | 'POLISH' | 'REGENERATE';
 export type AntiSlopStatus = QualityStatus | 'UNASSESSED';
@@ -877,5 +889,5 @@ export function gateG10(files: Record<string, string>) {
 }
 
 export default { CONFIG, MODELS, PROFILES, SKILLS, STYLES, PIPELINES, ROUTES, GATES, SKILLS_V26, resolveStyle, routeTask, recommendEngines, compilePrompt, lintPrompt, profileKit, expandSkillChain, wordBudget, hashtags, brandGate, detectBrands, disclosureBlock, blendStyles, gradeCard, styleGradeLine, saturationLabel,
-  ADAPTERS, getAdapter, compileShot, compileShotForAll, modelIntelligence, cinemaSlop, lintCinema, cinemaAudit, polishPlan, hardness, smartSharpen, antiSlop, antiSlopScore, humanizeText, postSharpenPlan, qualityLoop, QUALITY_COMMANDS,
+  ADAPTERS, getAdapter, compileShot, compileShotForAll, modelIntelligence, cinemaSlop, lintCinema, cinemaAudit, polishPlan, hardness, smartSharpen, antiSlop, antiSlopScore, humanizeText, postSharpenPlan, qualityLoop, QUALITY_COMMANDS, executeQualityCommand,
   artifactVerdict, continuityCheck, sequenceContinuity, AssetGraph, directorProfile, designToken, projectBibleScaffold, gateG10 };
