@@ -1,10 +1,10 @@
-# Dani Skills 3.3 — Cinematic Intelligence Architecture
+# Daniskills 3.3 — Cinematic Intelligence Architecture
 
 **Credits:** Daniel Rodrigues · Daniel Rodrigues
 
-> **Do not turn Dani Skills into a bigger skill. Turn it into a smarter cinematic system.**
+> **Do not turn Daniskills into a bigger skill. Turn it into a smarter cinematic system.**
 
-Dani Skills 3.3 keeps everything that made v3.1 strong (FOV in degrees, Hero Frame First, Feasibility Veto, Visual DNA, Color Grading DNA, engine routing, gates) and adds the layer that was missing: **how to keep, evaluate, remember, edit and improve an entire AI-generated film.**
+Daniskills 3.3 keeps everything that made v3.1 strong (FOV in degrees, Hero Frame First, Feasibility Veto, Visual DNA, Color Grading DNA, engine routing, gates) and adds the layer that was missing: **how to keep, evaluate, remember, edit and improve an entire AI-generated film.**
 
 The design borrows the *philosophy* of the Impeccable project — persistent context, an operational vocabulary, deterministic anti-pattern rules, audit → critique → polish loops — and adapts it to cinema. It copies none of its UI rules.
 
@@ -13,7 +13,7 @@ The design borrows the *philosophy* of the Impeccable project — persistent con
 ## 1. System map
 
 ```text
-                         DANI_SKILLS 3.3
+                         DANISKILLS 3.3
                     CINEMATIC INTELLIGENCE
                            │
         ┌──────────────────┼──────────────────┐
@@ -62,7 +62,7 @@ The 30+ capability areas of the original v3.1 skills (styles 01–14, 27, 28, 50
 ## 3. Three separations that matter
 
 1. **Project truth vs cinematic language.** `PROJECT.md` says what the film *is* (genre, audience, runtime, language, location, mode). `STYLE_BIBLE.md` says how it *looks* (base + accent DNA, FOV range, light, grade card, grain). Models stop confusing story with style.
-2. **Intent vs model syntax.** Intent → Shot Spec (Shot DNA) → **Engine Adapter** → prompt. A new model needs `models[]` + `engine_adapters[]`, not a new Dani Skills.
+2. **Intent vs model syntax.** Intent → Shot Spec (Shot DNA) → **Engine Adapter** → prompt. A new model needs `models[]` + `engine_adapters[]`, not a new Daniskills.
 3. **Director Profile vs person.** Famous-director requests map to language archetypes (`precision_thriller`, `intimate_naturalism`, `operatic_scale`, …) built from design tokens. Looks stay ownable and IP-safe.
 
 ## 4. The core loop
@@ -73,6 +73,19 @@ IDEA → STORY → PROJECT BIBLE (G10) → CINEMATIC LANGUAGE → SCENE → SHOT
      → EDIT → COLOR → SOUND → CINEMA AUDIT (G12) → POLISH → MASTER
      → DISTRIBUTION → PERFORMANCE → LEARNING ──→ next project
 ```
+
+## 4.1 Multimodal Quality Layer
+
+Daniskills 3.3 extends QA beyond cinema. **Hardness** resolves intent; **Anti-Slop** audits image/audio/video/script/text; **Smart Sharpen** resolves technical detail in code; **Humanize Text** reduces formulaic language; **Post Sharpen** plans finishing; **Quality Loop** regenerates only the smallest failed block.
+
+```text
+INTENT → HARDNESS → ANTI-SLOP → SMART SHARPEN → ADAPTER
+→ GENERATE → ARTIFACT QA → CONTINUITY QA → POST SHARPEN → FINAL QA
+```
+
+Operational commands: `/hardness`, `/anti-slop`, `/smart-sharpen`, `/humanize`, `/post-sharpen`, `/quality:loop`.
+
+See `DANISKILLS_QUALITY_SYSTEM_v3.3.md` and the executable functions in `skillsData.ts`.
 
 ## 5. Shot DNA
 
