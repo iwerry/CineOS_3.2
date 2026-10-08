@@ -1,7 +1,7 @@
-<!-- # Skill Criada por Daniel Rodrigues · Terminal AI — Draft Creative Studio Ltd · skills_cinema_pipeline v3.2.0-cia (v3.1 tables kept in Portuguese; CineOS 3.2 sections in English; generated from draft_studio_config.json) -->
-# CineOS 3.2 Catalog — 62 Skills · 69 Styles · 25 Pipelines
+<!-- # Skill Criada por Daniel Rodrigues · Terminal AI — Daniel Rodrigues · skills_cinema_pipeline v3.3.0-cia (v3.1 tables kept in Portuguese; Dani Skills 3.3 sections in English; generated from dani_skills_config.json) -->
+# Dani Skills 3.3 Catalog — 62 Skills · 69 Styles · 25 Pipelines
 
-Compatível com ComfyUI, Higgsfield Cinema Studio, Seedance 2.0/2.5, Veo 3.1, Kling 3.0, Grok Imagine, FLUX.2, GPT Image 2 e Nano Banana. Regras e conhecimento de motores: `BaseSkill.md`. Dados: `draft_studio_config.json`. Funções: `skillsData.ts`.
+Compatível com ComfyUI, Higgsfield Cinema Studio, Seedance 2.0/2.5, Veo 3.1, Kling 3.0, Grok Imagine, FLUX.2, GPT Image 2 e Nano Banana. Regras e conhecimento de motores: `BaseSkill.md`. Dados: `dani_skills_config.json`. Funções: `skillsData.ts`.
 
 ## Como invocar
 ```bash
@@ -9,8 +9,8 @@ Compatível com ComfyUI, Higgsfield Cinema Studio, Seedance 2.0/2.5, Veo 3.1, Kl
 /pipeline:p_short_film --style FINCHER --ratio 2.39:1
 /route "quero analisar essa imagem e gerar o prompt de recriação para o Veo"
 /engines --mode t2v --style KUBRICK
-/blend:NOIR+LIQUIDGLASS --weights 70/30      # Skill 57 (v3.2)
-/grade:UFOTABLE                               # cartão de color grading (v3.2)
+/blend:NOIR+LIQUIDGLASS --weights 70/30      # Skill 57 (v3.3)
+/grade:UFOTABLE                               # cartão de color grading (v3.3)
 /brand:on --marca "X" --produto "Y" --vinculo afiliado   # Modo Marca (G9)
 ```
 Auto-carregamento: **Skill 15** sempre · **16** se ComfyUI · **25** se pós · **53** em todo vídeo · **55/56** antes de entregar · **58** quando o pedido citar cor/saturação/sombras/grade · **57** quando houver 2 estilos · **G9** quando o pedido citar marca/produto real.
@@ -101,8 +101,8 @@ Auto-carregamento: **Skill 15** sempre · **16** se ComfyUI · **25** se pós ·
 | SKILL 43 | WES | Wes Anderson — Planimetric Pastel (Grand Budapest / Moonrise Kingdom) |
 | SKILL 44 | NOIR | Hollywood Film Noir — Eastman Double-X 5222 (Preto e Branco Clássico) |
 
-## Estilos Visual DNA v3.2 (59)
-Cada estilo carrega óptica, paleta, textura, movimento, luz, referências, `prompt_core`, **`color_grading`** e motores por família. Use por alias (`/style:WES`). Estilos marcados ⭐ são novos na 3.2.
+## Estilos Visual DNA v3.3 (59)
+Cada estilo carrega óptica, paleta, textura, movimento, luz, referências, `prompt_core`, **`color_grading`** e motores por família. Use por alias (`/style:WES`). Estilos marcados ⭐ são novos na 3.3.
 
 #### Quadrinhos
 | Alias | Nome completo | FOV° | WB | Paleta | Melhor para |
@@ -124,7 +124,7 @@ Cada estilo carrega óptica, paleta, textura, movimento, luz, referências, `pro
 | **UFOTABLE** ⭐ | Dynamic Light-Cel Anime — Ufotable-School VFX-over-2D (2015–2026 modern sakuga) | 54 | 4500K | #FF5B2E #1FB6FF #0B0B14 | trailer de ação anime moderno; clipe de game/gacha; abertura de série de streaming |
 | **MAPPA** ⭐ | Kinetic Fluid Sakuga — Modern Studio Powerhouse Motion (2020s) | 65 | 3800K | #7A1E1E #2B2B2B #C9A66B | trailer de anime dark/seinen; clipe de rock/metal; campanha de streaming de ação |
 | **ISEKAI** ⭐ | Isekai Fantasy Light-Novel Cover — Ornate High-Fantasy Anime Key Visual | 47 | 5800K | #4361EE #F72585 #FFD60A | trailer de anime fantasia; capa/teaser de light novel ou game; campanha de RPG |
-| **GHIBLIPUNK** ⭐ | Ghiblipunk — Watercolor-Pastoral × Neon-Cyberpunk Blend (v3.2 mix recipe) | 50 | 5600K | #7FB069 #87CEEB #FF2E63 | campanha de tecnologia sustentável; clipe indie synth-folk; trailer de jogo solarpunk |
+| **GHIBLIPUNK** ⭐ | Ghiblipunk — Watercolor-Pastoral × Neon-Cyberpunk Blend (v3.3 mix recipe) | 50 | 5600K | #7FB069 #87CEEB #FF2E63 | campanha de tecnologia sustentável; clipe indie synth-folk; trailer de jogo solarpunk |
 *Motores (imagem → vídeo):* nano_banana, seedream_5 → seedance_2_5, kling_3_0, wan_2_x. Forte em i2v a partir de still estilizado; evitar pedir '3D'.
 
 #### Animação 3D
@@ -189,7 +189,7 @@ Cada estilo carrega óptica, paleta, textura, movimento, luz, referências, `pro
 | **WONGKARWAI** | Wong Kar-wai — Step-Printed Neon Longing (In the Mood for Love / Chungking Express) | 47 | 3200K | #C1121F #2A9D8F #F4A261 | clipe romântico; campanha de perfume; curta urbano |
 | **LEONE** | Sergio Leone — Spaghetti Western Extreme Close-Up (Anamorphic Dust) | 65 | 5600K | #C89B5B #8A5A2B #F2DDB0 | curta western; campanha de bebida/couro; clipe rock |
 | **BURTON** | Tim Burton — Gothic Whimsy (Spiral Shadows / Striped Palettes) | 54 | 4300K | #1B1B2F #E8E8E8 #6A4C93 | campanha de Halloween; curta fantástico; clipe indie |
-| **GLASSNOIR** ⭐ | Glass Noir — Liquid-Glass UI × Hollywood Film Noir Blend (v3.2 mix recipe) | 50 | mono | #000000 #FFFFFF #8C8C8C | thriller corporativo/tech; campanha de perfume/relógio de luxo com tela; trailer de app de investigação/segurança |
+| **GLASSNOIR** ⭐ | Glass Noir — Liquid-Glass UI × Hollywood Film Noir Blend (v3.3 mix recipe) | 50 | mono | #000000 #FFFFFF #8C8C8C | thriller corporativo/tech; campanha de perfume/relógio de luxo com tela; trailer de app de investigação/segurança |
 *Motores (imagem → vídeo):* nano_banana, flux_2 → veo_3_1, seedance_2_5, kling_3_0. Óptica em graus, WB em Kelvin, um dispositivo de câmera.
 
 #### Educação
@@ -233,7 +233,7 @@ Cada estilo carrega óptica, paleta, textura, movimento, luz, referências, `pro
 | **DREAMCORE** ⭐ | Dreamcore / Liminal Space — Uncanny Empty-Place Surrealism | 75 | 4000K | #D8C89A #8A8368 #2E2A20 | horror atmosférico faceless; ARG/alternate reality; clipe ambient/dark synth |
 *Motores (imagem → vídeo):* midjourney, flux_2 → veo_3_1, kling_3_0. Imperfeição controlada; nunca gore gratuito.
 
-## Color Grading DNA por estilo (v3.2 · Skill 58)
+## Color Grading DNA por estilo (v3.3 · Skill 58)
 Saturação 0–100, tints de sombra/realce em HEX, estrutura de grão e LUT mais próxima. Copie estes valores para o bloco STYLE do prompt e para a cadeia Darkroom (Skill 25).
 
 | Alias | Sat. | Contraste | Sombra | Realce | Grão | LUT / película |
@@ -322,8 +322,8 @@ Saturação 0–100, tints de sombra/realce em HEX, estrutura de grão e LUT mai
 
 **No prompt:** No prompt, escreva a grade como parâmetros: 'saturation ~N/100, shadow tint #HEX, highlight tint #HEX, grain: <descritor>'. Nunca 'cinematic color grade'.
 
-## Receitas de mistura que funcionam (v3.2 · Skill 57)
-v3.2 — receitas de mistura com histórico de bom resultado em IA (Skill 57). Regra: 1 base (60–70%) + 1 acento (30–40%); o acento fica ISOLADO num elemento/superfície.
+## Receitas de mistura que funcionam (v3.3 · Skill 57)
+v3.3 — receitas de mistura com histórico de bom resultado em IA (Skill 57). Regra: 1 base (60–70%) + 1 acento (30–40%); o acento fica ISOLADO num elemento/superfície.
 
 | Receita | Base | Acento | Pesos | Por que funciona |
 |---|---|---|---|---|
@@ -584,7 +584,7 @@ v3.2 — receitas de mistura com histórico de bom resultado em IA (Skill 57). R
 | 5 | 28 Prompt Engineering Seedance Faceless (Documentário) | Regerar só o bloco afetado | `block` |
 | 6 | 29 Calendário Editorial e Distribuição Multi-Plataforma | Próximo ciclo | `calendar.json` |
 
-### `p_signature_style` — Assinatura Visual (DNA Blend + Color Grade) — v3.2
+### `p_signature_style` — Assinatura Visual (DNA Blend + Color Grade) — v3.3
 *Proporção 16:9 · ~0s · gates G1, G2, G4, G8* — Crie o estilo-assinatura do cliente/projeto: 1 base + 1 acento, com grade travada e reutilizável.
 
 | # | Skill | Papel | Saída |
@@ -702,13 +702,13 @@ B-ROLL: <planos com job + FOV°>   VO (145 wpm): "<texto>"   A/B HOOK: (a) awe (
 | 90–100% | Closer fraco | Reescrever última linha (gut-punch/pergunta aberta) | 21 |
 | re-watch spike | Momento clipável | Usar frame como thumb; cortar Short derivado; testar como hook | 18,17 |
 
-*Gerado do JSON v3.2.0-cinema-os · 2026-09-27 · Criado por Daniel Rodrigues · Direção Geral @ Draft Creative Studio Ltd*
+*Gerado do JSON v3.3.0-cinema-os · 2026-09-27 · Criado por Daniel Rodrigues · Direção Geral @ Daniel Rodrigues*
 
 ---
 
-# CineOS 3.2 — Cinematic Intelligence Architecture (additions)
+# Dani Skills 3.3 — Cinematic Intelligence Architecture (additions)
 
-**Credits:** Daniel Rodrigues · Draft Creative Studio Ltd. See `ARCHITECTURE.md`. The sections above are the v3.1 catalog (kept); everything below is new in 3.2.
+**Credits:** Daniel Rodrigues · Daniel Rodrigues. See `ARCHITECTURE.md`. The sections above are the v3.1 catalog (kept); everything below is new in 3.3.
 
 ## New skills (59–75)
 
@@ -779,7 +779,7 @@ B-ROLL: <planos com job + FOV°>   VO (145 wpm): "<texto>"   A/B HOOK: (a) awe (
 **SKILL 73 — Code-Driven Animation & Procedural Video.** Generates video with code when determinism matters: Remotion/React, HTML+Canvas, p5, Manim, Lottie, FFmpeg, Blender Python (bpy) and After Effects expressions/scripts. Critical typography, charts, UI motion and loops are rendered in code; the AI model handles organic imagery.  
 *Negative locks:* asking a video model to render critical text, non-deterministic brand typography, un-versioned render scripts
 
-**SKILL 74 — Production Learning Loop (Performance Memory).** CineOS learns from each production. Logs which engine, style and shot recipe worked, how many retries each shot needed, audit scores and audience data, then feeds the Model Intelligence benchmark and the next project's defaults.  
+**SKILL 74 — Production Learning Loop (Performance Memory).** Dani Skills learns from each production. Logs which engine, style and shot recipe worked, how many retries each shot needed, audit scores and audience data, then feeds the Model Intelligence benchmark and the next project's defaults.  
 *Negative locks:* starting every project from zero, logging impressions instead of numbers, keeping lessons outside the project memory
 
 **SKILL 75 — Micro-Drama & Series Showrunner (Vertical Serial).** Plans vertical episodic stories (typically 9:16, 60–120s episodes): series bible, episode grid, cliffhanger structure, recurring cast identity, hook-per-episode, and an efficient production batch so identity and look stay constant across dozens of episodes.  
@@ -790,15 +790,15 @@ B-ROLL: <planos com job + FOV°>   VO (145 wpm): "<texto>"   A/B HOOK: (a) awe (
 | Alias | Family | FOV | Sat | Shadow / Highlight | LUT match |
 |---|---|---|---|---|---|
 | `CINEMANOVO` | cinema_auteur | 65° | 34 | #1b1712 / #e8e1d0 | Kodak Vision3 250D 5207 Daylight Cine Film |
-| `SERTAOBLEACH` | cinema_auteur | 84° | 38 | #5e3b22 / #f2e8d5 | Sertão Sun-Bleach Daylight (v3.2) |
-| `TROPICALNOIR` | cinema_auteur | 54° | 46 | #0b1a1f / #e0a030 | Tropical Neon Night 800T (v3.2) |
-| `PRECISIONTHRILLER` | cinema_auteur | 58° | 28 | #1b1f1a / #a8883a | Bleach Bypass Controlled Desat (v3.2) |
-| `SLOWCINEMA` | cinema_auteur | 72° | 30 | #2e3430 / #d8c9a8 | Slow Cinema Muted Natural (v3.2) |
-| `WUXIAINK` | animation_2d | 60° | 12 | #1c1c1c / #f4efe4 | Ink-Wash Monochrome + Vermilion (v3.2) |
-| `DONGHUA3D` | animation_3d | 50° | 78 | #0e1b3d / #f4c84a | Donghua Glow Compositing (v3.2) |
-| `SOLARPUNK` | commercial | 62° | 62 | #2e7d32 / #f5f1dc | Solarpunk Fresh Daylight (v3.2) |
+| `SERTAOBLEACH` | cinema_auteur | 84° | 38 | #5e3b22 / #f2e8d5 | Sertão Sun-Bleach Daylight (v3.3) |
+| `TROPICALNOIR` | cinema_auteur | 54° | 46 | #0b1a1f / #e0a030 | Tropical Neon Night 800T (v3.3) |
+| `PRECISIONTHRILLER` | cinema_auteur | 58° | 28 | #1b1f1a / #a8883a | Bleach Bypass Controlled Desat (v3.3) |
+| `SLOWCINEMA` | cinema_auteur | 72° | 30 | #2e3430 / #d8c9a8 | Slow Cinema Muted Natural (v3.3) |
+| `WUXIAINK` | animation_2d | 60° | 12 | #1c1c1c / #f4efe4 | Ink-Wash Monochrome + Vermilion (v3.3) |
+| `DONGHUA3D` | animation_3d | 50° | 78 | #0e1b3d / #f4c84a | Donghua Glow Compositing (v3.3) |
+| `SOLARPUNK` | commercial | 62° | 62 | #2e7d32 / #f5f1dc | Solarpunk Fresh Daylight (v3.3) |
 | `BRUTALISTSCIFI` | cinema_auteur | 92° | 22 | #2c2a26 / #e6c58b | Kodak Vision3 250D 5207 Daylight Cine Film |
-| `VERTICALDRAMA` | commercial | 47° | 58 | #2a2a2e / #fff6ee | Vertical Drama Clean Skin (v3.2) |
+| `VERTICALDRAMA` | commercial | 47° | 58 | #2a2a2e / #fff6ee | Vertical Drama Clean Skin (v3.3) |
 
 ### Prompt cores
 
@@ -827,15 +827,15 @@ B-ROLL: <planos com job + FOV°>   VO (145 wpm): "<texto>"   A/B HOOK: (a) awe (
 
 | Name | Type | Characteristics | Halation | Grain |
 |---|---|---|---|---|
-| Bleach Bypass Controlled Desat (v3.2) | Thriller / Desaturated | Silver retention look: lowered saturation, raised contrast, crushed but readable blacks, cool-green midtones | 0.10 | 0.35 |
-| Teal-Amber Restrained (v3.2 anti-slop) | Cinema / Controlled Complementary | Cool shadows and warm highlights limited to practical sources; skin protected from teal; saturation capped at 40 | 0.15 | 0.30 |
-| Sertão Sun-Bleach Daylight (v3.2) | Arid Landscape Drama | Overexposed warm daylight, milky highlights, earth tones, restrained saturation | 0.25 | 0.25 |
-| Tropical Neon Night 800T (v3.2) | Night Exterior Neon | Tungsten-balanced night with magenta/green neon halation, wet-asphalt speculars, rich blacks | 0.40 | 0.45 |
-| Ink-Wash Monochrome + Vermilion (v3.2) | Stylized Monochrome Accent | Near-monochrome ink wash with a single selectively preserved vermilion hue | 0.00 | 0.00 (paper tooth only) |
-| Donghua Glow Compositing (v3.2) | Digital Light-FX | Neutral base with HDR emissive FX layer, soft particle bloom | 0.20 (digital bloom) | 0.00 |
-| Solarpunk Fresh Daylight (v3.2) | Commercial Natural | Airy lifted shadows, fresh greens, clean skin, bright roll-off | 0.10 | 0.15 |
-| Vertical Drama Clean Skin (v3.2) | Phone-First Commercial | Bright clean key, protected skin tones, medium contrast readable in sunlight | 0.05 | 0.10 |
-| Slow Cinema Muted Natural (v3.2) | Naturalistic Muted | Pulled exposure feel, muted greens and greys, soft roll-off, low-amplitude grain | 0.08 | 0.20 |
+| Bleach Bypass Controlled Desat (v3.3) | Thriller / Desaturated | Silver retention look: lowered saturation, raised contrast, crushed but readable blacks, cool-green midtones | 0.10 | 0.35 |
+| Teal-Amber Restrained (v3.3 anti-slop) | Cinema / Controlled Complementary | Cool shadows and warm highlights limited to practical sources; skin protected from teal; saturation capped at 40 | 0.15 | 0.30 |
+| Sertão Sun-Bleach Daylight (v3.3) | Arid Landscape Drama | Overexposed warm daylight, milky highlights, earth tones, restrained saturation | 0.25 | 0.25 |
+| Tropical Neon Night 800T (v3.3) | Night Exterior Neon | Tungsten-balanced night with magenta/green neon halation, wet-asphalt speculars, rich blacks | 0.40 | 0.45 |
+| Ink-Wash Monochrome + Vermilion (v3.3) | Stylized Monochrome Accent | Near-monochrome ink wash with a single selectively preserved vermilion hue | 0.00 | 0.00 (paper tooth only) |
+| Donghua Glow Compositing (v3.3) | Digital Light-FX | Neutral base with HDR emissive FX layer, soft particle bloom | 0.20 (digital bloom) | 0.00 |
+| Solarpunk Fresh Daylight (v3.3) | Commercial Natural | Airy lifted shadows, fresh greens, clean skin, bright roll-off | 0.10 | 0.15 |
+| Vertical Drama Clean Skin (v3.3) | Phone-First Commercial | Bright clean key, protected skin tones, medium contrast readable in sunlight | 0.05 | 0.10 |
+| Slow Cinema Muted Natural (v3.3) | Naturalistic Muted | Pulled exposure feel, muted greens and greys, soft roll-off, low-amplitude grain | 0.08 | 0.20 |
 
 ## New blend recipes (4)
 
@@ -848,7 +848,7 @@ B-ROLL: <planos com job + FOV°>   VO (145 wpm): "<texto>"   A/B HOOK: (a) awe (
 
 ## New pipelines (7)
 
-### `p_project_init` — Project Init (Bible + Memory) — v3.2
+### `p_project_init` — Project Init (Bible + Memory) — v3.3
 *Ratio 16:9 · gates G1, G10* — Create PROJECT.md, STYLE_BIBLE.md and the 16-file bible before any generation.
 
 | # | Skill | Role | Output |
@@ -859,7 +859,7 @@ B-ROLL: <planos com job + FOV°>   VO (145 wpm): "<texto>"   A/B HOOK: (a) awe (
 | 4 | SKILL 70 | Seed continuity + asset graph | `asset_graph.json` |
 | 5 | SKILL 55 | Consistency check of the bible | `qa_report.md` |
 
-### `p_cinema_audit_polish` — Cinema Audit → Critique → Polish — v3.2
+### `p_cinema_audit_polish` — Cinema Audit → Critique → Polish — v3.3
 *Ratio 16:9 · gates G4, G11, G12, G13* — Audit the whole project, critique worst items, regenerate only failing shots.
 
 | # | Skill | Role | Output |
@@ -871,7 +871,7 @@ B-ROLL: <planos com job + FOV°>   VO (145 wpm): "<texto>"   A/B HOOK: (a) awe (
 | 5 | SKILL 66 | Recompile only failing shots | `compiled_prompts.json` |
 | 6 | SKILL 64 | Re-audit; gate G12 | `polish_plan.json` |
 
-### `p_reference_to_shot` — Reference → Cinematic DNA → Shot Specs — v3.2
+### `p_reference_to_shot` — Reference → Cinematic DNA → Shot Specs — v3.3
 *Ratio 16:9 · gates G1, G4* — Turn references into a reusable look and executable shot specs.
 
 | # | Skill | Role | Output |
@@ -882,7 +882,7 @@ B-ROLL: <planos com job + FOV°>   VO (145 wpm): "<texto>"   A/B HOOK: (a) awe (
 | 4 | SKILL 65 | Register in STYLE_BIBLE.md | `STYLE_BIBLE.md` |
 | 5 | SKILL 66 | Compile Shot DNA | `shot_dna.json` |
 
-### `p_screenplay_package` — Screenplay + Pitch Package — v3.2
+### `p_screenplay_package` — Screenplay + Pitch Package — v3.3
 *Ratio 16:9 · gates G1, G4* — From premise to screenplay, treatment, lookbook, deck and storyboard in professional formats.
 
 | # | Skill | Role | Output |
@@ -894,7 +894,7 @@ B-ROLL: <planos com job + FOV°>   VO (145 wpm): "<texto>"   A/B HOOK: (a) awe (
 | 5 | SKILL 48 | Storyboard + shot list | `storyboard.json` |
 | 6 | SKILL 72 | Export PDF / PPTX / XLSX | `screenplay.pdf` |
 
-### `p_micro_drama_series` — Vertical Micro-Drama Series — v3.2
+### `p_micro_drama_series` — Vertical Micro-Drama Series — v3.3
 *Ratio 9:16 · gates G1, G2, G3, G4, G10, G11, G12* — Series production with recurring identity, batch generation and surgical polish.
 
 | # | Skill | Role | Output |
@@ -908,7 +908,7 @@ B-ROLL: <planos com job + FOV°>   VO (145 wpm): "<texto>"   A/B HOOK: (a) awe (
 | 7 | SKILL 69 | Assemble episode, hook + cliffhanger | `edit_decision_list.md` |
 | 8 | SKILL 64 | Audit + polish | `cinema_audit_report.md` |
 
-### `p_post_finishing` — Post Finishing (Edit · Color · Sound · Master) — v3.2
+### `p_post_finishing` — Post Finishing (Edit · Color · Sound · Master) — v3.3
 *Ratio 16:9 · gates G7, G12, G13, G8* — Professional finishing of AI-generated material across NLE, compositor and grade.
 
 | # | Skill | Role | Output |
@@ -921,7 +921,7 @@ B-ROLL: <planos com job + FOV°>   VO (145 wpm): "<texto>"   A/B HOOK: (a) awe (
 | 6 | SKILL 62 | Sound cinema map + mix | `sound_cinema_map.json` |
 | 7 | SKILL 64 | Final audit and delivery gate | `cinema_audit_report.md` |
 
-### `p_code_animation` — Code-Driven Animation (Remotion · bpy · AE scripts · FFmpeg) — v3.2
+### `p_code_animation` — Code-Driven Animation (Remotion · bpy · AE scripts · FFmpeg) — v3.3
 *Ratio 16:9 · gates G4, G8* — Deterministic typography, charts, UI motion and loops rendered in code; AI plates underneath.
 
 | # | Skill | Role | Output |
