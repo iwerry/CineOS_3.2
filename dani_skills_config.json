@@ -16628,5 +16628,16 @@
       ],
       "notes": ""
     }
-  ]
+  ],
+  "quality_system": {
+    "version": "3.3",
+    "canonical_name": "Daniskills",
+    "modalities": ["image", "audio", "video", "text", "script"],
+    "flow": ["INTENT", "HARDNESS", "ANTI-SLOP", "SMART SHARPEN", "ENGINE ADAPTER", "GENERATE", "ARTIFACT QA", "CONTINUITY QA", "POST SHARPEN", "FINAL QA"],
+    "commands": ["/hardness", "/anti-slop", "/smart-sharpen", "/humanize", "/post-sharpen", "/quality:loop"],
+    "anti_slop_score": {"pass": 90, "polish": 80, "revise": 70, "regenerate_below": 70, "do_not_deliver_below": 60},
+    "technical_locks": ["FOV degrees", "Kelvin", "180-degree shutter", "positive-only", "no empty adjectives"],
+    "consent_locks": ["Brand Mode G9 for real brands", "consent for real faces and voices"]
+  }
+
 }
