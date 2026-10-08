@@ -695,6 +695,161 @@ export class AssetGraph {
   }
 }
 
+
+/* ───────── Daniskills 3.3 Quality System: Hardness / Anti-Slop / Smart Sharpen ───────── */
+export type Modality = 'image' | 'audio' | 'video' | 'text' | 'script';
+export type QualityStatus = 'PASS' | 'POLISH' | 'REGENERATE';
+export type AntiSlopStatus = QualityStatus | 'UNASSESSED';
+
+export interface HardnessInput {
+  modality: Modality;
+  intent: string;
+  audience?: string;
+  destination?: string;
+  constraints?: string[];
+  technical?: Record<string, unknown>;
+}
+export interface SharpenSpec {
+  modality: Modality;
+  intent: string;
+  decisions: string[];
+  technical: Record<string, unknown>;
+  locks: string[];
+}
+export interface AntiSlopResult {
+  modality: Modality;
+  score: number | 'UNASSESSED';
+  status: AntiSlopStatus;
+  hits: { id: string; severity: 'warn' | 'error'; message: string; fix: string }[];
+  dimensions: Record<string, number>;
+}
+export interface PostSharpenPlan {
+  modality: Modality;
+  destination: string;
+  steps: string[];
+  cautions: string[];
+}
+export interface QualityLoopResult {
+  status: QualityStatus;
+  antiSlopScore: number | 'UNASSESSED';
+  findings: string[];
+  fixes: string[];
+  postPlan: PostSharpenPlan;
+}
+
+const EMPTY_ADJECTIVES = /\b(ultra[- ]?real(?:istic)?|hyper[- ]?real(?:istic)?|8k|masterpiece|stunning|epic|cinematic|highly detailed|amazing|beautiful|award[- ]?winning|premium|viral|next[- ]?level)\b/gi;
+const MODALITY_SLOP: Record<Modality, { id: string; pattern: RegExp; fix: string }[]> = {
+  image: [
+    { id: 'IMG_GENERIC_COMPOSITION', pattern: /beautiful composition|perfect composition|stunning composition/i, fix: 'specify subject hierarchy, position, scale and negative space' },
+    { id: 'IMG_PLASTIC_TEXTURE', pattern: /perfect skin|flawless skin|plastic skin/i, fix: 'specify natural skin texture, pore scale and light response' }
+  ],
+  video: [
+    { id: 'VID_UNMOTIVATED_CAMERA', pattern: /dynamic camera|epic camera movement|cinematic camera/i, fix: 'name one motivated camera device, direction, speed and duration' },
+    { id: 'VID_GENERIC_ACTION', pattern: /dramatic action|epic movement|cinematic motion/i, fix: 'define the physical action as timed beats' }
+  ],
+  audio: [
+    { id: 'AUD_TRAILER_CLICHE', pattern: /epic trailer|cinematic whoosh|epic sound/i, fix: 'define source, perspective, duration, dynamics and acoustic space' },
+    { id: 'AUD_GENERIC_VOICE', pattern: /powerful voice|cinematic voice|perfect voice/i, fix: 'define delivery, distance, room response and dynamics' }
+  ],
+  script: [
+    { id: 'SCRIPT_FORMULAIC_OPEN', pattern: /in a world where|little did .* know|it all changed when/i, fix: 'open with a concrete event, image, conflict or decision' },
+    { id: 'SCRIPT_ABSTRACT_EMOTION', pattern: /a journey of|tale of|powerful story about/i, fix: 'replace abstraction with observable behavior and stakes' }
+  ],
+  text: [
+    { id: 'TEXT_AI_FORMULA', pattern: /in today'?s (?:fast[- ]?paced|ever[- ]?changing) world|unlock the power of|game[- ]?changer/i, fix: 'replace formula with a concrete claim, example or action' },
+    { id: 'TEXT_EMPTY_PROMISE', pattern: /take your .* to the next level|revolutionize|transform your/i, fix: 'state the measurable benefit or specific action' }
+  ]
+};
+
+export function hardness(input: HardnessInput): SharpenSpec {
+  const decisions: string[] = [];
+  const technical: Record<string, unknown> = { ...(input.technical ?? {}) };
+  const locks = [...(input.constraints ?? [])];
+  if (input.modality === 'video' || input.modality === 'image') {
+    if (technical.fov_degrees == null) technical.fov_degrees = 47;
+    if (technical.kelvin == null) technical.kelvin = 5600;
+  }
+  if (input.modality === 'video') {
+    if (technical.shutter_angle == null) technical.shutter_angle = 180;
+    if (technical.fps == null) technical.fps = 24;
+  }
+  decisions.push(`resolve subject/action hierarchy for ${input.modality}`);
+  if (input.destination) decisions.push(`optimize for destination: ${input.destination}`);
+  if (input.audience) decisions.push(`optimize information density for audience: ${input.audience}`);
+  return { modality: input.modality, intent: input.intent.trim(), decisions, technical, locks };
+}
+
+export function smartSharpen(input: HardnessInput | SharpenSpec): SharpenSpec {
+  const spec = 'decisions' in input ? input : hardness(input);
+  const decisions = [...spec.decisions];
+  const technical = { ...spec.technical };
+  if (spec.modality === 'video') {
+    technical.shutter_angle ??= 180;
+    technical.fps ??= 24;
+    decisions.push('motivate camera movement with physical and narrative cause');
+  }
+  if (spec.modality === 'audio') decisions.push('resolve source distance, perspective, acoustic space, dynamics and silence');
+  if (spec.modality === 'script' || spec.modality === 'text') decisions.push('resolve voice, audience, concrete behavior, rhythm and information density');
+  if (spec.modality === 'image') decisions.push('resolve composition, perspective, light direction, material response and texture');
+  return { ...spec, decisions: [...new Set(decisions)], technical };
+}
+
+export function antiSlop(text: string, modality: Modality): AntiSlopResult {
+  const hits: AntiSlopResult['hits'] = [];
+  const empty = text.match(EMPTY_ADJECTIVES) ?? [];
+  empty.forEach((term, i) => hits.push({ id: `EMPTY_ADJECTIVE_${i + 1}`, severity: 'warn', message: `empty adjective: ${term}`, fix: 'replace adjective with an observable production parameter' }));
+  for (const rule of MODALITY_SLOP[modality]) if (rule.pattern.test(text)) hits.push({ id: rule.id, severity: 'warn', message: `formula detected for ${modality}`, fix: rule.fix });
+  const specificity = Math.max(0, 20 - Math.min(20, hits.length * 4));
+  const originality = Math.max(0, 20 - Math.min(20, hits.length * 3));
+  const technical = /FOV|\b\d{3,4}\s*K\b|Kelvin|180°|shutter|fps|dB|Hz|duration|beats|HEX/i.test(text) ? 15 : 8;
+  const humanity = /gesture|behavior|dialogue|voice|perspective|distance|context|specific|character|audience/i.test(text) ? 15 : 8;
+  const materiality = /texture|material|grain|acoustic|reverb|skin|surface|fabric|metal|wood/i.test(text) ? 10 : 5;
+  const rhythm = /timing|rhythm|beat|duration|cut|pause|silence|pace/i.test(text) ? 10 : 5;
+  const cliché = Math.max(0, 10 - Math.min(10, hits.length * 2));
+  const score = specificity + originality + technical + humanity + materiality + rhythm + cliché;
+  const status: AntiSlopStatus = score >= 80 ? 'PASS' : score >= 70 ? 'POLISH' : score >= 60 ? 'REGENERATE' : 'UNASSESSED';
+  return { modality, score, status, hits, dimensions: { specificity, originality, technical, humanity, materiality, rhythm, absence_of_cliches: cliché } };
+}
+
+export function humanizeText(text: string): string {
+  return text
+    .replace(/\b(in today'?s (?:fast[- ]?paced|ever[- ]?changing) world)\b/gi, 'today')
+    .replace(/\b(leverage|utilize)\b/gi, 'use')
+    .replace(/\b(delves into|journey|game[- ]?changer|unlock the power of)\b/gi, (m) => ({ 'delves into': 'explores', 'journey': 'process', 'game-changer': 'change', 'unlock the power of': 'use' }[m.toLowerCase()] ?? m))
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+
+export function postSharpenPlan(asset: { modality: Modality; destination?: string }): PostSharpenPlan {
+  const destination = asset.destination ?? 'general';
+  const steps: string[] = [];
+  const cautions: string[] = [];
+  if (asset.modality === 'image') steps.push('controlled upscale', 'selective microcontrast recovery', 'artifact cleanup', 'edge and skin inspection');
+  if (asset.modality === 'video') steps.push('temporal artifact cleanup', 'controlled upscale', 'motion-aware detail recovery', 'edge and skin inspection');
+  if (asset.modality === 'audio') steps.push('noise/artifact cleanup', 'dynamic-range check', 'perspective and ambience check');
+  if (asset.modality === 'text' || asset.modality === 'script') steps.push('second-pass repetition cut', 'abstraction check', 'voice consistency check');
+  cautions.push('avoid halos, plastic texture, invented detail, temporal shimmer and over-compression');
+  if (/social|reel|short/i.test(destination)) cautions.push('prioritize first-frame legibility and small-screen readability');
+  return { modality: asset.modality, destination, steps, cautions };
+}
+
+export function antiSlopScore(text: string, modality: Modality): number | 'UNASSESSED' {
+  return antiSlop(text, modality).score;
+}
+
+export function qualityLoop(input: HardnessInput, generatedText: string): QualityLoopResult {
+  const sharpened = smartSharpen(input);
+  const audit = antiSlop(generatedText, input.modality);
+  const postPlan = postSharpenPlan({ modality: input.modality, destination: input.destination });
+  const findings = audit.hits.map(h => h.message);
+  const fixes = audit.hits.map(h => h.fix);
+  const status: QualityStatus = audit.score >= 90 ? 'PASS' : audit.score >= 80 ? 'POLISH' : 'REGENERATE';
+  if (sharpened.technical.fov_degrees != null && (input.modality === 'image' || input.modality === 'video')) {
+    if (!findings.includes('FOV resolved')) findings.push('FOV resolved in degrees');
+  }
+  return { status, antiSlopScore: audit.score, findings, fixes, postPlan };
+}
+
 /* ───────── Director Profiles + Design Tokens (Skill 60 / Cinematic Design System) ───────── */
 export interface DirectorProfile { id: string; camera: string; composition: string; lighting: string; color: string; editing: string; performance: string; sound: string; dna: string[] }
 export const DIRECTOR_PROFILES = (TABLES as unknown as { director_profiles: { profiles: DirectorProfile[] } }).director_profiles.profiles;
