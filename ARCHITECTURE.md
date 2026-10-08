@@ -1,10 +1,10 @@
-# CineOS 3.2 — Cinematic Intelligence Architecture
+# Dani Skills 3.3 — Cinematic Intelligence Architecture
 
-**Credits:** Daniel Rodrigues · Draft Creative Studio Ltd
+**Credits:** Daniel Rodrigues · Daniel Rodrigues
 
-> **Do not turn CineOS into a bigger skill. Turn it into a smarter cinematic system.**
+> **Do not turn Dani Skills into a bigger skill. Turn it into a smarter cinematic system.**
 
-CineOS 3.2 keeps everything that made v3.1 strong (FOV in degrees, Hero Frame First, Feasibility Veto, Visual DNA, Color Grading DNA, engine routing, gates) and adds the layer that was missing: **how to keep, evaluate, remember, edit and improve an entire AI-generated film.**
+Dani Skills 3.3 keeps everything that made v3.1 strong (FOV in degrees, Hero Frame First, Feasibility Veto, Visual DNA, Color Grading DNA, engine routing, gates) and adds the layer that was missing: **how to keep, evaluate, remember, edit and improve an entire AI-generated film.**
 
 The design borrows the *philosophy* of the Impeccable project — persistent context, an operational vocabulary, deterministic anti-pattern rules, audit → critique → polish loops — and adapts it to cinema. It copies none of its UI rules.
 
@@ -13,7 +13,7 @@ The design borrows the *philosophy* of the Impeccable project — persistent con
 ## 1. System map
 
 ```text
-                         CINEOS 3.2
+                         DANI_SKILLS 3.3
                     CINEMATIC INTELLIGENCE
                            │
         ┌──────────────────┼──────────────────┐
@@ -62,7 +62,7 @@ The 30+ capability areas of the original v3.1 skills (styles 01–14, 27, 28, 50
 ## 3. Three separations that matter
 
 1. **Project truth vs cinematic language.** `PROJECT.md` says what the film *is* (genre, audience, runtime, language, location, mode). `STYLE_BIBLE.md` says how it *looks* (base + accent DNA, FOV range, light, grade card, grain). Models stop confusing story with style.
-2. **Intent vs model syntax.** Intent → Shot Spec (Shot DNA) → **Engine Adapter** → prompt. A new model needs `models[]` + `engine_adapters[]`, not a new CineOS.
+2. **Intent vs model syntax.** Intent → Shot Spec (Shot DNA) → **Engine Adapter** → prompt. A new model needs `models[]` + `engine_adapters[]`, not a new Dani Skills.
 3. **Director Profile vs person.** Famous-director requests map to language archetypes (`precision_thriller`, `intimate_naturalism`, `operatic_scale`, …) built from design tokens. Looks stay ownable and IP-safe.
 
 ## 4. The core loop
@@ -129,7 +129,7 @@ Dimensions and weights live in `tables.audit_dimensions`. The pass rule is G12: 
 
 ## 9. Implementation phases
 
-| Phase | Scope | Status in 3.2 |
+| Phase | Scope | Status in 3.3 |
 |---|---|---|
 | 1 Consolidate | Project Bible, Shot Spec, Shot DNA, Asset Graph | **Done** (skills 65, 66, 70; templates; `AssetGraph`) |
 | 2 Intelligence | Model Intelligence, benchmark suite, Reference Intelligence, Prompt Compiler 2 | **Done** (skills 67, 68, 66; adapters; `modelIntelligence`) — *benchmark results are empty until you measure* |
@@ -140,6 +140,6 @@ Dimensions and weights live in `tables.audit_dimensions`. The pass rule is G12: 
 ## 10. What is still open
 
 - Run the 10-test benchmark on the engines you actually use and fill `tables.engine_benchmark.results`.
-- Re-verify engine specs added in 3.2 (`confidence: low`, `verified_on 2026-06-30`) and the v3.1 specs older than 90 days (`staleEngines()`).
+- Re-verify engine specs added in 3.3 (`confidence: low`, `verified_on 2026-06-30`) and the v3.1 specs older than 90 days (`staleEngines()`).
 - Optionally translate the remaining Portuguese v3.1 strings in the JSON (`triggers_pt` stays for PT routing).
 - Assimilate additional repositories (CineZine, openDesign, Hugovdd/skills, openclaw marketplace) once their contents are provided; each addition should land as a style, skill, pipeline, table or adapter — never as a loose file.
