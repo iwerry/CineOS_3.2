@@ -1,7 +1,7 @@
-<!-- # Skill Criada por Daniel Rodrigues · Terminal AI — Daniel Rodrigues · profiles_guide v3.3.0-cia (v3.1 profiles 01–18 kept in Portuguese; profiles 19–22 and 3.3 skill additions in English) -->
+<!-- # Skill Criada por Daniel Rodrigues · Dani Skills — Daniel Rodrigues · profiles_guide v3.3.0-cia (v3.1 profiles 01–18 kept in Portuguese; profiles 19–22 and 3.3 skill additions in English) -->
 # Profiles Guide — Dani Skills 3.3 (22 profiles)
 
-O **Terminal AI — Daniel Rodrigues** atende **18 perfis**. Cada perfil já vem com **skills, estilos Visual DNA, motores, pipeline e KPIs resolvidos**: escolher o perfil é escolher o kit inteiro. No código: `profileKit('perfil_08')` (skillsData.ts) devolve skills expandidas (com dependências), estilos, motores e pipeline.
+O **Dani Skills — Daniel Rodrigues** atende **18 perfis**. Cada perfil já vem com **skills, estilos Visual DNA, motores, pipeline e KPIs resolvidos**: escolher o perfil é escolher o kit inteiro. No código: `profileKit('perfil_08')` (skillsData.ts) devolve skills expandidas (com dependências), estilos, motores e pipeline.
 
 ## O que é um perfil (e o que não é)
 - **Perfil** = *quem* pede (dono do problema): dores, KPIs, entregáveis, kit padrão. Não define look.
