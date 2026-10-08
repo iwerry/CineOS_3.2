@@ -697,6 +697,15 @@ export class AssetGraph {
 
 
 /* ───────── Daniskills 3.3 Quality System: Hardness / Anti-Slop / Smart Sharpen ───────── */
+export const QUALITY_COMMANDS = {
+  '/hardness': 'hardness',
+  '/anti-slop': 'antiSlop',
+  '/smart-sharpen': 'smartSharpen',
+  '/humanize': 'humanizeText',
+  '/post-sharpen': 'postSharpenPlan',
+  '/quality:loop': 'qualityLoop'
+} as const;
+
 export type Modality = 'image' | 'audio' | 'video' | 'text' | 'script';
 export type QualityStatus = 'PASS' | 'POLISH' | 'REGENERATE';
 export type AntiSlopStatus = QualityStatus | 'UNASSESSED';
