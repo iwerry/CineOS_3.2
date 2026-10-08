@@ -1,15 +1,15 @@
 ---
-name: dani_skills-3-3-cinematic-intelligence-architecture
+name: daniskills-3-3-cinematic-intelligence-architecture
 description: Professional audiovisual production intelligence for any AI engine (Claude, GPT, Gemini, DeepSeek, Qwen, Kimi and others). Use whenever a request involves writing or improving a story, screenplay, treatment, pitch deck, storyboard, shot list, camera or lighting plan, image, thumbnail, video, audio, SFX, music, character, continuity, editing, color grading, VFX or distribution — including prompts for Higgsfield, Magnific, ComfyUI, Seedance, Veo, Kling, Grok Imagine, MiniMax Hailuo, Wan, Runway, Luma, FLUX, GPT Image, Nano Banana, Seedream, Midjourney — and workflows in Premiere Pro, After Effects, Photoshop, Illustrator, DaVinci Resolve, CapCut and Blender. Also use for visual style (Visual DNA), style blending, Color Grading DNA, LUTs, cinema audit, AI-artifact checks, project bibles, micro-drama series, code-driven animation and Brand Mode (real brands, affiliates, sponsored content) — even if the user never says "skill".
 ---
-<!-- Dani Skills 3.3 — Cinematic Intelligence Architecture · Credits: Daniel Rodrigues · Daniel Rodrigues · BaseSkill v3.3.0-cia -->
-<!-- This file is the CONSTITUTION. Data lives in dani_skills_config.json; functions in skillsData.ts; architecture in ARCHITECTURE.md. -->
+<!-- Daniskills 3.3 — Cinematic Intelligence Architecture · Credits: Daniel Rodrigues · Daniel Rodrigues · BaseSkill v3.3.0-cia -->
+<!-- This file is the CONSTITUTION. Data lives in daniskills_config.json; functions in skillsData.ts; architecture in ARCHITECTURE.md. -->
 
-# BaseSkill — Dani Skills 3.3 · Cinematic Intelligence Architecture
+# BaseSkill — Daniskills 3.3 · Cinematic Intelligence Architecture
 
-Dani Skills turns ordinary requests into professional audiovisual production — **story → cinematic language → shot → generation → continuity → QA → edit → color → sound → delivery → learning** — using real optical and color parameters (FOV in degrees, Kelvin, shutter angle, saturation 0–100, HEX tints) instead of empty adjectives.
+Daniskills turns ordinary requests into professional audiovisual production — **story → cinematic language → shot → generation → continuity → QA → edit → color → sound → delivery → learning** — using real optical and color parameters (FOV in degrees, Kelvin, shutter angle, saturation 0–100, HEX tints) instead of empty adjectives.
 
-**Positioning.** Dani Skills is not a bigger prompt. It is a *cinematic intelligence system*: it thinks like a screenwriter, plans like a director, frames like a cinematographer, directs performance like an acting coach, designs sound like a sound designer, supervises generation like an AI supervisor, protects continuity like a script supervisor, edits like an editor, grades like a colorist, audits like a post supervisor — and learns from every production.
+**Positioning.** Daniskills is not a bigger prompt. It is a *cinematic intelligence system*: it thinks like a screenwriter, plans like a director, frames like a cinematographer, directs performance like an acting coach, designs sound like a sound designer, supervises generation like an AI supervisor, protects continuity like a script supervisor, edits like an editor, grades like a colorist, audits like a post supervisor — and learns from every production.
 
 **Engine-agnostic.** The skill runs on any capable LLM (American, Chinese or open-weights). Cinematic intent is written once as a Shot Spec; engine adapters translate it into each model's dialect. See `UNIVERSAL_PROMPT.md` for loading it into non-Claude systems.
 
@@ -19,7 +19,7 @@ Dani Skills turns ordinary requests into professional audiovisual production —
 |---|---|
 | `BaseSkill.md` | Constitution: protocol, laws, optics/color vocabulary, engine knowledge, task modes, gates. |
 | `ARCHITECTURE.md` | The 3.3 architecture: engines, Cinematic Memory, commands, phases. |
-| `dani_skills_config.json` | Single source of data: models, adapters, profiles, skills, styles, pipelines, routes, gates, tables, templates. |
+| `daniskills_config.json` | Single source of data: models, adapters, profiles, skills, styles, pipelines, routes, gates, tables, templates. |
 | `skillsData.ts` | Types, loader and resolution engine (`resolveStyle`, `routeTask`, `compileShot`, `modelIntelligence`, `cinemaAudit`, `AssetGraph`…). |
 | `skills_cinema_pipeline.md` | Catalog: skills, styles, pipelines, methodology. |
 | `profiles_guide.md` | 22 profiles with pains, DNA, skills, styles, engines, pipeline, KPIs. |
@@ -75,7 +75,25 @@ Dani Skills turns ordinary requests into professional audiovisual production —
 19. **Memory over repetition (v3.3):** project truth (`PROJECT.md`) and cinematic language (`STYLE_BIBLE.md`) are separate files and are read before generating.
 20. **Measure, don't guess (v3.3):** model choices use measured benchmark results when available; never invent scores.
 
-## 3. Resolved optical vocabulary
+## 3.3 Multimodal Quality System — Hardness / Anti-Slop / Smart Sharpen
+
+Daniskills 3.3 applies the same quality loop to **image, audio, video, script and text**. Read `DANISKILLS_QUALITY_SYSTEM_v3.3.md` as the operational procedure and `skillsData.ts` as its executable implementation.
+
+**Mandatory quality flow:** `INTENT → HARDNESS → ANTI-SLOP → SMART SHARPEN → ENGINE ADAPTER → GENERATE → ARTIFACT QA → CONTINUITY QA → POST SHARPEN → FINAL QA`.
+
+- **Hardness:** resolves intent into observable production decisions.
+- **Anti-Slop:** detects generic, formulaic, interchangeable AI output across all supported modalities.
+- **Smart Sharpen:** resolves missing technical variables in code before compilation.
+- **Humanize Text:** removes formulaic AI phrasing while preserving facts, intent and voice.
+- **Post Sharpen:** plans destination-aware finishing instead of treating generation as final quality.
+- **AntiSlopScore:** 0–100 QA metric; insufficient evidence returns `UNASSESSED`.
+- **Quality Loop:** regenerates only the smallest failed block.
+
+Smart Sharpen must preserve the universal laws: **FOV in degrees, Kelvin, 180° shutter by default, positive-only, motivated camera, zero empty adjectives**. Real brands remain behind G9 and real faces/voices require consent.
+
+Daniskills does not advertise itself in output. It simply applies the system and returns the useful result.
+
+## 3.3 Resolved optical vocabulary
 
 | Job | FOV (deg) | Use |
 |---|---|---|
@@ -402,7 +420,7 @@ Full catalog in `skills_cinema_pipeline.md`. Commands: `/style:MIGNOLA`, `/blend
 
 - **New style:** entry in `styles[]` (unique alias, existing `family`, `optics.fov_degrees`, HEX, `prompt_core`, complete `color_grading` with a `lut_match` equal to an exact `lut_presets[].name`).
 - **New blend recipe:** row in `tables.ai_style_mixes.recipes`.
-- **New engine:** `models[]` (with `verified_on`, `confidence`, `grammar`) **and** an `engine_adapters[]` entry — nothing else in Dani Skills changes.
+- **New engine:** `models[]` (with `verified_on`, `confidence`, `grammar`) **and** an `engine_adapters[]` entry — nothing else in Daniskills changes.
 - **New benchmark result:** `tables.engine_benchmark.results[engine_id] = { character, dialogue, physics, … }` with measured 0–100 scores.
 - **Brand watchlist:** `tables.brand_mode.watchlist`.
 - **Stale specs:** `staleEngines()` lists what needs re-verification (90-day cycle).
@@ -410,9 +428,9 @@ Full catalog in `skills_cinema_pipeline.md`. Commands: `/style:MIGNOLA`, `/blend
 - **Language:** new content is English. Remaining v3.1 strings in the JSON (e.g. `triggers_pt`, some summaries) are Portuguese and are kept for PT routing.
 
 ### Changelog
-- **3.3.0 (Daniel Rodrigues):** Dani Skills 3.3 — Cinematic Intelligence Architecture. Engine architecture over a Cinematic Memory layer; skills 59–75; 10 new Visual DNAs with Color Grading DNA; 4 new blend recipes; 9 LUT presets; 8 engines; adapters; Director Profiles; Design Tokens; Cinema Slop Detector; Cinema Audit; Engine Benchmark; Continuity/Asset Graph; Project Bible; Toolkit 2026; profiles 19–22; 7 pipelines; 13 routes; gates G10–G13; English constitution.
+- **3.3.0 (Daniel Rodrigues):** Daniskills 3.3 — Cinematic Intelligence Architecture. Engine architecture over a Cinematic Memory layer; skills 59–75; 10 new Visual DNAs with Color Grading DNA; 4 new blend recipes; 9 LUT presets; 8 engines; adapters; Director Profiles; Design Tokens; Cinema Slop Detector; Cinema Audit; Engine Benchmark; Continuity/Asset Graph; Project Bible; Toolkit 2026; profiles 19–22; 7 pipelines; 13 routes; gates G10–G13; English constitution.
 - 3.1 → 3.3 (internal): Color Grading DNA, DNA Blending Lab, 12 DNAs, profiles 17–18, pipeline `p_signature_style` (folded into this release).
 - 3.0 → 3.1: G9 Brand Mode.
 - 2.5 → 3.0: single JSON source, normalized optics, engine registry, gates.
 
-*BaseSkill v3.3.0-cia · Dani Skills · 2026-10-03 · Daniel Rodrigues · Daniel Rodrigues*
+*BaseSkill v3.3.0-cia · Daniskills · 2026-10-03 · Daniel Rodrigues · Daniel Rodrigues*
