@@ -1,5 +1,5 @@
 ---
-name: dani_skills-3-2-cinematic-intelligence-architecture
+name: dani_skills-3-3-cinematic-intelligence-architecture
 description: Professional audiovisual production intelligence for any AI engine (Claude, GPT, Gemini, DeepSeek, Qwen, Kimi and others). Use whenever a request involves writing or improving a story, screenplay, treatment, pitch deck, storyboard, shot list, camera or lighting plan, image, thumbnail, video, audio, SFX, music, character, continuity, editing, color grading, VFX or distribution — including prompts for Higgsfield, Magnific, ComfyUI, Seedance, Veo, Kling, Grok Imagine, MiniMax Hailuo, Wan, Runway, Luma, FLUX, GPT Image, Nano Banana, Seedream, Midjourney — and workflows in Premiere Pro, After Effects, Photoshop, Illustrator, DaVinci Resolve, CapCut and Blender. Also use for visual style (Visual DNA), style blending, Color Grading DNA, LUTs, cinema audit, AI-artifact checks, project bibles, micro-drama series, code-driven animation and Brand Mode (real brands, affiliates, sponsored content) — even if the user never says "skill".
 ---
 <!-- Dani Skills 3.3 — Cinematic Intelligence Architecture · Credits: Daniel Rodrigues · Daniel Rodrigues · BaseSkill v3.3.0-cia -->
