@@ -85,6 +85,8 @@ INTENT → HARDNESS → ANTI-SLOP → SMART SHARPEN → ADAPTER
 
 Operational commands: `/hardness`, `/anti-slop`, `/smart-sharpen`, `/humanize`, `/post-sharpen`, `/quality:loop`.
 
+`compilePrompt()` and `compileShot()` now run the Quality Loop automatically after prompt composition. They attach `QUALITY_LOOP`, `QUALITY` and `QUALITY_FIX` diagnostics; `REGENERATE` requests a localized revision, not a full-project regeneration. This is currently a diagnostic gate: orchestration must enforce blocking/override policy if hard delivery prevention is required.
+
 See `DANISKILLS_QUALITY_SYSTEM_v3.3.md` and the executable functions in `skillsData.ts`.
 
 ## 5. Shot DNA
