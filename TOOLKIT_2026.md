@@ -1,16 +1,16 @@
-# CineOS Toolkit 2026 — Professional Software & AI Tools
+# Dani Skills Toolkit 2026 — Professional Software & AI Tools
 
-**Credits:** Daniel Rodrigues · Draft Creative Studio Ltd
+**Credits:** Daniel Rodrigues · Daniel Rodrigues
 
 > Software knowledge for professional handoff (Skill 71). Feature names change between releases; treat version-specific items as 'verify in the installed version'. Color rule: one grade authority, one compositing authority.
 
-**Currency warning.** Feature names, limits and prices of AI tools change monthly. Items here describe stable *roles* and workflows. Anything version-specific must be checked in the installed version or on the vendor page. Engines in `draft_studio_config.json` carry `verified_on` and `confidence`.
+**Currency warning.** Feature names, limits and prices of AI tools change monthly. Items here describe stable *roles* and workflows. Anything version-specific must be checked in the installed version or on the vendor page. Engines in `dani_skills_config.json` carry `verified_on` and `confidence`.
 
 ## Who does what (one authority per job)
 
 | Job | Authority | Why |
 |---|---|---|
-| Story, script, planning | LLM (any) + CineOS skills | Structure and consistency |
+| Story, script, planning | LLM (any) + Dani Skills skills | Structure and consistency |
 | Hero frames and stills | Flux / Nano Banana / Midjourney / GPT Image / Seedream | Per-style strengths |
 | Local fixes on stills | Photoshop (+ Firefly) | Layer control |
 | Vector / typography | Illustrator, Recraft, code (Skill 73) | Exact shapes and text |
