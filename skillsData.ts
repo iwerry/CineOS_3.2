@@ -868,5 +868,5 @@ export function gateG10(files: Record<string, string>) {
 }
 
 export default { CONFIG, MODELS, PROFILES, SKILLS, STYLES, PIPELINES, ROUTES, GATES, SKILLS_V26, resolveStyle, routeTask, recommendEngines, compilePrompt, lintPrompt, profileKit, expandSkillChain, wordBudget, hashtags, brandGate, detectBrands, disclosureBlock, blendStyles, gradeCard, styleGradeLine, saturationLabel,
-  ADAPTERS, getAdapter, compileShot, compileShotForAll, modelIntelligence, cinemaSlop, lintCinema, cinemaAudit, polishPlan,
+  ADAPTERS, getAdapter, compileShot, compileShotForAll, modelIntelligence, cinemaSlop, lintCinema, cinemaAudit, polishPlan, hardness, smartSharpen, antiSlop, antiSlopScore, humanizeText, postSharpenPlan, qualityLoop,
   artifactVerdict, continuityCheck, sequenceContinuity, AssetGraph, directorProfile, designToken, projectBibleScaffold, gateG10 };
