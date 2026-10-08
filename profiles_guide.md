@@ -1,7 +1,7 @@
-<!-- # Skill Criada por Daniel Rodrigues · Terminal AI — Draft Creative Studio Ltd · profiles_guide v3.2.0-cia (v3.1 profiles 01–18 kept in Portuguese; profiles 19–22 and 3.2 skill additions in English) -->
-# Profiles Guide — CineOS 3.2 (22 profiles)
+<!-- # Skill Criada por Daniel Rodrigues · Terminal AI — Daniel Rodrigues · profiles_guide v3.3.0-cia (v3.1 profiles 01–18 kept in Portuguese; profiles 19–22 and 3.3 skill additions in English) -->
+# Profiles Guide — Dani Skills 3.3 (22 profiles)
 
-O **Terminal AI — Draft Creative Studio Ltd** atende **18 perfis**. Cada perfil já vem com **skills, estilos Visual DNA, motores, pipeline e KPIs resolvidos**: escolher o perfil é escolher o kit inteiro. No código: `profileKit('perfil_08')` (skillsData.ts) devolve skills expandidas (com dependências), estilos, motores e pipeline.
+O **Terminal AI — Daniel Rodrigues** atende **18 perfis**. Cada perfil já vem com **skills, estilos Visual DNA, motores, pipeline e KPIs resolvidos**: escolher o perfil é escolher o kit inteiro. No código: `profileKit('perfil_08')` (skillsData.ts) devolve skills expandidas (com dependências), estilos, motores e pipeline.
 
 ## O que é um perfil (e o que não é)
 - **Perfil** = *quem* pede (dono do problema): dores, KPIs, entregáveis, kit padrão. Não define look.
@@ -49,7 +49,7 @@ O **Terminal AI — Draft Creative Studio Ltd** atende **18 perfis**. Cada perfi
 - **Dores resolvidas:** Falta de pré-vis cinematográfico real, plates de VFX com cara de IA, texturas incompatíveis com DaVinci/Premiere.
 - **DNA técnico:** Anamórfico com flare elíptico, ARRI Alexa LF, obturador 180°, curvas H&D, LUT .cube 33/65 pontos.
 - **Skills-chave:** 05 Cinematic, 10 Motion Design, 20 Técnicas de Câmera Física e Digital, 25 Pós-Produção e Emulação Química (Darkroom + LUT), 27 Motion Design e Launch Video (MiniMax H3 / Higgsfield), 45 Análise de Imagem e Engenharia Reversa de Prompt, 51 Motion de Produto Digital (UX/UI para Vídeo), 54 Upgrade de Vídeo Comum para Cinema (V2V Restyle), 57 DNA Blending Lab (Mistura de Estilos), 58 Color Grading DNA Engine
-- **Estilos Visual DNA recomendados:** **NOIR** — Hollywood Film Noir — Eastman Double-X 5222 (Preto e Branco Clássico); **KUBRICK** — Stanley Kubrick — One-Point Perspective Symmetry (The Shining / 2001); **VILLENEUVE** — Denis Villeneuve — Monolithic Fog Brutalism (Dune / Blade Runner 2049); **SWISS** — Swiss / International Typographic Style — Grid Motion Design; **GLASSNOIR** — Glass Noir — Liquid-Glass UI × Hollywood Film Noir Blend (v3.2 mix recipe); **LIQUIDMETAL** — Liquid Metal Morph — Reflective Fluid-Chrome Transformation (2026 AI-video signature look)
+- **Estilos Visual DNA recomendados:** **NOIR** — Hollywood Film Noir — Eastman Double-X 5222 (Preto e Branco Clássico); **KUBRICK** — Stanley Kubrick — One-Point Perspective Symmetry (The Shining / 2001); **VILLENEUVE** — Denis Villeneuve — Monolithic Fog Brutalism (Dune / Blade Runner 2049); **SWISS** — Swiss / International Typographic Style — Grid Motion Design; **GLASSNOIR** — Glass Noir — Liquid-Glass UI × Hollywood Film Noir Blend (v3.3 mix recipe); **LIQUIDMETAL** — Liquid Metal Morph — Reflective Fluid-Chrome Transformation (2026 AI-video signature look)
 - **Motores preferidos:** `veo_3_1`, `kling_3_0`, `ltx_2_x`, `comfyui`
 - **Pipeline padrão:** `p_video_upgrade` — Upgrade de Vídeo Comum → Cinema (V2V) (16:9, ~30s)
 - **Entregáveis:** plates B-roll; pré-vis; LUT .cube; specs de motion
@@ -101,7 +101,7 @@ O **Terminal AI — Draft Creative Studio Ltd** atende **18 perfis**. Cada perfi
 - **Dores resolvidas:** Frustração com prompts de YouTube baseados em adjetivos vazios; falta de controle paramétrico.
 - **DNA técnico:** Grafos ComfyUI DAG, Seedance 2.x, Higgsfield Studio, FOV em graus, Hero Frame First, Feasibility Veto, sandbox Python.
 - **Skills-chave:** 15 Seedance Base, 16 ComfyUI Mastery, 19 Direção de Cinema Digital (Higgsfield / ComfyUI), 20 Técnicas de Câmera Física e Digital, 22 Consistent Characters (Identidade Visual), 24 Direção de Atuação Sintética (Acting Director OS), 45 Análise de Imagem e Engenharia Reversa de Prompt, 53 Roteador de Motores e Adaptador de Prompt, 55 Continuidade e Auditoria de Qualidade (Script Supervisor Sintético), 57 DNA Blending Lab (Mistura de Estilos), 58 Color Grading DNA Engine
-- **Estilos Visual DNA recomendados:** **NOIR** — Hollywood Film Noir — Eastman Double-X 5222 (Preto e Branco Clássico); **DOCREAL** — Documentary Photoreal — Cinéma Vérité / National Geographic Realism; **AKIRA** — Katsuhiro Otomo — Akira / Neo-Tokyo Cel Cyberpunk (1988); **MOEBIUS** — Jean Giraud 'Moebius' — Ligne Claire / Heavy Metal / BD Franco-Belga; **GHIBLIPUNK** — Ghiblipunk — Watercolor-Pastoral × Neon-Cyberpunk Blend (v3.2 mix recipe); **GLASSNOIR** — Glass Noir — Liquid-Glass UI × Hollywood Film Noir Blend (v3.2 mix recipe)
+- **Estilos Visual DNA recomendados:** **NOIR** — Hollywood Film Noir — Eastman Double-X 5222 (Preto e Branco Clássico); **DOCREAL** — Documentary Photoreal — Cinéma Vérité / National Geographic Realism; **AKIRA** — Katsuhiro Otomo — Akira / Neo-Tokyo Cel Cyberpunk (1988); **MOEBIUS** — Jean Giraud 'Moebius' — Ligne Claire / Heavy Metal / BD Franco-Belga; **GHIBLIPUNK** — Ghiblipunk — Watercolor-Pastoral × Neon-Cyberpunk Blend (v3.3 mix recipe); **GLASSNOIR** — Glass Noir — Liquid-Glass UI × Hollywood Film Noir Blend (v3.3 mix recipe)
 - **Motores preferidos:** `comfyui`, `seedance_2_5`, `ltx_2_x`, `higgsfield`
 - **Pipeline padrão:** `p_short_film` — Curta-Metragem Sintético (2.39:1, ~300s)
 - **Entregáveis:** workflow .json; prompts paramétricos; hero frames; auditoria anti-slop
@@ -231,7 +231,7 @@ O **Terminal AI — Draft Creative Studio Ltd** atende **18 perfis**. Cada perfi
 - **Dores resolvidas:** Comunicar acervo/obra com respeito ao estilo sem copiar obras específicas.
 - **DNA técnico:** Estilos como DNA técnico (UKIYOE, ARTDECO, MOEBIUS…), non-IP, proveniência, legendas acessíveis, localização cultural.
 - **Skills-chave:** 45 Análise de Imagem e Engenharia Reversa de Prompt, 46 Direção de Imagem (T2I / I2I / Multi-Referência), 47 Arquiteto de História (Premissa, Estrutura e Bíblia de Mundo), 52 Bíblia de Pré-Produção (Moodboard, Style Bible, Cronograma e Orçamento), 56 Compliance, IP e Proveniência, 31 Localização e Adaptação Cultural Multi-Idioma, 50 Estúdio Educacional (Aula, Explainer, EdTech), 57 DNA Blending Lab (Mistura de Estilos)
-- **Estilos Visual DNA recomendados:** **UKIYOE** — Ukiyo-e Woodblock — Hokusai / Hiroshige Edo Print Motion; **ARTDECO** — Art Deco Luxury — Gatsby-Era Geometric Gold (Cassandre Poster Motion); **MOEBIUS** — Jean Giraud 'Moebius' — Ligne Claire / Heavy Metal / BD Franco-Belga; **PAPERCUT** — Paper Cut-Out Diorama — Layered Paper Craft (Kirigami Motion); **GHIBLI** — Studio Ghibli — Hayao Miyazaki Watercolor Pastoral; **GHIBLIPUNK** — Ghiblipunk — Watercolor-Pastoral × Neon-Cyberpunk Blend (v3.2 mix recipe)
+- **Estilos Visual DNA recomendados:** **UKIYOE** — Ukiyo-e Woodblock — Hokusai / Hiroshige Edo Print Motion; **ARTDECO** — Art Deco Luxury — Gatsby-Era Geometric Gold (Cassandre Poster Motion); **MOEBIUS** — Jean Giraud 'Moebius' — Ligne Claire / Heavy Metal / BD Franco-Belga; **PAPERCUT** — Paper Cut-Out Diorama — Layered Paper Craft (Kirigami Motion); **GHIBLI** — Studio Ghibli — Hayao Miyazaki Watercolor Pastoral; **GHIBLIPUNK** — Ghiblipunk — Watercolor-Pastoral × Neon-Cyberpunk Blend (v3.3 mix recipe)
 - **Motores preferidos:** `midjourney`, `flux_2`, `gpt_image_2`, `kling_3_0`
 - **Pipeline padrão:** `p_still_campaign` — Campanha de Imagens / Thumbnails (16:9, ~0s)
 - **Entregáveis:** vídeo de exposição; loop de instalação; campanha de abertura; versões acessíveis
@@ -244,7 +244,7 @@ O **Terminal AI — Draft Creative Studio Ltd** atende **18 perfis**. Cada perfi
 - **Dores resolvidas:** Estilo de anime 'genérico de IA'; perda de linha e cor entre planos; dificuldade de misturar 2D e 3D sem parecer colagem.
 - **DNA técnico:** Cel + luz CG por camada (UFOTABLE), climax em 24fps e resto em 12fps (MAPPA), painel vertical (WEBTOON), key visual heroico (ISEKAI), Hero Frame no estilo antes de animar, Character Sheet e paleta HEX travada.
 - **Skills-chave:** 01 Anime Action, 06 Comic to Video, 22 Consistent Characters (Identidade Visual), 23 Character Sheet (Do Rascunho à Apresentação), 46 Direção de Imagem (T2I / I2I / Multi-Referência), 48 Storyboard, Shot List e Animatic (Pré-Vis), 57 DNA Blending Lab (Mistura de Estilos), 58 Color Grading DNA Engine, 11 Music Video
-- **Estilos Visual DNA recomendados:** **UFOTABLE** — Dynamic Light-Cel Anime — Ufotable-School VFX-over-2D (2015–2026 modern sakuga); **MAPPA** — Kinetic Fluid Sakuga — Modern Studio Powerhouse Motion (2020s); **WEBTOON** — Vertical Webtoon Flat Color — Korean Digital-Native Comic Motion; **ISEKAI** — Isekai Fantasy Light-Novel Cover — Ornate High-Fantasy Anime Key Visual; **AKIRA** — Katsuhiro Otomo — Akira / Neo-Tokyo Cel Cyberpunk (1988); **SHINKAI** — Makoto Shinkai — Luminous Sky Anime (Your Name / Weathering With You); **TRIGGER** — Studio Trigger — Neon Flat-Pop Anime (Kill la Kill / Cyberpunk: Edgerunners); **GHIBLIPUNK** — Ghiblipunk — Watercolor-Pastoral × Neon-Cyberpunk Blend (v3.2 mix recipe)
+- **Estilos Visual DNA recomendados:** **UFOTABLE** — Dynamic Light-Cel Anime — Ufotable-School VFX-over-2D (2015–2026 modern sakuga); **MAPPA** — Kinetic Fluid Sakuga — Modern Studio Powerhouse Motion (2020s); **WEBTOON** — Vertical Webtoon Flat Color — Korean Digital-Native Comic Motion; **ISEKAI** — Isekai Fantasy Light-Novel Cover — Ornate High-Fantasy Anime Key Visual; **AKIRA** — Katsuhiro Otomo — Akira / Neo-Tokyo Cel Cyberpunk (1988); **SHINKAI** — Makoto Shinkai — Luminous Sky Anime (Your Name / Weathering With You); **TRIGGER** — Studio Trigger — Neon Flat-Pop Anime (Kill la Kill / Cyberpunk: Edgerunners); **GHIBLIPUNK** — Ghiblipunk — Watercolor-Pastoral × Neon-Cyberpunk Blend (v3.3 mix recipe)
 - **Motores preferidos:** `seedance_2_5`, `kling_3_0`, `nano_banana`, `flux_2`, `wan_2_x`
 - **Pipeline padrão:** `p_storyboard_previs` — Storyboard e Pré-Vis (16:9, ~60s)
 - **Entregáveis:** teaser/trailer 30–60s; key visual; character sheet; loop vertical de webtoon; abertura 90s
@@ -257,9 +257,9 @@ O **Terminal AI — Draft Creative Studio Ltd** atende **18 perfis**. Cada perfi
 - **Dores resolvidas:** Todo mundo usa os mesmos estilos famosos; resultado sem assinatura; cor e grade mudam de post para post.
 - **DNA técnico:** 1 base + 1 acento isolado (Skill 57), cartão de color grading com números (Skill 58), 3 stills aprovados antes de animar, registro no style bible (Skill 52).
 - **Skills-chave:** 45 Análise de Imagem e Engenharia Reversa de Prompt, 46 Direção de Imagem (T2I / I2I / Multi-Referência), 52 Bíblia de Pré-Produção (Moodboard, Style Bible, Cronograma e Orçamento), 53 Roteador de Motores e Adaptador de Prompt, 55 Continuidade e Auditoria de Qualidade (Script Supervisor Sintético), 57 DNA Blending Lab (Mistura de Estilos), 58 Color Grading DNA Engine, 25 Pós-Produção e Emulação Química (Darkroom + LUT)
-- **Estilos Visual DNA recomendados:** **GHIBLIPUNK** — Ghiblipunk — Watercolor-Pastoral × Neon-Cyberpunk Blend (v3.2 mix recipe); **GLASSNOIR** — Glass Noir — Liquid-Glass UI × Hollywood Film Noir Blend (v3.2 mix recipe); **ANALOGDREAM** — Analog Dream Photography — Flux-Era Warm-Film AI Look (2025–26); **LIQUIDMETAL** — Liquid Metal Morph — Reflective Fluid-Chrome Transformation (2026 AI-video signature look); **DREAMCORE** — Dreamcore / Liminal Space — Uncanny Empty-Place Surrealism; **BIOLUMINESCENT** — Bioluminescent Biopunk — Living-Light Organic Sci-Fi
+- **Estilos Visual DNA recomendados:** **GHIBLIPUNK** — Ghiblipunk — Watercolor-Pastoral × Neon-Cyberpunk Blend (v3.3 mix recipe); **GLASSNOIR** — Glass Noir — Liquid-Glass UI × Hollywood Film Noir Blend (v3.3 mix recipe); **ANALOGDREAM** — Analog Dream Photography — Flux-Era Warm-Film AI Look (2025–26); **LIQUIDMETAL** — Liquid Metal Morph — Reflective Fluid-Chrome Transformation (2026 AI-video signature look); **DREAMCORE** — Dreamcore / Liminal Space — Uncanny Empty-Place Surrealism; **BIOLUMINESCENT** — Bioluminescent Biopunk — Living-Light Organic Sci-Fi
 - **Motores preferidos:** `flux_2`, `nano_banana`, `midjourney`, `seedance_2_5`, `higgsfield`
-- **Pipeline padrão:** `p_signature_style` — Assinatura Visual (DNA Blend + Color Grade) — v3.2 (16:9, ~0s)
+- **Pipeline padrão:** `p_signature_style` — Assinatura Visual (DNA Blend + Color Grade) — v3.3 (16:9, ~0s)
 - **Entregáveis:** blend_style.json; color_grading_card.json; 3 hero frames de teste; style bible atualizada
 - **KPIs:** reconhecimento do look; consistência entre peças; aprovação na 1ª rodada
 - **Comece por aqui:** `/blend:NOIR+LIQUIDGLASS --weights 70/30` — *Crie o estilo-assinatura de uma marca de relógios: base NOIR 70% + acento LIQUIDGLASS 30% num único vidro.*
@@ -273,11 +273,11 @@ O **Terminal AI — Draft Creative Studio Ltd** atende **18 perfis**. Cada perfi
 - **Mistura de estilos:** no máximo 1 base + 1 acento (Skill 57). Os perfis 06, 14, 16, 17 e 18 são os que mais usam.
 - Estilos com nomes de artistas/estúdios são âncoras culturais de DNA visual (traços técnicos), não licença para reproduzir personagens, logotipos, cenas ou trade dress. Em uso comercial, prefira os campos dna_tags/prompt_core (traços) a nomes próprios, mantenha IP LOCK e revise com a Skill 56.
 
-*Gerado a partir do JSON v3.2.0-cinema-os · 2026-09-27 · Daniel Rodrigues · Draft Creative Studio*
+*Gerado a partir do JSON v3.3.0-cinema-os · 2026-09-27 · Daniel Rodrigues · Daniel Rodrigues*
 
 ---
 
-# CineOS 3.2 — new profiles (19–22) and upgrades
+# Dani Skills 3.3 — new profiles (19–22) and upgrades
 
 ## PERFIL 19: Directors of Photography & Cinematography Planners
 **Who:** DoPs, gaffers, camera operators and directors who need shot logic, lighting plans and lens/FOV decisions that translate to AI and real sets  
@@ -331,7 +331,7 @@ O **Terminal AI — Draft Creative Studio Ltd** atende **18 perfis**. Cada perfi
 **KPIs:** pitch meeting requests, script-to-shot translation, revision rounds  
 **Quick start:** `/story:develop` — Turn this premise into a logline, 5-page treatment, lookbook and an 8-slide pitch deck.
 
-## Existing profiles that gained 3.2 skills
+## Existing profiles that gained 3.3 skills
 
 | Profile | Added skills |
 |---|---|
