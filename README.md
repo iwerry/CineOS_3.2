@@ -31,7 +31,7 @@ const audit = antiSlop(prompt, 'video');
 const final = qualityLoop({ modality: 'video', intent: '...', destination: 'social' }, prompt);
 ```
 
-The system resolves technical decisions instead of adding empty adjectives. Video keeps FOV in degrees, Kelvin and 180° shutter by default. Real brands remain behind G9; faces and voices require consent. Post-production sharpening is planned by destination and modality.
+The system resolves technical decisions instead of adding empty adjectives. `compilePrompt()` and `compileShot()` automatically run the Quality Loop and attach Anti-Slop scores, findings and fixes; a `REGENERATE` result calls for localized revision. This is diagnostic feedback, not yet a hard delivery block. Video keeps FOV in degrees, Kelvin and 180° shutter by default. Real brands remain behind G9; faces and voices require consent. Post-production sharpening is planned by destination and modality.
 
 See `DANISKILLS_QUALITY_SYSTEM_v3.3.md` for the complete procedure.
 
