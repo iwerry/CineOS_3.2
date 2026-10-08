@@ -1,8 +1,8 @@
-# CineOS v3.1 → 3.2 Architecture Audit
+# Dani Skills v3.1 → 3.2 Architecture Audit
 
-**Credits:** Daniel Rodrigues · Draft Creative Studio Ltd
+**Credits:** Daniel Rodrigues · Daniel Rodrigues
 
-**Method and limits.** Classification is based on the structure of `draft_studio_config.json` (skill summaries, requires/feeds, routes, pipelines, gates) and the contents of `BaseSkill.md`, `skillsData.ts`, README and the doc files. It is **not** a line-by-line review of every skill's internal wording. Treat IMPROVE/MERGE items as design decisions to confirm.
+**Method and limits.** Classification is based on the structure of `dani_skills_config.json` (skill summaries, requires/feeds, routes, pipelines, gates) and the contents of `BaseSkill.md`, `skillsData.ts`, README and the doc files. It is **not** a line-by-line review of every skill's internal wording. Treat IMPROVE/MERGE items as design decisions to confirm.
 
 **Result:** 32 KEEP · 12 IMPROVE · 1 MERGE · 0 REPLACE · 17 NEW. Nothing was removed.
 
