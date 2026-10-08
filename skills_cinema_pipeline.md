@@ -1,7 +1,7 @@
-<!-- # Skill Criada por Daniel Rodrigues · Dani Skills — Daniel Rodrigues · skills_cinema_pipeline v3.3.0-cia (v3.1 tables kept in Portuguese; Dani Skills 3.3 sections in English; generated from dani_skills_config.json) -->
-# Dani Skills 3.3 Catalog — 62 Skills · 69 Styles · 25 Pipelines
+<!-- # Skill Criada por Daniel Rodrigues · Daniskills — Daniel Rodrigues · skills_cinema_pipeline v3.3.0-cia (v3.1 tables kept in Portuguese; Daniskills 3.3 sections in English; generated from daniskills_config.json) -->
+# Daniskills 3.3 Catalog — 62 Skills · 69 Styles · 25 Pipelines
 
-Compatível com ComfyUI, Higgsfield Cinema Studio, Seedance 2.0/2.5, Veo 3.1, Kling 3.0, Grok Imagine, FLUX.2, GPT Image 2 e Nano Banana. Regras e conhecimento de motores: `BaseSkill.md`. Dados: `dani_skills_config.json`. Funções: `skillsData.ts`.
+Compatível com ComfyUI, Higgsfield Cinema Studio, Seedance 2.0/2.5, Veo 3.1, Kling 3.0, Grok Imagine, FLUX.2, GPT Image 2 e Nano Banana. Regras e conhecimento de motores: `BaseSkill.md`. Dados: `daniskills_config.json`. Funções: `skillsData.ts`.
 
 ## Como invocar
 ```bash
@@ -706,7 +706,7 @@ B-ROLL: <planos com job + FOV°>   VO (145 wpm): "<texto>"   A/B HOOK: (a) awe (
 
 ---
 
-# Dani Skills 3.3 — Cinematic Intelligence Architecture (additions)
+# Daniskills 3.3 — Cinematic Intelligence Architecture (additions)
 
 **Credits:** Daniel Rodrigues · Daniel Rodrigues. See `ARCHITECTURE.md`. The sections above are the v3.1 catalog (kept); everything below is new in 3.3.
 
@@ -779,7 +779,7 @@ B-ROLL: <planos com job + FOV°>   VO (145 wpm): "<texto>"   A/B HOOK: (a) awe (
 **SKILL 73 — Code-Driven Animation & Procedural Video.** Generates video with code when determinism matters: Remotion/React, HTML+Canvas, p5, Manim, Lottie, FFmpeg, Blender Python (bpy) and After Effects expressions/scripts. Critical typography, charts, UI motion and loops are rendered in code; the AI model handles organic imagery.  
 *Negative locks:* asking a video model to render critical text, non-deterministic brand typography, un-versioned render scripts
 
-**SKILL 74 — Production Learning Loop (Performance Memory).** Dani Skills learns from each production. Logs which engine, style and shot recipe worked, how many retries each shot needed, audit scores and audience data, then feeds the Model Intelligence benchmark and the next project's defaults.  
+**SKILL 74 — Production Learning Loop (Performance Memory).** Daniskills learns from each production. Logs which engine, style and shot recipe worked, how many retries each shot needed, audit scores and audience data, then feeds the Model Intelligence benchmark and the next project's defaults.  
 *Negative locks:* starting every project from zero, logging impressions instead of numbers, keeping lessons outside the project memory
 
 **SKILL 75 — Micro-Drama & Series Showrunner (Vertical Serial).** Plans vertical episodic stories (typically 9:16, 60–120s episodes): series bible, episode grid, cliffhanger structure, recurring cast identity, hook-per-episode, and an efficient production batch so identity and look stay constant across dozens of episodes.  
