@@ -433,9 +433,26 @@ export function disclosureBlock(b: BrandModeInput): string {
 }
 
 /** Compila o prompt e, se o G9 estiver ativo, injeta a especificação do produto e devolve o bloco de divulgação. */
+function applyCompiledPromptQuality(out: CompiledPrompt, req: CompileRequest): CompiledPrompt {
+  const modality: Modality = out.kind === 'image' ? 'image' : out.kind === 'audio' ? 'audio' : 'video';
+  const intent = [req.subject, req.action, req.setting, req.speech, req.ambience].flatMap(asList).filter(Boolean).join(' ').trim();
+  const qa = qualityLoop({
+    modality, intent: intent || 'Compile the supplied production specification',
+    destination: req.ratio ?? CONFIG.defaults.ratio,
+    technical: { fov_degrees: resolveStyle(req.styleAlias ?? '')?.optics.fov_degrees ?? 47,
+      shutter_angle: 180, fps: out.engine.fps ?? CONFIG.defaults.fps },
+    constraints: ['Positive-only production instructions', 'Use FOV in degrees', 'Use 180-degree shutter as the video default']
+  }, out.positive);
+  out.warnings.push(`QUALITY_LOOP: ${qa.status}; AntiSlopScore ${qa.antiSlopScore}`);
+  out.warnings.push(...qa.findings.map(x => `QUALITY: ${x}`));
+  out.warnings.push(...qa.fixes.map(x => `QUALITY_FIX: ${x}`));
+  if (qa.status === 'REGENERATE') out.warnings.push('QUALITY_GATE: revise the prompt before delivery; regenerate only the failing block or shot.');
+  return out;
+}
+
 export function compilePrompt(req: CompileRequest): CompiledPrompt {
   const out = compileCore(req);
-  if (!req.brand) return out;
+  if (!req.brand) return applyCompiledPromptQuality(out, req);
   const gate = brandGate(req.brand); out.warnings.push(...gate.warnings);
   if (!gate.active) { out.warnings.push(`G9 inativo (seguindo Non-IP): ${gate.missing.join('; ')}`); return out; }
   const b = req.brand;
@@ -444,7 +461,7 @@ export function compilePrompt(req: CompileRequest): CompiledPrompt {
     try { const j = JSON.parse(out.positive); if (j.subjects?.[0]) j.subjects[0].description += `; product: ${spec}`; out.positive = JSON.stringify(j, null, 2); } catch { out.positive += `\nPRODUCT: ${spec}`; }
   } else out.positive += `\nPRODUCT SPEC: ${spec}`;
   out.disclosure = gate.disclosure;
-  return out;
+  return applyCompiledPromptQuality(out, req);
 }
 
 /* ───────────────────────── HELPERS DE PRODUÇÃO ───────────────────────── */
@@ -579,7 +596,17 @@ export function compileShot(shot: ShotSpec, engineId: string): CompiledShot | un
   }
   if (adapter && /zh/i.test(adapter.notes)) warnings.push('NOTE: Chinese-native engine — an optional short Chinese keyword line can help (verify on platform).');
   const slop = cinemaSlop(prompt).map(i => `${i.id}: ${i.message}`);
-  return { engine, adapter, prompt, negative: st.negatives || undefined, warnings: [...warnings, ...slop] };
+  const modality: Modality = engine.kind === 'image' ? 'image' : engine.kind === 'audio' ? 'audio' : 'video';
+  const qa = qualityLoop({
+    modality, intent: [shot.subject, shot.action, shot.location, shot.emotion].filter(Boolean).join(' '),
+    destination: shot.ratio ?? CONFIG.defaults.ratio,
+    technical: { fov_degrees: shot.camera.fov_degrees, shutter_angle: 180, fps: engine.fps ?? CONFIG.defaults.fps },
+    constraints: ['Preserve shot continuity', 'Keep one dominant camera device per short shot', 'Positive-only production instructions']
+  }, prompt);
+  const qualityWarnings = [`QUALITY_LOOP: ${qa.status}; AntiSlopScore ${qa.antiSlopScore}`,
+    ...qa.findings.map(x => `QUALITY: ${x}`), ...qa.fixes.map(x => `QUALITY_FIX: ${x}`)];
+  if (qa.status === 'REGENERATE') qualityWarnings.push('QUALITY_GATE: revise this shot only; do not regenerate the whole sequence.');
+  return { engine, adapter, prompt, negative: st.negatives || undefined, warnings: [...warnings, ...slop, ...qualityWarnings] };
 }
 /** One cinematic intent → many dialects. */
 export const compileShotForAll = (shot: ShotSpec, engineIds: string[]) =>
@@ -828,7 +855,7 @@ export function antiSlop(text: string, modality: Modality): AntiSlopResult {
   const rhythm = /timing|rhythm|beat|duration|cut|pause|silence|pace/i.test(text) ? 10 : 5;
   const cliché = Math.max(0, 10 - Math.min(10, hits.length * 2));
   const score = specificity + originality + technical + humanity + materiality + rhythm + cliché;
-  const status: AntiSlopStatus = score >= 90 ? 'PASS' : score >= 80 ? 'POLISH' : score >= 70 ? 'REGENERATE' : 'UNASSESSED';
+  const status: AntiSlopStatus = !text.trim() ? 'UNASSESSED' : score >= 90 ? 'PASS' : score >= 80 ? 'POLISH' : 'REGENERATE';
   return { modality, score, status, hits, dimensions: { specificity, originality, technical, humanity, materiality, rhythm, absence_of_cliches: cliché } };
 }
 
@@ -864,7 +891,7 @@ export function qualityLoop(input: HardnessInput, generatedText: string): Qualit
   const postPlan = postSharpenPlan({ modality: input.modality, destination: input.destination });
   const findings = audit.hits.map(h => h.message);
   const fixes = audit.hits.map(h => h.fix);
-  const status: QualityStatus = audit.score >= 90 ? 'PASS' : audit.score >= 80 ? 'POLISH' : 'REGENERATE';
+  const status: QualityStatus = !generatedText.trim() ? 'REGENERATE' : audit.score >= 90 ? 'PASS' : audit.score >= 80 ? 'POLISH' : 'REGENERATE';
   if (sharpened.technical.fov_degrees != null && (input.modality === 'image' || input.modality === 'video')) {
     if (!findings.includes('FOV resolved')) findings.push('FOV resolved in degrees');
   }
