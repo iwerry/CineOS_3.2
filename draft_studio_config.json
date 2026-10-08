@@ -1,28 +1,28 @@
 {
-  "project": "Terminal AI - Draft Creative Studio Ltd",
-  "studio": "Draft Creative Studio Ltd",
+  "project": "Terminal AI - Daniel Rodrigues",
+  "studio": "Daniel Rodrigues",
   "author": "Daniel Rodrigues",
-  "version": "3.2.0-cia",
-  "schema_version": "3.2",
-  "visual_dna_pack": "3.2",
+  "version": "3.3.0",
+  "schema_version": "3.3",
+  "visual_dna_pack": "3.3",
   "updated": "2026-10-03",
   "changelog": [
     "2.5.0 → 3.0.0: fonte única de dados (JSON); estilos Visual DNA com alias + nome completo + óptica normalizada (mm derivado de FOV°); 47 estilos; 56 códigos (43 skills + 13 estilos legados SKILL 32–44; +12 skills novas); 16 perfis (+10); 17 pipelines; 21 rotas de tarefa; registro de 23 motores com specs verificadas em 2026-09-20; gates de qualidade; tabelas resolvidas; skillsData.ts agora compila e expõe motor de resolução.",
     "Correção: interface Skill estava fora de qualquer 'interface' no .ts; lentes legadas com mm inconsistentes com FOV foram normalizadas (lens_family + mm_equiv derivado).",
     "3.0.0 → 3.1.0: G9 Modo Marca (opt-in, desligado por padrão). Non-IP (Lei 11, Skill 56, G8) continua sendo o padrão. Marca/produto real só entra depois de 5 perguntas + regras (divulgação, sem endosso inventado, foto oficial de referência, contexto compatível, autorização escrita se anúncio pago). Rótulo de divulgação (#publi etc.) não conta entre as 3 hashtags. Novos: gate G9, tables.brand_mode, templates.brand_mode_prompt/brand_disclosure_block/brand_mode_input, lint BRAND_UNGATED/BRAND_UNLISTED/BRAND_NO_DISCLOSURE, brandGate()/detectBrands()/disclosureBlock() no .ts, comando /brand.",
-    "3.1.0 → 3.2.0 (Daniel Rodrigues): Color Grading DNA — todo estilo ganha style.color_grading (saturation 0–100, contrast, shadow_tint, highlight_tint, grain, dynamic_range, lut_match) + tables.color_science (escala e vocabulário). +12 estilos (59 no total): UFOTABLE, MAPPA, WEBTOON, ISEKAI, GHIBLIPUNK, GLASSNOIR, CLAYMORPHISM, LIQUIDMETAL, GLITCHCORE, DREAMCORE, ANALOGDREAM, BIOLUMINESCENT. Receitas de mistura (tables.ai_style_mixes, 12 receitas) e style.blend_recipe. +2 skills: 57 DNA Blending Lab, 58 Color Grading DNA Engine (45 skills). +2 perfis (18): perfil_17 Animação Indie/Anime/Webtoon, perfil_18 Direção de Arte e Assinatura Visual. +1 pipeline p_signature_style (18), +1 rota blend_style (22). +2 LUT presets, veto de 3+ estilos, schema image_analysis com color_grading_estimate, gate G1 inclui cartão de grade.",
-    "3.2.0 (Cinematic Intelligence Architecture): CineOS shifts from a skill collection to an engine architecture (Story · Cinema · AI · Continuity · QA · Post · Distribution) over a Cinematic Memory layer. New: skills 59-75; 10 Visual DNAs with Color Grading DNA; 4 blend recipes; 9 LUT presets; 8 models (low confidence, to re-verify); engine_adapters (intent → spec → adapter → prompt); director_profiles; design_tokens; cinema_slop rules; audit_dimensions; engine_benchmark; continuity checks; project bible; software tools table; deliverable formats; learning loop; profiles 19-22; pipelines (7); routes (12); gates G10-G13; 22 new commands. Existing v3.1 data is preserved; earlier internal 3.2 labels are folded into this release."
+    "3.1.0 → 3.3.0 (Daniel Rodrigues): Color Grading DNA — todo estilo ganha style.color_grading (saturation 0–100, contrast, shadow_tint, highlight_tint, grain, dynamic_range, lut_match) + tables.color_science (escala e vocabulário). +12 estilos (59 no total): UFOTABLE, MAPPA, WEBTOON, ISEKAI, GHIBLIPUNK, GLASSNOIR, CLAYMORPHISM, LIQUIDMETAL, GLITCHCORE, DREAMCORE, ANALOGDREAM, BIOLUMINESCENT. Receitas de mistura (tables.ai_style_mixes, 12 receitas) e style.blend_recipe. +2 skills: 57 DNA Blending Lab, 58 Color Grading DNA Engine (45 skills). +2 perfis (18): perfil_17 Animação Indie/Anime/Webtoon, perfil_18 Direção de Arte e Assinatura Visual. +1 pipeline p_signature_style (18), +1 rota blend_style (22). +2 LUT presets, veto de 3+ estilos, schema image_analysis com color_grading_estimate, gate G1 inclui cartão de grade.",
+    "3.3.0 (Cinematic Intelligence Architecture): Dani Skills shifts from a skill collection to an engine architecture (Story · Cinema · AI · Continuity · QA · Post · Distribution) over a Cinematic Memory layer. New: skills 59-75; 10 Visual DNAs with Color Grading DNA; 4 blend recipes; 9 LUT presets; 8 models (low confidence, to re-verify); engine_adapters (intent → spec → adapter → prompt); director_profiles; design_tokens; cinema_slop rules; audit_dimensions; engine_benchmark; continuity checks; project bible; software tools table; deliverable formats; learning loop; profiles 19-22; pipelines (7); routes (12); gates G10-G13; 22 new commands. Existing v3.1 data is preserved; earlier internal 3.3 labels are folded into this release."
   ],
   "files_contract": {
     "BaseSkill.md": "Constituição do engine: protocolo de execução, leis universais, Color Grading DNA, mistura de estilos, conhecimento de motores, modos de tarefa, qualidade. Lê: JSON (ids) e TS (funções).",
     "profiles_guide.md": "Guia de 18 perfis (dores, DNA, skills, estilos, motores, pipeline). Gerado a partir de profiles[] do JSON.",
     "skills_cinema_pipeline.md": "Acervo das 45 skills + 59 estilos (com Color Grading DNA) + 18 pipelines + receitas de mistura + metodologia pré/prod/pós/distribuição. Tabelas geradas do JSON.",
-    "draft_studio_config.json": "Fonte única de dados: modelos, perfis, skills, estilos, pipelines, rotas, tabelas resolvidas, templates, usuários, personagens, clientes.",
+    "dani_skills_config.json": "Fonte única de dados: modelos, perfis, skills, estilos, pipelines, rotas, tabelas resolvidas, templates, usuários, personagens, clientes.",
     "skillsData.ts": "Tipos + carregador tipado + motor de resolução: resolveStyle, routeTask, recommendEngines, compilePrompt, lintPrompt, helpers (FOV↔mm, wpm, hashtags).",
-    "ARCHITECTURE.md": "CineOS 3.2 architecture: engines, memory layer, ID contract, command map, phases.",
-    "CINEOS_AUDIT_v3.1.md": "KEEP / IMPROVE / MERGE / REPLACE / NEW classification of the v3.1 base.",
+    "ARCHITECTURE.md": "Dani Skills 3.3 architecture: engines, memory layer, ID contract, command map, phases.",
+    "DANI_SKILLS_AUDIT_v3.1.md": "KEEP / IMPROVE / MERGE / REPLACE / NEW classification of the v3.1 base.",
     "TOOLKIT_2026.md": "Professional software and AI-tool knowledge (Premiere, After Effects, Photoshop, Illustrator, Resolve, CapCut, Blender, Higgsfield, Magnific, Flux, Seedance, Kling, Veo, MiniMax…).",
-    "UNIVERSAL_PROMPT.md": "Condensed system prompt to run CineOS on any LLM (Claude, GPT, Gemini, DeepSeek, Qwen, Kimi, Doubao…).",
+    "UNIVERSAL_PROMPT.md": "Condensed system prompt to run Dani Skills on any LLM (Claude, GPT, Gemini, DeepSeek, Qwen, Kimi, Doubao…).",
     "PROJECT_BIBLE_TEMPLATE/": "16 template files for the Project Bible (PROJECT.md vs STYLE_BIBLE.md).",
     "scripts/validate_contract.py": "Checks the ID contract across JSON, docs and TS."
   },
@@ -118,7 +118,7 @@
       "--grade",
       "--budget"
     ],
-    "autoload": "skill_15 sempre; skill_16 se ComfyUI; skill_25 se pós solicitado; skill_53 em todo generate_video; G9 (Modo Marca) quando o pedido citar marca/produto real; skill_58 quando o pedido citar cor/saturação/sombras/color grade; skill_57 quando houver 2 estilos no pedido v3.2: skill_65 + G10 on project start; skill_66 on every compiled shot; skill_67 when more than one engine fits; skill_70 + G11 when 2+ shots share a character, location or prop; skill_63 + G13 before approving any generated clip; skill_64 + G12 before delivery; skill_71 when Premiere / After Effects / Photoshop / Illustrator / DaVinci Resolve / CapCut / Blender is mentioned; skill_73 when code, Remotion, bpy or FFmpeg is mentioned; skill_75 for series or micro-drama."
+    "autoload": "skill_15 sempre; skill_16 se ComfyUI; skill_25 se pós solicitado; skill_53 em todo generate_video; G9 (Modo Marca) quando o pedido citar marca/produto real; skill_58 quando o pedido citar cor/saturação/sombras/color grade; skill_57 quando houver 2 estilos no pedido v3.3: skill_65 + G10 on project start; skill_66 on every compiled shot; skill_67 when more than one engine fits; skill_70 + G11 when 2+ shots share a character, location or prop; skill_63 + G13 before approving any generated clip; skill_64 + G12 before delivery; skill_71 when Premiere / After Effects / Photoshop / Illustrator / DaVinci Resolve / CapCut / Blender is mentioned; skill_73 when code, Remotion, bpy or FFmpeg is mentioned; skill_75 for series or micro-drama."
   },
   "engine_lifecycle": {
     "stale_after_days": 90,
@@ -4391,7 +4391,7 @@
       "code": "SKILL 57",
       "name": "DNA Blending Lab (Mistura de Estilos)",
       "creator": "Daniel Rodrigues",
-      "summary": "Combina 2 estilos Visual DNA num híbrido coerente (base 70% + acento 30%), resolvendo conflitos de óptica, paleta e color grading e gerando um prompt_core mesclado. Base para as receitas de mistura da v3.2 (ex.: GHIBLIPUNK, GLASSNOIR, GRUNGENIME).",
+      "summary": "Combina 2 estilos Visual DNA num híbrido coerente (base 70% + acento 30%), resolvendo conflitos de óptica, paleta e color grading e gerando um prompt_core mesclado. Base para as receitas de mistura da v3.3 (ex.: GHIBLIPUNK, GLASSNOIR, GRUNGENIME).",
       "category": "Visual DNA & Mistura",
       "aspect_ratios": [
         "Universal"
@@ -4421,7 +4421,7 @@
       "outputs": [
         "blend_style.json"
       ],
-      "since": "3.2.0"
+      "since": "3.3.0"
     },
     {
       "id": "skill_58",
@@ -4454,7 +4454,7 @@
       "outputs": [
         "color_grading_card.json"
       ],
-      "since": "3.2.0"
+      "since": "3.3.0"
     },
     {
       "id": "skill_59",
@@ -4493,7 +4493,7 @@
         "scene_grammar.json",
         "coverage_plan.md"
       ],
-      "since": "3.2.0"
+      "since": "3.3.0"
     },
     {
       "id": "skill_60",
@@ -4528,7 +4528,7 @@
         "cinematography_plan.md",
         "shot_rationale.json"
       ],
-      "since": "3.2.0"
+      "since": "3.3.0"
     },
     {
       "id": "skill_61",
@@ -4562,7 +4562,7 @@
         "beat_sheet.json",
         "acting_profile.md"
       ],
-      "since": "3.2.0"
+      "since": "3.3.0"
     },
     {
       "id": "skill_62",
@@ -4597,7 +4597,7 @@
         "sound_cinema_map.json",
         "silence_cue_sheet.md"
       ],
-      "since": "3.2.0"
+      "since": "3.3.0"
     },
     {
       "id": "skill_63",
@@ -4630,7 +4630,7 @@
       "outputs": [
         "artifact_report.json"
       ],
-      "since": "3.2.0"
+      "since": "3.3.0"
     },
     {
       "id": "skill_64",
@@ -4666,7 +4666,7 @@
         "cinema_audit_report.md",
         "polish_plan.json"
       ],
-      "since": "3.2.0"
+      "since": "3.3.0"
     },
     {
       "id": "skill_65",
@@ -4703,7 +4703,7 @@
         "PROJECT_BIBLE/",
         "decision_log.md"
       ],
-      "since": "3.2.0"
+      "since": "3.3.0"
     },
     {
       "id": "skill_66",
@@ -4739,7 +4739,7 @@
         "shot_dna.json",
         "compiled_prompts.json"
       ],
-      "since": "3.2.0"
+      "since": "3.3.0"
     },
     {
       "id": "skill_67",
@@ -4774,7 +4774,7 @@
         "model_decision.md",
         "benchmark_results.json"
       ],
-      "since": "3.2.0"
+      "since": "3.3.0"
     },
     {
       "id": "skill_68",
@@ -4809,7 +4809,7 @@
         "cinematic_dna.json",
         "reference_board.md"
       ],
-      "since": "3.2.0"
+      "since": "3.3.0"
     },
     {
       "id": "skill_69",
@@ -4844,7 +4844,7 @@
         "edit_decision_list.md",
         "cut_report.json"
       ],
-      "since": "3.2.0"
+      "since": "3.3.0"
     },
     {
       "id": "skill_70",
@@ -4880,7 +4880,7 @@
         "continuity_graph.json",
         "asset_graph.json"
       ],
-      "since": "3.2.0"
+      "since": "3.3.0"
     },
     {
       "id": "skill_71",
@@ -4912,7 +4912,7 @@
         "handoff_plan.md",
         "tool_pipeline.json"
       ],
-      "since": "3.2.0"
+      "since": "3.3.0"
     },
     {
       "id": "skill_72",
@@ -4948,7 +4948,7 @@
         "storyboard.pdf",
         "shot_list.xlsx"
       ],
-      "since": "3.2.0"
+      "since": "3.3.0"
     },
     {
       "id": "skill_73",
@@ -4983,14 +4983,14 @@
         "render_script.*",
         "composition.json"
       ],
-      "since": "3.2.0"
+      "since": "3.3.0"
     },
     {
       "id": "skill_74",
       "code": "SKILL 74",
       "name": "Production Learning Loop (Performance Memory)",
       "creator": "Daniel Rodrigues",
-      "summary": "CineOS learns from each production. Logs which engine, style and shot recipe worked, how many retries each shot needed, audit scores and audience data, then feeds the Model Intelligence benchmark and the next project's defaults.",
+      "summary": "Dani Skills learns from each production. Logs which engine, style and shot recipe worked, how many retries each shot needed, audit scores and audience data, then feeds the Model Intelligence benchmark and the next project's defaults.",
       "category": "Memory & Analytics",
       "aspect_ratios": [
         "Universal"
@@ -5018,7 +5018,7 @@
         "production_memory.json",
         "lessons.md"
       ],
-      "since": "3.2.0"
+      "since": "3.3.0"
     },
     {
       "id": "skill_75",
@@ -5053,7 +5053,7 @@
         "series_bible.md",
         "episode_grid.json"
       ],
-      "since": "3.2.0"
+      "since": "3.3.0"
     }
   ],
   "styles": [
@@ -8821,7 +8821,7 @@
       "aliases": [
         "PASTORALCYBER"
       ],
-      "full_name": "Ghiblipunk — Watercolor-Pastoral × Neon-Cyberpunk Blend (v3.2 mix recipe)",
+      "full_name": "Ghiblipunk — Watercolor-Pastoral × Neon-Cyberpunk Blend (v3.3 mix recipe)",
       "legacy_skill_id": null,
       "family": "anime",
       "summary": "Mistura de sucesso (via Skill 57, base 70% GHIBLI + acento 30% AKIRA): fundos pintados à mão de céu e vegetação com um elemento tecnológico/neon isolado no quadro — a natureza permanece gouache, a máquina é que 'vaza' neon.",
@@ -8903,7 +8903,7 @@
       "aliases": [
         "NEOGLASSTHRILLER"
       ],
-      "full_name": "Glass Noir — Liquid-Glass UI × Hollywood Film Noir Blend (v3.2 mix recipe)",
+      "full_name": "Glass Noir — Liquid-Glass UI × Hollywood Film Noir Blend (v3.3 mix recipe)",
       "legacy_skill_id": null,
       "family": "cinema_auteur",
       "summary": "Mistura de sucesso (via Skill 57, base 70% NOIR + acento 30% LIQUIDGLASS): thriller monocromático clássico de slats e fumaça, mas as superfícies-chave (vidro, tela, taça) ganham refração translúcida moderna em vez de vidro fosco de época.",
@@ -9557,7 +9557,7 @@
         "highlight_tint": "#f2e8d5",
         "grain": "fine warm grain with halation on highlights",
         "dynamic_range": "high, highlights deliberately near clipping",
-        "lut_match": "Sertão Sun-Bleach Daylight (v3.2)"
+        "lut_match": "Sertão Sun-Bleach Daylight (v3.3)"
       },
       "engines": {
         "image": [
@@ -9631,7 +9631,7 @@
         "highlight_tint": "#e0a030",
         "grain": "medium film grain with halation on neon sources",
         "dynamic_range": "mid-high, neon highlights controlled",
-        "lut_match": "Tropical Neon Night 800T (v3.2)"
+        "lut_match": "Tropical Neon Night 800T (v3.3)"
       },
       "engines": {
         "image": [
@@ -9707,7 +9707,7 @@
         "highlight_tint": "#a8883a",
         "grain": "fine controlled digital grain",
         "dynamic_range": "mid, deliberately restrained",
-        "lut_match": "Bleach Bypass Controlled Desat (v3.2)"
+        "lut_match": "Bleach Bypass Controlled Desat (v3.3)"
       },
       "engines": {
         "image": [
@@ -9781,7 +9781,7 @@
         "highlight_tint": "#d8c9a8",
         "grain": "organic fine film grain, low amplitude",
         "dynamic_range": "high, natural roll-off",
-        "lut_match": "Slow Cinema Muted Natural (v3.2)"
+        "lut_match": "Slow Cinema Muted Natural (v3.3)"
       },
       "engines": {
         "image": [
@@ -9857,7 +9857,7 @@
         "highlight_tint": "#f4efe4",
         "grain": "paper tooth + ink bleed, no photographic grain",
         "dynamic_range": "low-mid, graphic tonal range",
-        "lut_match": "Ink-Wash Monochrome + Vermilion (v3.2)"
+        "lut_match": "Ink-Wash Monochrome + Vermilion (v3.3)"
       },
       "engines": {
         "image": [
@@ -9932,7 +9932,7 @@
         "highlight_tint": "#f4c84a",
         "grain": "clean digital with soft particle bloom, no photographic grain",
         "dynamic_range": "high, HDR-like FX range",
-        "lut_match": "Donghua Glow Compositing (v3.2)"
+        "lut_match": "Donghua Glow Compositing (v3.3)"
       },
       "engines": {
         "image": [
@@ -10007,7 +10007,7 @@
         "highlight_tint": "#f5f1dc",
         "grain": "fine clean grain, light organic texture",
         "dynamic_range": "high, airy",
-        "lut_match": "Solarpunk Fresh Daylight (v3.2)"
+        "lut_match": "Solarpunk Fresh Daylight (v3.3)"
       },
       "engines": {
         "image": [
@@ -10154,7 +10154,7 @@
         "highlight_tint": "#fff6ee",
         "grain": "minimal clean digital grain",
         "dynamic_range": "mid, phone-screen friendly",
-        "lut_match": "Vertical Drama Clean Skin (v3.2)"
+        "lut_match": "Vertical Drama Clean Skin (v3.3)"
       },
       "engines": {
         "image": [
@@ -11267,7 +11267,7 @@
     },
     {
       "id": "p_signature_style",
-      "name": "Assinatura Visual (DNA Blend + Color Grade) — v3.2",
+      "name": "Assinatura Visual (DNA Blend + Color Grade) — v3.3",
       "default_ratio": "16:9",
       "default_duration_s": 0,
       "gates": [
@@ -11318,7 +11318,7 @@
     },
     {
       "id": "p_project_init",
-      "name": "Project Init (Bible + Memory) — v3.2",
+      "name": "Project Init (Bible + Memory) — v3.3",
       "default_ratio": "16:9",
       "default_duration_s": 0,
       "gates": [
@@ -11361,7 +11361,7 @@
     },
     {
       "id": "p_cinema_audit_polish",
-      "name": "Cinema Audit → Critique → Polish — v3.2",
+      "name": "Cinema Audit → Critique → Polish — v3.3",
       "default_ratio": "16:9",
       "default_duration_s": 0,
       "gates": [
@@ -11412,7 +11412,7 @@
     },
     {
       "id": "p_reference_to_shot",
-      "name": "Reference → Cinematic DNA → Shot Specs — v3.2",
+      "name": "Reference → Cinematic DNA → Shot Specs — v3.3",
       "default_ratio": "16:9",
       "default_duration_s": 0,
       "gates": [
@@ -11455,7 +11455,7 @@
     },
     {
       "id": "p_screenplay_package",
-      "name": "Screenplay + Pitch Package — v3.2",
+      "name": "Screenplay + Pitch Package — v3.3",
       "default_ratio": "16:9",
       "default_duration_s": 0,
       "gates": [
@@ -11504,7 +11504,7 @@
     },
     {
       "id": "p_micro_drama_series",
-      "name": "Vertical Micro-Drama Series — v3.2",
+      "name": "Vertical Micro-Drama Series — v3.3",
       "default_ratio": "9:16",
       "default_duration_s": 90,
       "gates": [
@@ -11570,7 +11570,7 @@
     },
     {
       "id": "p_post_finishing",
-      "name": "Post Finishing (Edit · Color · Sound · Master) — v3.2",
+      "name": "Post Finishing (Edit · Color · Sound · Master) — v3.3",
       "default_ratio": "16:9",
       "default_duration_s": 0,
       "gates": [
@@ -11627,7 +11627,7 @@
     },
     {
       "id": "p_code_animation",
-      "name": "Code-Driven Animation (Remotion · bpy · AE scripts · FFmpeg) — v3.2",
+      "name": "Code-Driven Animation (Remotion · bpy · AE scripts · FFmpeg) — v3.3",
       "default_ratio": "16:9",
       "default_duration_s": 15,
       "gates": [
@@ -12449,7 +12449,7 @@
     },
     {
       "id": "blend_style",
-      "label": "Mesclar estilos / criar assinatura visual (v3.2)",
+      "label": "Mesclar estilos / criar assinatura visual (v3.3)",
       "triggers_pt": [
         "misturar estilos",
         "mesclar estilo",
@@ -12874,7 +12874,7 @@
     {
       "id": "G1",
       "name": "Style Bible travada",
-      "rule": "STYLE alias + paleta hex + óptica (FOV°, shutter, WB) definidos antes de gerar. v3.2: inclui o cartão color_grading do estilo (saturação, contraste, tint de sombra/realce, grão, LUT)."
+      "rule": "STYLE alias + paleta hex + óptica (FOV°, shutter, WB) definidos antes de gerar. v3.3: inclui o cartão color_grading do estilo (saturação, contraste, tint de sombra/realce, grão, LUT)."
     },
     {
       "id": "G2",
@@ -13912,7 +13912,7 @@
       "watchlist_note": "Lista editável de gatilho para o lint. Falso positivo possível (ex.: 'vans' como veículo): use substituto genérico ou ajuste a lista."
     },
     "color_science": {
-      "note": "v3.2 — vocabulário numérico para color grading. Todo estilo carrega style.color_grading; use estes eixos em vez de 'cinematic color'.",
+      "note": "v3.3 — vocabulário numérico para color grading. Todo estilo carrega style.color_grading; use estes eixos em vez de 'cinematic color'.",
       "saturation_scale": [
         {
           "range": [
@@ -13979,7 +13979,7 @@
       "engine_prompt_rule": "No prompt, escreva a grade como parâmetros: 'saturation ~N/100, shadow tint #HEX, highlight tint #HEX, grain: <descritor>'. Nunca 'cinematic color grade'."
     },
     "ai_style_mixes": {
-      "note": "v3.2 — receitas de mistura com histórico de bom resultado em IA (Skill 57). Regra: 1 base (60–70%) + 1 acento (30–40%); o acento fica ISOLADO num elemento/superfície.",
+      "note": "v3.3 — receitas de mistura com histórico de bom resultado em IA (Skill 57). Regra: 1 base (60–70%) + 1 acento (30–40%); o acento fica ISOLADO num elemento/superfície.",
       "recipes": [
         {
           "id": "mix_ghiblipunk",
@@ -15845,7 +15845,7 @@
       "note": "valores iniciais a calibrar"
     },
     {
-      "name": "Portra 400 -0.5EV Analog Dream (v3.2)",
+      "name": "Portra 400 -0.5EV Analog Dream (v3.3)",
       "type": "AI Anti-Slop Portrait",
       "characteristics": "Levemente subexposto, sombras quentes, realce cremoso, pele com textura",
       "halation_intensity": "0.28",
@@ -15853,7 +15853,7 @@
       "note": "valores iniciais a calibrar; look padrão do ANALOGDREAM"
     },
     {
-      "name": "Anime Compositing Neutral+FX (v3.2)",
+      "name": "Anime Compositing Neutral+FX (v3.3)",
       "type": "Digital Cel + Light FX",
       "characteristics": "Base cel neutra com camada de luz elemental saturada por cima",
       "halation_intensity": "0.10 (bloom digital, não halation química)",
@@ -15861,7 +15861,7 @@
       "note": "valores iniciais a calibrar; look do UFOTABLE/MAPPA"
     },
     {
-      "name": "Bleach Bypass Controlled Desat (v3.2)",
+      "name": "Bleach Bypass Controlled Desat (v3.3)",
       "type": "Thriller / Desaturated",
       "characteristics": "Silver retention look: lowered saturation, raised contrast, crushed but readable blacks, cool-green midtones",
       "halation_intensity": "0.10",
@@ -15869,7 +15869,7 @@
       "note": "initial values, calibrate per project"
     },
     {
-      "name": "Teal-Amber Restrained (v3.2 anti-slop)",
+      "name": "Teal-Amber Restrained (v3.3 anti-slop)",
       "type": "Cinema / Controlled Complementary",
       "characteristics": "Cool shadows and warm highlights limited to practical sources; skin protected from teal; saturation capped at 40",
       "halation_intensity": "0.15",
@@ -15877,7 +15877,7 @@
       "note": "replaces generic teal-and-orange; skin stays natural"
     },
     {
-      "name": "Sertão Sun-Bleach Daylight (v3.2)",
+      "name": "Sertão Sun-Bleach Daylight (v3.3)",
       "type": "Arid Landscape Drama",
       "characteristics": "Overexposed warm daylight, milky highlights, earth tones, restrained saturation",
       "halation_intensity": "0.25",
@@ -15885,7 +15885,7 @@
       "note": "pair with SERTAOBLEACH"
     },
     {
-      "name": "Tropical Neon Night 800T (v3.2)",
+      "name": "Tropical Neon Night 800T (v3.3)",
       "type": "Night Exterior Neon",
       "characteristics": "Tungsten-balanced night with magenta/green neon halation, wet-asphalt speculars, rich blacks",
       "halation_intensity": "0.40",
@@ -15893,7 +15893,7 @@
       "note": "pair with TROPICALNOIR"
     },
     {
-      "name": "Ink-Wash Monochrome + Vermilion (v3.2)",
+      "name": "Ink-Wash Monochrome + Vermilion (v3.3)",
       "type": "Stylized Monochrome Accent",
       "characteristics": "Near-monochrome ink wash with a single selectively preserved vermilion hue",
       "halation_intensity": "0.00",
@@ -15901,7 +15901,7 @@
       "note": "pair with WUXIAINK"
     },
     {
-      "name": "Donghua Glow Compositing (v3.2)",
+      "name": "Donghua Glow Compositing (v3.3)",
       "type": "Digital Light-FX",
       "characteristics": "Neutral base with HDR emissive FX layer, soft particle bloom",
       "halation_intensity": "0.20 (digital bloom)",
@@ -15909,7 +15909,7 @@
       "note": "pair with DONGHUA3D"
     },
     {
-      "name": "Solarpunk Fresh Daylight (v3.2)",
+      "name": "Solarpunk Fresh Daylight (v3.3)",
       "type": "Commercial Natural",
       "characteristics": "Airy lifted shadows, fresh greens, clean skin, bright roll-off",
       "halation_intensity": "0.10",
@@ -15917,7 +15917,7 @@
       "note": "pair with SOLARPUNK"
     },
     {
-      "name": "Vertical Drama Clean Skin (v3.2)",
+      "name": "Vertical Drama Clean Skin (v3.3)",
       "type": "Phone-First Commercial",
       "characteristics": "Bright clean key, protected skin tones, medium contrast readable in sunlight",
       "halation_intensity": "0.05",
@@ -15925,7 +15925,7 @@
       "note": "pair with VERTICALDRAMA"
     },
     {
-      "name": "Slow Cinema Muted Natural (v3.2)",
+      "name": "Slow Cinema Muted Natural (v3.3)",
       "type": "Naturalistic Muted",
       "characteristics": "Pulled exposure feel, muted greens and greys, soft roll-off, low-amplitude grain",
       "halation_intensity": "0.08",
@@ -16082,7 +16082,7 @@
   "social_media_clients": [
     {
       "cliente_id": "client_draft_official",
-      "nome": "Draft Creative Studio Labs",
+      "nome": "Daniel Rodrigues Labs",
       "pacote": "premium",
       "frequencia": "3x semana",
       "redes": [
@@ -16139,9 +16139,9 @@
       }
     }
   ],
-  "product_name": "CineOS 3.2",
+  "product_name": "Dani Skills 3.3",
   "codename": "Cinematic Intelligence Architecture",
-  "credits": "Daniel Rodrigues · Draft Creative Studio Ltd",
+  "credits": "Daniel Rodrigues · Daniel Rodrigues",
   "skill_language": "en",
   "engine_adapters": [
     {
