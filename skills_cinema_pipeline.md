@@ -1,4 +1,4 @@
-<!-- # Skill Criada por Daniel Rodrigues · Terminal AI — Daniel Rodrigues · skills_cinema_pipeline v3.3.0-cia (v3.1 tables kept in Portuguese; Dani Skills 3.3 sections in English; generated from dani_skills_config.json) -->
+<!-- # Skill Criada por Daniel Rodrigues · Dani Skills — Daniel Rodrigues · skills_cinema_pipeline v3.3.0-cia (v3.1 tables kept in Portuguese; Dani Skills 3.3 sections in English; generated from dani_skills_config.json) -->
 # Dani Skills 3.3 Catalog — 62 Skills · 69 Styles · 25 Pipelines
 
 Compatível com ComfyUI, Higgsfield Cinema Studio, Seedance 2.0/2.5, Veo 3.1, Kling 3.0, Grok Imagine, FLUX.2, GPT Image 2 e Nano Banana. Regras e conhecimento de motores: `BaseSkill.md`. Dados: `dani_skills_config.json`. Funções: `skillsData.ts`.
