@@ -1,7 +1,7 @@
-<!-- # Skill Criada por Daniel Rodrigues · Dani Skills — Daniel Rodrigues · profiles_guide v3.3.0-cia (v3.1 profiles 01–18 kept in Portuguese; profiles 19–22 and 3.3 skill additions in English) -->
-# Profiles Guide — Dani Skills 3.3 (22 profiles)
+<!-- # Skill Criada por Daniel Rodrigues · Daniskills — Daniel Rodrigues · profiles_guide v3.3.0-cia (v3.1 profiles 01–18 kept in Portuguese; profiles 19–22 and 3.3 skill additions in English) -->
+# Profiles Guide — Daniskills 3.3 (22 profiles)
 
-O **Dani Skills — Daniel Rodrigues** atende **18 perfis**. Cada perfil já vem com **skills, estilos Visual DNA, motores, pipeline e KPIs resolvidos**: escolher o perfil é escolher o kit inteiro. No código: `profileKit('perfil_08')` (skillsData.ts) devolve skills expandidas (com dependências), estilos, motores e pipeline.
+O **Daniskills — Daniel Rodrigues** atende **18 perfis**. Cada perfil já vem com **skills, estilos Visual DNA, motores, pipeline e KPIs resolvidos**: escolher o perfil é escolher o kit inteiro. No código: `profileKit('perfil_08')` (skillsData.ts) devolve skills expandidas (com dependências), estilos, motores e pipeline.
 
 ## O que é um perfil (e o que não é)
 - **Perfil** = *quem* pede (dono do problema): dores, KPIs, entregáveis, kit padrão. Não define look.
@@ -277,7 +277,7 @@ O **Dani Skills — Daniel Rodrigues** atende **18 perfis**. Cada perfil já vem
 
 ---
 
-# Dani Skills 3.3 — new profiles (19–22) and upgrades
+# Daniskills 3.3 — new profiles (19–22) and upgrades
 
 ## PERFIL 19: Directors of Photography & Cinematography Planners
 **Who:** DoPs, gaffers, camera operators and directors who need shot logic, lighting plans and lens/FOV decisions that translate to AI and real sets  
