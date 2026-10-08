@@ -1,20 +1,20 @@
 /**
- * # CineOS 3.2 — Cinematic Intelligence Architecture
- * Credits: Daniel Rodrigues · Draft Creative Studio Ltd · skillsData.ts v3.2.0-cia
+ * # Dani Skills 3.3 — Cinematic Intelligence Architecture
+ * Credits: Daniel Rodrigues · Daniel Rodrigues · skillsData.ts v3.3.0-cia
  *
  * ROLE OF THIS FILE in the set:
- *   draft_studio_config.json  → DATA (single source: models, adapters, profiles, skills, styles, pipelines, routes, tables, templates)
+ *   dani_skills_config.json  → DATA (single source: models, adapters, profiles, skills, styles, pipelines, routes, tables, templates)
  *   skillsData.ts (this)      → TYPES + LOADER + ENGINE (resolve style, route task, pick engine, compile + lint, blend, grade card,
  *                               compileShot, modelIntelligence, cinemaAudit, cinemaSlop, continuity + asset graph)
  *   BaseSkill.md              → CONSTITUTION (protocol, laws, engine knowledge)
- *   ARCHITECTURE.md           → the 3.2 architecture (engines + memory + commands)
+ *   ARCHITECTURE.md           → the 3.3 architecture (engines + memory + commands)
  *
  * Requires: tsconfig with "resolveJsonModule": true. SKILLS_V26 keeps the legacy format (skills 32-44).
- * New in 3.2: ShotSpec, compileShot(), compileShotForAll(), modelIntelligence(), cinemaAudit(), polishPlan(), cinemaSlop(), lintCinema(),
+ * New in 3.3: ShotSpec, compileShot(), compileShotForAll(), modelIntelligence(), cinemaAudit(), polishPlan(), cinemaSlop(), lintCinema(),
  *             artifactVerdict(), continuityCheck(), sequenceContinuity(), AssetGraph, directorProfile(), designToken(), gateG10().
  * Legacy comments below remain in Portuguese from v3.1 and are being translated progressively.
  */
-import rawConfig from './draft_studio_config.json';
+import rawConfig from './dani_skills_config.json';
 
 /* ───────────────────────── TIPOS ───────────────────────── */
 export type ModelKind = 'video' | 'image' | 'audio' | 'platform' | 'pipeline' | 'llm';
@@ -25,7 +25,7 @@ export interface Optics {
   fov_degrees: number; camera: string; lens: string; aperture: string | null;
   shutter: string; white_balance: string; fps: number; mm_equiv: number;
 }
-/** v3.2 — Color Grading DNA: color science numérica por estilo (Skill 58). */
+/** v3.3 — Color Grading DNA: color science numérica por estilo (Skill 58). */
 export interface ColorGrading {
   saturation: number;          // 0–100 (ver tables.color_science.saturation_scale)
   contrast: string;            // descritor de curva
@@ -162,7 +162,7 @@ export function routeTask(text: string): { route: Route; score: number }[] {
   }).filter(x => x.score > 0).sort((a, b) => b.score - a.score);
 }
 
-/* ───────────────────────── COLOR GRADING DNA (v3.2 · Skill 58) ───────────────────────── */
+/* ───────────────────────── COLOR GRADING DNA (v3.3 · Skill 58) ───────────────────────── */
 /** Linha de grade em parâmetros (nunca 'cinematic color grade'). Entra no bloco STYLE de todo prompt. */
 export function styleGradeLine(style?: VisualStyle): string {
   const g = style?.color_grading; if (!g) return '';
@@ -179,7 +179,7 @@ export function gradeCard(alias: string) {
 export const saturationLabel = (n: number) =>
   (TABLES as unknown as { color_science: { saturation_scale: { range: [number, number]; label: string }[] } }).color_science.saturation_scale.find(r => n >= r.range[0] && n <= r.range[1])?.label;
 
-/* ───────────────────────── MISTURA DE ESTILOS (v3.2 · Skill 57) ───────────────────────── */
+/* ───────────────────────── MISTURA DE ESTILOS (v3.3 · Skill 57) ───────────────────────── */
 export interface BlendResult { base: VisualStyle; accent: VisualStyle; weights: [number, number]; optics: Optics; palette_hex: string[]; prompt_core: string; negative_locks: string; color_grading: ColorGrading; conflicts: string[] }
 const CONFLICTS = [['LAIKA', 'PIXAR'], ['XEROX', 'KEYNOTE'], ['PIXELART', 'PLANETEARTH']];
 const hexMix = (a: string, b: string, wb: number) => {
@@ -242,7 +242,7 @@ export interface CompileRequest {
   subject?: string; setting?: string; firstFrame?: string; action?: string | string[]; camera?: string; physics?: string; lighting?: string;
   speech?: string; ambience?: string; diegetic?: string[]; score?: string; text?: string; palette?: string[];
   references?: { label: string; role: string }[];
-  /** v3.2: mistura 1 base + 1 acento (Skill 57). Se presente, substitui styleAlias no bloco STYLE. */
+  /** v3.3: mistura 1 base + 1 acento (Skill 57). Se presente, substitui styleAlias no bloco STYLE. */
   blend?: { base: string; accent: string; baseWeight?: number };
   /** Modo Marca (G9): só tem efeito se brandGate(brand).active. */
   brand?: BrandModeInput;
@@ -353,7 +353,7 @@ export function lintPrompt(text: string, opt: LintOptions = {}): LintIssue[] {
   if (/\bno (motion )?blur\b/i.test(text)) issues.push({ level: 'error', code: 'NO_BLUR', message: 'Feasibility Veto: use obturador 180° (ou 90° para ação crisp), nunca "no blur"' });
   if (/\b(no|without|avoid|never|don't)\s+(people|humans?|persons?|faces?|text|logos?)\b/i.test(text)) issues.push({ level: 'warn', code: 'NEGATIVE_PHRASING', message: 'negação planta o objeto: escreva o que ESTÁ no quadro (POSITIVE LOCKS)' });
   if (/\bFOV\b/.test(text) && !/FOV\s*\d+(\.\d+)?\s*(°|deg)/i.test(text)) issues.push({ level: 'warn', code: 'FOV_UNIT', message: 'FOV deve vir em graus (ex.: FOV 47°)' });
-  /* v3.2 — grade vaga e mistura excessiva */
+  /* v3.3 — grade vaga e mistura excessiva */
   if (/\b(cinematic|film|movie)\s+(color\s+)?(grade|grading|look|colou?rs?)\b/i.test(text) && !/saturation\s*~?\d+/i.test(text)) issues.push({ level: 'warn', code: 'GRADE_VAGUE', message: 'grade sem números: use "saturation ~N/100, shadow tint #HEX, highlight tint #HEX, grain: …" (style.color_grading / Skill 58)' });
   if ((opt.styleAliases?.length ?? 0) > 2) issues.push({ level: 'error', code: 'BLEND_OVERLOAD', message: 'Feasibility Veto: no máximo 1 base + 1 acento (Skill 57)' });
   const tags = (text.match(/#[\p{L}\p{N}_]+/gu) ?? []).filter(x => !isDisclosureTag(x)); // rótulo de divulgação não conta entre as 3
@@ -467,7 +467,7 @@ export const ctrRetentionQuadrant = (ctrHigh: boolean, retentionHigh: boolean) =
 export const actingVerdict = (found: string[]) => ({ count: found.length, regenerate: found.length >= 2, symptoms: found.filter(f => TABLES.symptoms_15.includes(f)) });
 
 /* ═══════════════════════════════════════════════════════════════════════════
- * CineOS 3.2 — CINEMATIC INTELLIGENCE ARCHITECTURE  (credits: Daniel Rodrigues)
+ * Dani Skills 3.3 — CINEMATIC INTELLIGENCE ARCHITECTURE  (credits: Daniel Rodrigues)
  * Intent → Shot Spec (Shot DNA) → Engine Adapter → Prompt  ·  Model Intelligence  ·  Continuity / Asset Graph
  * Cinema Audit · Cinema Slop Detector · Artifact verdicts · Director Profiles · Design Tokens
  * ═══════════════════════════════════════════════════════════════════════════ */
