@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🎬 Dani Skills 3.3 — Cinematic Intelligence Architecture
+# 🎬 Daniskills 3.3 — Cinematic Intelligence Architecture
 
 ### Turn simple prompts into cinematic productions — and keep, audit, edit and improve the whole film.
 ### One engine-agnostic system: story → cinema → AI generation → continuity → QA → edit → post → distribution → learning
@@ -15,11 +15,31 @@
 
 </div>
 
+## 🧠 Multimodal Quality System
+
+Daniskills 3.3 now applies **Hardness + Anti-Slop + Smart Sharpening** to image, audio, video, scripts and text.
+
+`INTENT → HARDNESS → ANTI-SLOP → SMART SHARPEN → GENERATE → QA → POST SHARPEN → FINAL QA`
+
+### Quality functions
+
+```ts
+import { hardness, smartSharpen, antiSlop, antiSlopScore, humanizeText, postSharpenPlan, qualityLoop } from './skillsData';
+
+const spec = smartSharpen({ modality: 'video', intent: '...', destination: 'social' });
+const audit = antiSlop(prompt, 'video');
+const final = qualityLoop({ modality: 'video', intent: '...', destination: 'social' }, prompt);
+```
+
+The system resolves technical decisions instead of adding empty adjectives. Video keeps FOV in degrees, Kelvin and 180° shutter by default. Real brands remain behind G9; faces and voices require consent. Post-production sharpening is planned by destination and modality.
+
+See `DANISKILLS_QUALITY_SYSTEM_v3.3.md` for the complete procedure.
+
 ---
 
 ## 🧭 What is this
 
-Dani Skills is a *skill* that turns ordinary requests ("make a Reel about my coffee shop") into **structured professional production**: script, storyboard, shot list, per-engine generation prompts, synced audio, film-emulation post, editorial calendar and performance analysis.
+Daniskills is a *skill* that turns ordinary requests ("make a Reel about my coffee shop") into **structured professional production**: script, storyboard, shot list, per-engine generation prompts, synced audio, film-emulation post, editorial calendar and performance analysis.
 
 > **A prompt is not guesswork. It is cinematography, written down.**
 
@@ -29,7 +49,7 @@ Visual identity is **locked before generation** (Style Bible) and composition is
 
 ---
 
-## 🚀 What's new in Dani Skills 3.3 — Cinematic Intelligence Architecture
+## 🚀 What's new in Daniskills 3.3 — Cinematic Intelligence Architecture
 
 > **Not a bigger skill. A smarter cinematic system.** See `ARCHITECTURE.md`.
 
@@ -108,7 +128,7 @@ Core five below; v3.3 adds `ARCHITECTURE.md`, `DANI_SKILLS_AUDIT_v3.1.md`, `TOOL
 | File | Role |
 |---|---|
 | **`BaseSkill.md`** | 🏛️ The constitution: execution protocol, 16 universal laws, optical + color vocabulary, engine knowledge, task modes, quality gates |
-| **`dani_skills_config.json`** | 💾 Single source of data: models, profiles, skills, styles, pipelines, routes, resolved tables, templates, characters, clients |
+| **`daniskills_config.json`** | 💾 Single source of data: models, profiles, skills, styles, pipelines, routes, resolved tables, templates, characters, clients |
 | **`skillsData.ts`** | ⚙️ Types + typed loader + resolution engine: `resolveStyle`, `routeTask`, `recommendEngines`, `compilePrompt`, `lintPrompt`, `profileKit`, **`blendStyles`**, **`gradeCard`**, helpers |
 | **`skills_cinema_pipeline.md`** | 📚 Catalog: 45 skills + 59 styles + Color Grading table + 18 pipelines + methodology |
 | **`profiles_guide.md`** | 👥 18 profiles with pains, technical DNA, skills, styles, engines, pipeline and KPIs pre-resolved |
@@ -320,7 +340,7 @@ Requirement: `tsconfig` with `"resolveJsonModule": true` (Vite/Next already ship
 ## 👤 Author
 
 **Daniel Rodrigues** · Daniel Rodrigues
-*Dani Skills 3.3.0 · Cinematic Intelligence Architecture · Color Grading DNA · Style Blending · G9 Brand Mode*
+*Daniskills 3.3.0 · Cinematic Intelligence Architecture · Color Grading DNA · Style Blending · G9 Brand Mode*
 
 Idea, architecture and creative content: all rights reserved to the author. Contributions and bug reports are welcome via *Issues*.
 
