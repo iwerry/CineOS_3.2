@@ -1,0 +1,56 @@
+import { describe, expect, it } from 'vitest';
+import {
+  antiSlop,
+  antiSlopScore,
+  executeQualityCommand,
+  humanizeText,
+  qualityLoop,
+  smartSharpen
+} from '../skillsData';
+
+const videoInput = {
+  modality: 'video' as const,
+  intent: 'Track a courier crossing a wet stone courtyard at dawn',
+  destination: 'short film',
+  technical: { fov_degrees: 47 }
+};
+
+describe('Quality Loop regression coverage', () => {
+  it('returns UNASSESSED for empty or whitespace-only material', () => {
+    expect(antiSlopScore('', 'video')).toBe('UNASSESSED');
+    expect(antiSlop('   ', 'text').status).toBe('UNASSESSED');
+  });
+
+  it('detects empty adjectives instead of treating them as production detail', () => {
+    const result = antiSlop('A stunning epic masterpiece', 'video');
+    expect(result.hits.length).toBeGreaterThan(0);
+    expect(result.hits.some(hit => hit.message.toLowerCase().includes('empty adjective'))).toBe(true);
+  });
+
+  it('adds a 180-degree shutter default to video sharpening', () => {
+    const result = smartSharpen(videoInput);
+    expect(result.technical.shutter_angle).toBe(180);
+    expect(result.decisions.some(item => item.includes('physical and narrative cause'))).toBe(true);
+  });
+
+  it('humanizes common formulaic wording without leaving extra whitespace', () => {
+    expect(humanizeText('  In today’s fast-paced world, leverage tools to unlock the power of AI.  '))
+      .toBe('today, use tools to use AI.');
+  });
+
+  it('keeps modality and destination in the post-sharpen plan', () => {
+    const result = executeQualityCommand('/post-sharpen', videoInput);
+    expect(result.modality).toBe('video');
+    expect(result.destination).toBe('short film');
+    expect(result.steps).toContain('temporal artifact cleanup');
+  });
+
+  it('keeps the Quality Loop result structurally complete', () => {
+    const result = qualityLoop(videoInput, 'A courier crosses a wet stone courtyard at dawn. FOV 47 degrees, 5600K skylight, 180° shutter. Footfalls compress water into ripples.');
+    expect(result).toHaveProperty('status');
+    expect(result).toHaveProperty('antiSlopScore');
+    expect(result).toHaveProperty('findings');
+    expect(result).toHaveProperty('fixes');
+    expect(result.postPlan.modality).toBe('video');
+  });
+});
