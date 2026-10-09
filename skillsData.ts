@@ -789,7 +789,7 @@ export interface PostSharpenPlan {
   cautions: string[];
 }
 export interface QualityLoopResult {
-  status: QualityStatus;
+  status: AntiSlopStatus;
   antiSlopScore: number | 'UNASSESSED';
   findings: string[];
   fixes: string[];
@@ -902,7 +902,7 @@ export function qualityLoop(input: HardnessInput, generatedText: string): Qualit
   const postPlan = postSharpenPlan({ modality: input.modality, destination: input.destination });
   const findings = audit.hits.map(h => h.message);
   const fixes = audit.hits.map(h => h.fix);
-  const status: QualityStatus = !generatedText.trim() ? 'REGENERATE' : audit.score >= 90 ? 'PASS' : audit.score >= 80 ? 'POLISH' : 'REGENERATE';
+  const status: AntiSlopStatus = audit.score === 'UNASSESSED' ? 'UNASSESSED' : audit.score >= 90 ? 'PASS' : audit.score >= 80 ? 'POLISH' : 'REGENERATE';
   if (sharpened.technical.fov_degrees != null && (input.modality === 'image' || input.modality === 'video')) {
     if (!findings.includes('FOV resolved')) findings.push('FOV resolved in degrees');
   }
