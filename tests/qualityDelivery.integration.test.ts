@@ -45,6 +45,24 @@ describe('delivery wrappers', () => {
     expect(out.warnings.some(w => w.startsWith('QUALITY_DELIVERY_GATE: ALLOW'))).toBe(true);
   });
 
+  it('blocks a slop-heavy prompt unless a reasoned override is provided', () => {
+    const req = {
+      engineId: 'veo_3_1',
+      subject: 'ultra realistic stunning masterpiece',
+      setting: 'room',
+      action: 'dramatic action with epic movement and cinematic motion',
+      camera: 'dynamic camera',
+      lighting: 'beautiful cinematic light',
+      physics: 'epic movement'
+    };
+    expect(() => compilePromptForDelivery(req)).toThrow(/^QUALITY_GATE_BLOCKED: REGENERATE\\./);
+    const overridden = compilePromptForDelivery(req, {
+      overrideReason: 'Editorial exception for integration coverage'
+    });
+    expect(overridden.warnings.some(w => w.startsWith('QUALITY_LOOP: REGENERATE'))).toBe(true);
+    expect(overridden.warnings.some(w => w.startsWith('QUALITY_DELIVERY_GATE: ALLOW; Explicit override'))).toBe(true);
+  });
+
   it('keeps the Quality Loop active when Brand Mode G9 is inactive', () => {
     const out = compilePrompt({
       engineId: 'veo_3_1',
