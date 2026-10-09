@@ -26,6 +26,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Report dependency advisories
+        run: |
+          npm audit --json > npm-audit.json || true
+          node -e "const a=require('./npm-audit.json'); for (const [name,v] of Object.entries(a.vulnerabilities || {})) console.log(name + ': severity=' + v.severity + ', direct=' + v.isDirect + ', fixAvailable=' + JSON.stringify(v.fixAvailable))"
+
       - name: Run unit and contract tests
         run: npm test
 
