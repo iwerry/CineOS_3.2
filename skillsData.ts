@@ -454,7 +454,7 @@ export function compilePrompt(req: CompileRequest): CompiledPrompt {
   const out = compileCore(req);
   if (!req.brand) return applyCompiledPromptQuality(out, req);
   const gate = brandGate(req.brand); out.warnings.push(...gate.warnings);
-  if (!gate.active) { out.warnings.push(`G9 inativo (seguindo Non-IP): ${gate.missing.join('; ')}`); return out; }
+  if (!gate.active) { out.warnings.push(`G9 inativo (seguindo Non-IP): ${gate.missing.join('; ')}`); return applyCompiledPromptQuality(out, req); }
   const b = req.brand;
   const spec = `${b.brand} ${b.product}, rendered as the plain product shown in the attached official reference photo (role: product); logo and text only as visible in that photo${b.context ? `; placement: ${b.context}` : ''}`;
   if (out.engine.id === 'flux_2') {
@@ -521,7 +521,7 @@ export interface ShotSpec {
   continuity?: { characters?: string[]; locations?: string[]; props?: string[]; time?: string; weather?: string; wardrobe?: string; light_direction?: string };
   references?: string[]; needs_native_audio?: boolean;
 }
-export interface CompiledShot { engine: ModelSpec; adapter?: EngineAdapter; prompt: string; negative?: string; warnings: string[] }
+export interface CompiledShot { engine: ModelSpec; adapter?: EngineAdapter; prompt: string; negative?: string; warnings: string[]; deliveryGate?: QualityDeliveryGate }
 
 function resolveShotStyle(s: ShotSpec): { core: string; grade: string; negatives: string } {
   if (!s.style) return { core: '', grade: '', negatives: '' };
@@ -619,6 +619,19 @@ export function compileShot(shot: ShotSpec, engineId: string): CompiledShot | un
   if (qa.status === 'REGENERATE') qualityWarnings.push('QUALITY_GATE: revise this shot only; do not regenerate the whole sequence.');
   return { engine, adapter, prompt, negative: st.negatives || undefined, warnings: [...warnings, ...slop, ...qualityWarnings] };
 }
+/** Compile a shot and enforce the delivery policy. Drafting remains available through compileShot(). */
+export function compileShotForDelivery(shot: ShotSpec, engineId: string, policy: QualityGatePolicy = {}): CompiledShot | undefined {
+  const out = compileShot(shot, engineId);
+  if (!out) return undefined;
+  const diagnostic = out.warnings.find(w => w.startsWith('QUALITY_LOOP:'));
+  const status = (diagnostic?.match(/QUALITY_LOOP: (PASS|POLISH|REGENERATE|UNASSESSED)/)?.[1] ?? 'UNASSESSED') as AntiSlopStatus;
+  const gate = qualityDeliveryGate(status, policy);
+  out.deliveryGate = gate;
+  out.warnings.push(`QUALITY_DELIVERY_GATE: ${gate.allowed ? 'ALLOW' : 'BLOCK'}; ${gate.reason}`);
+  assertDeliverable(gate);
+  return out;
+}
+
 /** One cinematic intent → many dialects. */
 export const compileShotForAll = (shot: ShotSpec, engineIds: string[]) =>
   Object.fromEntries(engineIds.map(id => [id, compileShot(shot, id)]));
@@ -958,5 +971,5 @@ export function gateG10(files: Record<string, string>) {
 }
 
 export default { CONFIG, MODELS, PROFILES, SKILLS, STYLES, PIPELINES, ROUTES, GATES, SKILLS_V26, resolveStyle, routeTask, recommendEngines, compilePrompt, lintPrompt, profileKit, expandSkillChain, wordBudget, hashtags, brandGate, detectBrands, disclosureBlock, blendStyles, gradeCard, styleGradeLine, saturationLabel,
-  ADAPTERS, getAdapter, compileShot, compileShotForAll, compilePromptForDelivery, qualityDeliveryGate, assertDeliverable, modelIntelligence, cinemaSlop, lintCinema, cinemaAudit, polishPlan, hardness, smartSharpen, antiSlop, antiSlopScore, humanizeText, postSharpenPlan, qualityLoop, QUALITY_COMMANDS, executeQualityCommand,
+  ADAPTERS, getAdapter, compileShot, compileShotForDelivery, compileShotForAll, compilePromptForDelivery, qualityDeliveryGate, assertDeliverable, modelIntelligence, cinemaSlop, lintCinema, cinemaAudit, polishPlan, hardness, smartSharpen, antiSlop, antiSlopScore, humanizeText, postSharpenPlan, qualityLoop, QUALITY_COMMANDS, executeQualityCommand,
   artifactVerdict, continuityCheck, sequenceContinuity, AssetGraph, directorProfile, designToken, projectBibleScaffold, gateG10 };
