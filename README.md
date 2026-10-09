@@ -33,6 +33,18 @@ const final = qualityLoop({ modality: 'video', intent: '...', destination: 'soci
 
 The system resolves technical decisions instead of adding empty adjectives. `compilePrompt()` and `compileShot()` automatically run the Quality Loop and attach Anti-Slop scores, findings and fixes; a `REGENERATE` result calls for localized revision. `compilePromptForDelivery()` and `compileShotForDelivery()` enforce the delivery gate: `PASS` is allowed, `POLISH` requires explicit policy acceptance, and `REGENERATE`/`UNASSESSED` are blocked by default. `qualityDeliveryGate()` supports explicit overrides; `assertDeliverable()` throws when delivery is blocked. `compilePrompt()` remains available for drafting and diagnostics. Video keeps FOV in degrees, Kelvin and 180° shutter by default. Real brands remain behind G9; faces and voices require consent. Post-production sharpening is planned by destination and modality.
 
+### Automated checks
+
+The repository includes a TypeScript/Vitest test suite and a Python contract validator. Run locally with Node.js 22+ and Python 3.12+:
+
+```bash
+npm install
+npm test
+npm run typecheck
+```
+
+`npm test` runs the Quality Gate unit/integration tests and `scripts/validate_contract.py`. GitHub Actions repeats these checks on pushes to `main` and pull requests targeting `main`. The integration tests cover blocked shot delivery, explicit overrides, prompt delivery decisions, and Quality Loop behavior with Brand Mode G9 active or inactive.
+
 See `DANISKILLS_QUALITY_SYSTEM_v3.3.md` for the complete procedure.
 
 ---
