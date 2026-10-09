@@ -85,7 +85,7 @@ INTENT → HARDNESS → ANTI-SLOP → SMART SHARPEN → ADAPTER
 
 Operational commands: `/hardness`, `/anti-slop`, `/smart-sharpen`, `/humanize`, `/post-sharpen`, `/quality:loop`.
 
-`compilePrompt()` and `compileShot()` now run the Quality Loop automatically after prompt composition. They attach `QUALITY_LOOP`, `QUALITY` and `QUALITY_FIX` diagnostics; `REGENERATE` requests a localized revision, not a full-project regeneration. This is currently a diagnostic gate: orchestration must enforce blocking/override policy if hard delivery prevention is required.
+`compilePrompt()` and `compileShot()` now run the Quality Loop automatically after prompt composition. They attach `QUALITY_LOOP`, `QUALITY` and `QUALITY_FIX` diagnostics; `REGENERATE` requests a localized revision, not a full-project regeneration. `compilePromptForDelivery()` enforces delivery policy. `PASS` is allowed; `POLISH` requires explicit acceptance; `REGENERATE` and `UNASSESSED` are blocked by default. `qualityDeliveryGate()` supports policy flags or a reasoned override, while `assertDeliverable()` throws on blocked delivery. Use `compilePrompt()` for drafting and diagnostics without enforcing delivery.
 
 See `DANISKILLS_QUALITY_SYSTEM_v3.3.md` and the executable functions in `skillsData.ts`.
 
