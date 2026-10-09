@@ -222,7 +222,7 @@ Nunca regenerar um projeto inteiro por uma falha localizada.
 
 O Quality Loop roda automaticamente em `compilePrompt()` e `compileShot()` após a composição do prompt. O compilador acrescenta avisos `QUALITY_LOOP`, `QUALITY` e `QUALITY_FIX`, com score, achados e correções sugeridas. Se o status for `REGENERATE`, o aviso pede revisão localizada do prompt/shot.
 
-**Entrega com enforcement:** `compilePrompt()` continua sendo o modo de composição/diagnóstico. Para aplicar o bloqueio, use `compilePromptForDelivery(req, policy)`. `PASS` libera; `POLISH` só libera com `allowPolish: true` ou uma justificativa de exceção; `REGENERATE` bloqueia até revisão, salvo exceção justificada; `UNASSESSED` bloqueia por padrão e exige avaliação ou exceção explícita. `assertDeliverable()` lança `QUALITY_GATE_BLOCKED` quando a política não autoriza a entrega. Registre e audite qualquer exceção no sistema que orquestra a produção. `UNASSESSED` significa evidência insuficiente, nunca score baixo.
+**Entrega com enforcement:** `compilePrompt()` continua sendo o modo de composição/diagnóstico. Para aplicar o bloqueio, use `compilePromptForDelivery(req, policy)` para prompts e `compileShotForDelivery(shot, engineId, policy)` para shots. `PASS` libera; `POLISH` só libera com `allowPolish: true` ou uma justificativa de exceção; `REGENERATE` bloqueia até revisão, salvo exceção justificada; `UNASSESSED` bloqueia por padrão e exige avaliação ou exceção explícita. `assertDeliverable()` lança `QUALITY_GATE_BLOCKED` quando a política não autoriza a entrega. Registre e audite qualquer exceção no sistema que orquestra a produção. `UNASSESSED` significa evidência insuficiente, nunca score baixo.
 
 ## 9. Saída esperada
 
