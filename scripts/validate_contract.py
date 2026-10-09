@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""CineOS 3.2 — validates the ID contract of draft_studio_config.json and the docs.
+"""Daniskills 3.3 — validates the ID contract of dani_skills_config.json and the docs.
 Usage: python scripts/validate_contract.py [path/to/repo]   (credits: Daniel Rodrigues)"""
 import json, os, re, sys
 root = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(__file__), '..')
-d = json.load(open(os.path.join(root, 'draft_studio_config.json'), encoding='utf-8'))
+d = json.load(open(os.path.join(root, 'dani_skills_config.json'), encoding='utf-8'))
 ids = lambda k, f='id': {x[f] for x in d[k]}
 skill, model, pipe, gate, prof = ids('skills'), ids('models'), ids('pipelines'), ids('gates'), ids('profiles')
 alias = {s['alias'] for s in d['styles']}; legacy = {s['legacy_skill_id'] for s in d['styles'] if s.get('legacy_skill_id')}; lut = {l['name'] for l in d['lut_presets']}
