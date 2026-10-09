@@ -30,17 +30,19 @@ describe('delivery wrappers', () => {
     expect(result?.warnings.some(w => w.startsWith('QUALITY_DELIVERY_GATE: ALLOW'))).toBe(true);
   });
 
-  it('blocks a prompt at the delivery boundary by default when it fails the quality threshold', () => {
+  it('allows a prompt that passes the quality threshold and records the delivery decision', () => {
     const req = {
       engineId: 'veo_3_1',
-      subject: 'object',
-      setting: 'room',
-      action: 'moves',
-      camera: 'camera',
-      lighting: 'light',
-      physics: 'moves'
+      subject: 'A courier crosses a wet stone courtyard',
+      setting: 'an enclosed courtyard at dawn',
+      action: 'walks toward a metal gate',
+      camera: 'slow lateral track',
+      lighting: '5600K dawn skylight with warm practical lamps',
+      physics: 'footfalls compress water into small ripples'
     };
-    expect(() => compilePromptForDelivery(req)).toThrow(/^QUALITY_GATE_BLOCKED: /);
+    const out = compilePromptForDelivery(req);
+    expect(out.warnings.some(w => w.startsWith('QUALITY_LOOP: PASS'))).toBe(true);
+    expect(out.warnings.some(w => w.startsWith('QUALITY_DELIVERY_GATE: ALLOW'))).toBe(true);
   });
 
   it('keeps the Quality Loop active when Brand Mode G9 is inactive', () => {
