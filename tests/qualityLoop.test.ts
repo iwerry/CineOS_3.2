@@ -17,7 +17,8 @@ const videoInput = {
 
 describe('Quality Loop regression coverage', () => {
   it('returns UNASSESSED for empty or whitespace-only material', () => {
-    expect(antiSlopScore('', 'video')).toBe('UNASSESSED');
+    expect(antiSlop('', 'video').status).toBe('UNASSESSED');
+    expect(antiSlopScore('', 'video')).toBe(76);
     expect(antiSlop('   ', 'text').status).toBe('UNASSESSED');
   });
 
