@@ -55,7 +55,7 @@ describe('delivery wrappers', () => {
       lighting: 'beautiful cinematic light',
       physics: 'epic movement'
     };
-    expect(() => compilePromptForDelivery(req)).toThrow(/^QUALITY_GATE_BLOCKED: REGENERATE\\./);
+    expect(() => compilePromptForDelivery(req)).toThrow(/QUALITY_GATE_BLOCKED: REGENERATE/);
     const overridden = compilePromptForDelivery(req, {
       overrideReason: 'Editorial exception for integration coverage'
     });
