@@ -464,6 +464,17 @@ export function compilePrompt(req: CompileRequest): CompiledPrompt {
   return applyCompiledPromptQuality(out, req);
 }
 
+
+export function compilePromptForDelivery(req: CompileRequest, policy: QualityGatePolicy = {}): CompiledPrompt {
+  const out = compilePrompt(req);
+  const diagnostic = out.warnings.find(w => w.startsWith('QUALITY_LOOP:'));
+  const status = (diagnostic?.match(/QUALITY_LOOP: (PASS|POLISH|REGENERATE|UNASSESSED)/)?.[1] ?? 'UNASSESSED') as AntiSlopStatus;
+  const gate = qualityDeliveryGate(status, policy);
+  out.warnings.push(`QUALITY_DELIVERY_GATE: ${gate.allowed ? 'ALLOW' : 'BLOCK'}; ${gate.reason}`);
+  assertDeliverable(gate);
+  return out;
+}
+
 /* ───────────────────────── HELPERS DE PRODUÇÃO ───────────────────────── */
 /** Orçamento de palavras: fala nativa (≤25/10s) e leitura de roteiro (145 wpm) por mercado. */
 export function wordBudget(seconds: number, market = 'PT-BR') {
@@ -898,6 +909,37 @@ export function qualityLoop(input: HardnessInput, generatedText: string): Qualit
   return { status, antiSlopScore: audit.score, findings, fixes, postPlan };
 }
 
+
+export interface QualityGatePolicy {
+  allowPolish?: boolean;
+  allowUnassessed?: boolean;
+  overrideReason?: string;
+}
+export interface QualityDeliveryGate {
+  status: AntiSlopStatus;
+  allowed: boolean;
+  blocked: boolean;
+  requiresReview: boolean;
+  reason: string;
+  overrideAccepted: boolean;
+}
+export function qualityDeliveryGate(status: AntiSlopStatus, policy: QualityGatePolicy = {}): QualityDeliveryGate {
+  const overrideAccepted = Boolean(policy.overrideReason?.trim());
+  if (status === 'PASS') return { status, allowed: true, blocked: false, requiresReview: false, reason: 'Quality score meets the delivery threshold.', overrideAccepted: false };
+  if (status === 'POLISH') {
+    const allowed = Boolean(policy.allowPolish || overrideAccepted);
+    return { status, allowed, blocked: !allowed, requiresReview: true, reason: allowed ? (overrideAccepted ? `Explicit override: ${policy.overrideReason!.trim()}` : 'POLISH accepted by delivery policy; review remains required.') : 'POLISH requires revision or explicit policy acceptance.', overrideAccepted };
+  }
+  if (status === 'UNASSESSED') {
+    const allowed = Boolean(policy.allowUnassessed || overrideAccepted);
+    return { status, allowed, blocked: !allowed, requiresReview: true, reason: allowed ? (overrideAccepted ? `Explicit override: ${policy.overrideReason!.trim()}` : 'UNASSESSED accepted explicitly by delivery policy.') : 'Insufficient evidence: assess quality before delivery.', overrideAccepted };
+  }
+  return { status, allowed: overrideAccepted, blocked: !overrideAccepted, requiresReview: true, reason: overrideAccepted ? `Explicit override: ${policy.overrideReason!.trim()}` : 'REGENERATE blocks delivery until the failing content is revised.', overrideAccepted };
+}
+export function assertDeliverable(gate: QualityDeliveryGate): void {
+  if (!gate.allowed) throw new Error(`QUALITY_GATE_BLOCKED: ${gate.status}. ${gate.reason}`);
+}
+
 /* ───────── Director Profiles + Design Tokens (Skill 60 / Cinematic Design System) ───────── */
 export interface DirectorProfile { id: string; camera: string; composition: string; lighting: string; color: string; editing: string; performance: string; sound: string; dna: string[] }
 export const DIRECTOR_PROFILES = (TABLES as unknown as { director_profiles: { profiles: DirectorProfile[] } }).director_profiles.profiles;
@@ -916,5 +958,5 @@ export function gateG10(files: Record<string, string>) {
 }
 
 export default { CONFIG, MODELS, PROFILES, SKILLS, STYLES, PIPELINES, ROUTES, GATES, SKILLS_V26, resolveStyle, routeTask, recommendEngines, compilePrompt, lintPrompt, profileKit, expandSkillChain, wordBudget, hashtags, brandGate, detectBrands, disclosureBlock, blendStyles, gradeCard, styleGradeLine, saturationLabel,
-  ADAPTERS, getAdapter, compileShot, compileShotForAll, modelIntelligence, cinemaSlop, lintCinema, cinemaAudit, polishPlan, hardness, smartSharpen, antiSlop, antiSlopScore, humanizeText, postSharpenPlan, qualityLoop, QUALITY_COMMANDS, executeQualityCommand,
+  ADAPTERS, getAdapter, compileShot, compileShotForAll, compilePromptForDelivery, qualityDeliveryGate, assertDeliverable, modelIntelligence, cinemaSlop, lintCinema, cinemaAudit, polishPlan, hardness, smartSharpen, antiSlop, antiSlopScore, humanizeText, postSharpenPlan, qualityLoop, QUALITY_COMMANDS, executeQualityCommand,
   artifactVerdict, continuityCheck, sequenceContinuity, AssetGraph, directorProfile, designToken, projectBibleScaffold, gateG10 };
