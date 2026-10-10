@@ -434,3 +434,18 @@ Full catalog in `skills_cinema_pipeline.md`. Commands: `/style:MIGNOLA`, `/blend
 - 2.5 → 3.0: single JSON source, normalized optics, engine registry, gates.
 
 *BaseSkill v3.3.0-cia · Daniskills · 2026-10-03 · Daniel Rodrigues · Daniel Rodrigues*
+
+
+## Optical Intelligence — lens and sensor decisions
+
+When a request involves a shot, resolve optical choices by **narrative intent → camera position → focal length / field of view → sensor format → lens family → aperture and focus behavior → motivated optical artifacts**. Use `opticsCatalog.ts` and `resolveOptics()` when a structured lens-family choice is useful; see `OPTICAL_INTELLIGENCE.md`.
+
+Rules:
+- Never claim perspective compression is caused by focal length alone; camera-to-subject distance is the primary perspective control.
+- Treat sensor format, focal length and field of view as related but distinct variables.
+- Do not infer exact mount, image-circle coverage or camera compatibility from a format label.
+- Keep f-number (`f/`) and transmission stop (`T`) distinct.
+- Anamorphic squeeze ratio and desqueeze are model-specific; never invent them.
+- Use lens names as semantic references for generative models, not guarantees of optical simulation.
+- Add flare, halation, chromatic aberration, breathing, distortion, vignetting and character bokeh only when they serve the scene.
+- For real-camera plans, verify exact model/SKU and manufacturer documentation for image circle, mount, minimum focus, magnification, T-stop and optical behavior.
