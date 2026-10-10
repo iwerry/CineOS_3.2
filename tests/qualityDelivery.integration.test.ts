@@ -63,7 +63,8 @@ describe('delivery wrappers', () => {
     };
     expect(() => compileShotForDelivery(shot, 'veo_3_1')).toThrow(/QUALITY_GATE_BLOCKED: REGENERATE/);
   });
-\n  it('blocks a weak shot at the delivery boundary by default', () => {
+
+  it('blocks a weak shot at the delivery boundary by default', () => {
     expect(() => compileShotForDelivery(minimalShot, 'veo_3_1'))
       .toThrow(/^QUALITY_GATE_BLOCKED: /);
   });
