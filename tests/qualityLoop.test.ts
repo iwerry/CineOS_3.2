@@ -22,8 +22,11 @@ describe('Quality Loop regression coverage', () => {
     expect(antiSlop('', 'video').score).toBe('UNASSESSED');
     expect(antiSlopScore('', 'video')).toBe('UNASSESSED');
     expect(antiSlop('   ', 'text').status).toBe('UNASSESSED');
-    expect(qualityLoop(videoInput, '   ').status).toBe('UNASSESSED');
-    expect(qualityLoop(videoInput, '   ').antiSlopScore).toBe('UNASSESSED');
+    const loop = qualityLoop(videoInput, '   ');
+    expect(loop.status).toBe('UNASSESSED');
+    expect(loop.antiSlopScore).toBe('UNASSESSED');
+    expect(loop.findings).toContain('Insufficient material for quality assessment');
+    expect(loop.fixes).toContain('Provide non-empty generated content before scoring or delivery');
   });
 
   it('detects empty adjectives instead of treating them as production detail', () => {
