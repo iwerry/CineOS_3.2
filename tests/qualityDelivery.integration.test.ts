@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { resolveOptics } from '../opticsCatalog';
 import {
   compilePrompt,
   compilePromptForDelivery,
@@ -34,9 +35,10 @@ describe('delivery wrappers', () => {
         depthOfField: 'shallow' as const,
       },
     };
+    const resolved = resolveOptics(shot.optics);
     const result = compileShot(shot, 'veo_3_1');
     expect(result).toBeDefined();
-    expect(result?.prompt).toContain('85mm focal length');
+    expect(result?.prompt).toContain(`${resolved.selectedFocalLengthMm}mm focal length`);
     expect(result?.prompt).toContain('spherical cinema prime');
     expect(result?.prompt).toContain('aperture T2.0');
     expect(result?.prompt).not.toMatch(/Cooke|ARRI|ZEISS|Sony|RED/i);
