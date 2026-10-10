@@ -888,9 +888,9 @@ export function antiSlop(text: string, modality: Modality): AntiSlopResult {
 
 export function humanizeText(text: string): string {
   return text
-    .replace(/\b(in today(?:'|’)?s (?:fast[- ]?paced|ever[- ]?changing) world)\b/gi, 'today')
+    .replace(/\b(in today(?:'|’)?s (?:fast[- ]?paced|ever[- ]?changing) world)\b/gi, (m) => /^[I]/.test(m) ? 'In practice' : 'in practice')
     .replace(/\b(leverage|utilize)\b/gi, 'use')
-    .replace(/\b(delves into|journey|game[- ]?changer|unlock the power of)\b/gi, (m) => ({ 'delves into': 'explores', 'journey': 'process', 'game-changer': 'change', 'unlock the power of': 'use' }[m.toLowerCase()] ?? m))
+    .replace(/\b(delves into|journey|game[- ]?changer|unlock the power of)\b/gi, (m) => ({ 'delves into': 'explores', 'journey': 'process', 'game-changer': 'change', 'unlock the power of': 'make better use of' }[m.toLowerCase()] ?? m))
     .replace(/\s{2,}/g, ' ')
     .trim();
 }
