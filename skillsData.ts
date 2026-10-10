@@ -900,7 +900,25 @@ export function antiSlop(text: string, modality: Modality): AntiSlopResult {
     text: /\b(audience|claim|example|source|evidence|specific|paragraph|headline|word count|tone|voice|structure|context|fact)\b/i,
     script: /\b(scene|beat|dialogue|character|action|INT\.|EXT\.|slugline|duration|pause|cut|motivation|stakes|subtext)\b/i
   };
-  const technical = technicalPattern[modality].test(text) && (evidence.measurableConstraint || /\b(camera|lens|light source|key light|fill light|aspect ratio|frame rate|tracking|pan|tilt|dolly|dB|Hz|kHz|LUFS|reverb|acoustic|stereo|mono|audience|claim|example|source|evidence|word count|scene|beat|dialogue|INT\.|EXT\.)\b/i.test(text)) ? 15 : 6;
+  let technical = technicalPattern[modality].test(text) && (evidence.measurableConstraint || /\b(camera|lens|light source|key light|fill light|aspect ratio|frame rate|tracking|pan|tilt|dolly|dB|Hz|kHz|LUFS|reverb|acoustic|stereo|mono|audience|claim|example|source|evidence|word count|scene|beat|dialogue|INT\.|EXT\.)\b/i.test(text)) ? 15 : 6;
+
+  // Hard contradictions are explicit QA findings and reduce technical credit.
+  let technicalConflictCount = 0;
+  if ((modality === 'video' || modality === 'image') && /\bFOV\s*\d+(?:\.\d+)?\s*mm\b/i.test(text)) {
+    hits.push({ id: 'FOV_UNIT_CONFLICT', severity: 'error', message: 'FOV is expressed in millimeters instead of degrees', fix: 'Express field of view in degrees; if millimeters describe the lens focal length, label focal length separately.' });
+    technicalConflictCount++;
+  }
+  if (modality === 'video') {
+    const shutterAngles = [...text.matchAll(/\b(\d{1,3})\s*°\s*(?:shutter|shutter angle)?/gi)]
+      .map(match => Number(match[1]))
+      .filter(value => value > 0 && value <= 360);
+    const uniqueAngles = [...new Set(shutterAngles)];
+    if (uniqueAngles.length > 1) {
+      hits.push({ id: 'SHUTTER_ANGLE_CONFLICT', severity: 'error', message: 'Multiple shutter angles are specified without shot-specific separation', fix: 'Choose one shutter angle for this shot or assign each angle to a clearly separated shot.' });
+      technicalConflictCount++;
+    }
+  }
+  technical = Math.max(0, technical - technicalConflictCount * 10);
   const humanity = evidence.observableAction && (evidence.subjectOrSource || evidence.causalRelation) ? 15 : evidence.observableAction || evidence.causalRelation ? 10 : 4;
   const materiality = evidence.materialResponse ? 10 : 3;
   const rhythm = evidence.temporalStructure ? 10 : 3;
