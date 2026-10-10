@@ -919,6 +919,10 @@ export function qualityLoop(input: HardnessInput, generatedText: string): Qualit
   const findings = audit.hits.map(h => h.message);
   const fixes = audit.hits.map(h => h.fix);
   const status: AntiSlopStatus = audit.status;
+  if (status === 'UNASSESSED') {
+    findings.push('Insufficient material for quality assessment');
+    fixes.push('Provide non-empty generated content before scoring or delivery');
+  }
   if (sharpened.technical.fov_degrees != null && (input.modality === 'image' || input.modality === 'video')) {
     if (!findings.includes('FOV resolved')) findings.push('FOV resolved in degrees');
   }
