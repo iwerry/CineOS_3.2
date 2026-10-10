@@ -5,7 +5,8 @@ import {
   executeQualityCommand,
   humanizeText,
   qualityLoop,
-  smartSharpen
+  smartSharpen,
+  type PostSharpenPlan
 } from '../skillsData';
 
 const videoInput = {
@@ -40,7 +41,7 @@ describe('Quality Loop regression coverage', () => {
   });
 
   it('keeps modality and destination in the post-sharpen plan', () => {
-    const result = executeQualityCommand('/post-sharpen', videoInput);
+    const result = executeQualityCommand('/post-sharpen', videoInput) as PostSharpenPlan;
     expect(result.modality).toBe('video');
     expect(result.destination).toBe('short film');
     expect(result.steps).toContain('temporal artifact cleanup');
