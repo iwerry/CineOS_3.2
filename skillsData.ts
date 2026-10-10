@@ -523,6 +523,34 @@ export interface ShotSpec {
 }
 export interface CompiledShot { engine: ModelSpec; adapter?: EngineAdapter; prompt: string; negative?: string; warnings: string[]; deliveryGate?: QualityDeliveryGate }
 
+/** Parse explicit beat timestamps only; unsupported notation is left for human review. */
+export function validateShotTiming(shot: ShotSpec): { errors: string[]; parsedBeats: { index: number; seconds: number }[] } {
+  const errors: string[] = [];
+  const parsedBeats: { index: number; seconds: number }[] = [];
+  const beats = shot.acting_beats ?? [];
+  const parseTime = (raw: string): number | undefined => {
+    const value = raw.trim();
+    const clock = value.match(/^(\d+):(\d{1,2}(?:\.\d+)?)$/);
+    if (clock) return Number(clock[1]) * 60 + Number(clock[2]);
+    const seconds = value.match(/^(\d+(?:\.\d+)?)\s*s?$/i);
+    if (seconds) return Number(seconds[1]);
+    return undefined;
+  };
+  beats.forEach((beat, index) => {
+    const seconds = parseTime(beat.t);
+    if (seconds === undefined) return;
+    parsedBeats.push({ index, seconds });
+    if (shot.duration_s != null && seconds > shot.duration_s) {
+      errors.push(`TIMING_BEYOND_DURATION: beat ${index + 1} at ${beat.t} exceeds shot duration ${shot.duration_s}s.`);
+    }
+    const previous = parsedBeats.length > 1 ? parsedBeats[parsedBeats.length - 2] : undefined;
+    if (previous && seconds < previous.seconds) {
+      errors.push(`TIMING_ORDER_CONFLICT: beat ${index + 1} at ${beat.t} occurs before beat ${previous.index + 1} at ${beats[previous.index].t}.`);
+    }
+  });
+  return { errors, parsedBeats };
+}
+
 function resolveShotStyle(s: ShotSpec): { core: string; grade: string; negatives: string } {
   if (!s.style) return { core: '', grade: '', negatives: '' };
   if (typeof s.style === 'string') {
@@ -580,7 +608,7 @@ function blockFor(key: string, s: ShotSpec, st: ReturnType<typeof resolveShotSty
  */
 export function compileShot(shot: ShotSpec, engineId: string): CompiledShot | undefined {
   const engine = getModel(engineId); if (!engine) return undefined;
-  const adapter = getAdapter(engineId); const warnings: string[] = []; const st = resolveShotStyle(shot);
+  const adapter = getAdapter(engineId); const warnings: string[] = []; const st = resolveShotStyle(shot);\n  const timingQA = validateShotTiming(shot);\n  warnings.push(...timingQA.errors);
   // Feasibility Veto (G3) and engine limits
   if (shot.camera.fov_degrees >= 94 && (shot.emotion || shot.acting_beats?.length)) warnings.push('VETO: micro-acting at FOV >= 94 degrees — raise the shot size or lower the FOV.');
   if (engine.status === 'sunsetting') warnings.push(`ENGINE_SUNSET: ${engine.name} is sunsetting — do not start new pipelines on it.`);
@@ -614,9 +642,9 @@ export function compileShot(shot: ShotSpec, engineId: string): CompiledShot | un
     technical: { fov_degrees: shot.camera.fov_degrees, shutter_angle: 180, fps: engine.fps ?? CONFIG.defaults.fps },
     constraints: ['Preserve shot continuity', 'Keep one dominant camera device per short shot', 'Positive-only production instructions']
   }, prompt);
-  const qualityWarnings = [`QUALITY_LOOP: ${qa.status}; AntiSlopScore ${qa.antiSlopScore}`,
+  const effectiveQualityStatus: AntiSlopStatus = timingQA.errors.length ? 'REGENERATE' : qa.status;\n  const qualityWarnings = [`QUALITY_LOOP: ${effectiveQualityStatus}; AntiSlopScore ${qa.antiSlopScore}`,
     ...qa.findings.map(x => `QUALITY: ${x}`), ...qa.fixes.map(x => `QUALITY_FIX: ${x}`)];
-  if (qa.status === 'REGENERATE') qualityWarnings.push('QUALITY_GATE: revise this shot only; do not regenerate the whole sequence.');
+  if (effectiveQualityStatus === 'REGENERATE') qualityWarnings.push('QUALITY_GATE: revise this shot only; do not regenerate the whole sequence.');
   return { engine, adapter, prompt, negative: st.negatives || undefined, warnings: [...warnings, ...slop, ...qualityWarnings] };
 }
 /** Compile a shot and enforce the delivery policy. Drafting remains available through compileShot(). */
