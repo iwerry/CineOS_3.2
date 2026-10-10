@@ -634,7 +634,7 @@ export function compileShot(shot: ShotSpec, engineId: string): CompiledShot | un
     engine: shot.optics.engine ?? (engine.kind === 'image' ? 'generic' : 'video'),
   }) : undefined;
   const opticalPrompt = opticalResolution ? [
-    `${opticalResolution.requestedFocalLengthMm}mm focal length`,
+    `${opticalResolution.selectedFocalLengthMm}mm focal length`,
     `${opticalResolution.lens.family.replace(/-/g, ' ')}`,
     shot.optics?.aperture ? `aperture ${shot.optics.aperture}` : undefined,
     shot.optics?.depthOfField ? `${shot.optics.depthOfField} depth of field` : undefined,
