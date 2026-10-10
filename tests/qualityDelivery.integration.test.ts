@@ -18,6 +18,31 @@ const minimalShot = {
 
 describe('delivery wrappers', () => {
 
+  it('integrates generic optical intent without leaking branded lens names into the prompt', () => {
+    const shot = {
+      shot_id: 'optics-integration',
+      subject: 'A ceramic artist',
+      action: 'turns a clay bowl toward the window',
+      location: 'a working ceramics studio',
+      camera: { fov_degrees: 47, movement: 'slow push-in' },
+      lighting: '5600K window daylight',
+      optics: {
+        intent: 'portrait' as const,
+        focalLengthMm: 85,
+        sensorFormat: 'full-frame' as const,
+        aperture: 'T2.0',
+        depthOfField: 'shallow' as const,
+      },
+    };
+    const result = compileShot(shot, 'veo_3_1');
+    expect(result).toBeDefined();
+    expect(result?.prompt).toContain('85mm focal length');
+    expect(result?.prompt).toContain('spherical cinema prime');
+    expect(result?.prompt).toContain('aperture T2.0');
+    expect(result?.prompt).not.toMatch(/Cooke|ARRI|ZEISS|Sony|RED/i);
+    expect(result?.opticalNotes?.length).toBeGreaterThan(0);
+  });
+
   it('flags acting beats that exceed duration or run backwards in time', () => {
     const base = {
       shot_id: 'timing-qa',
