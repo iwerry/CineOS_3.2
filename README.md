@@ -365,3 +365,27 @@ Idea, architecture and creative content: all rights reserved to the author. Cont
 *— Daniel Rodrigues*
 
 </div>
+
+
+## 🔭 Optical Intelligence (new in 3.3)
+
+Daniskills now includes a structured lens-family catalog and a deterministic optical resolver in `opticsCatalog.ts`. Resolve shot intent, focal length, sensor format, lens family, aperture notation, depth of field and movement into prompt-ready optical language:
+
+```ts
+import { resolveOptics } from './opticsCatalog';
+
+const optics = resolveOptics({
+  intent: 'portrait',
+  focalLengthMm: 85,
+  sensorFormat: 'full-frame',
+  aperture: 'T2.0',
+  depthOfField: 'shallow',
+  engine: 'video',
+});
+```
+
+Catalog families include Cooke S8/i, ARRI Signature Prime, ZEISS Supreme Prime, Leitz SUMMILUX-C, ARRI Master Anamorphic, Atlas Orion, Panavision C-Series, Sony G Master, Sigma Art, Canon RF L, Nikon Z S, vintage character optics, macro/probe, cine zoom and tilt-shift references. Camera-format references cover ARRI, Sony, RED and Canon cinema bodies.
+
+The resolver deliberately distinguishes *format-plausible* from verified mount/image-circle compatibility. Lens families are reference-level data; verify exact SKU, mount, T-stop, minimum focus, breathing, distortion and anamorphic squeeze ratio before using a real camera package. AI model equipment names are semantic cues, not guarantees of physically faithful optics.
+
+See [OPTICAL_INTELLIGENCE.md](./OPTICAL_INTELLIGENCE.md) for the schema, decision rules and tests.
