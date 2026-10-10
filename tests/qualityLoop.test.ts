@@ -43,7 +43,9 @@ describe('Quality Loop regression coverage', () => {
 
   it('humanizes common formulaic wording without leaving extra whitespace', () => {
     expect(humanizeText('  In today’s fast-paced world, leverage tools to unlock the power of AI.  '))
-      .toBe('today, use tools to use AI.');
+      .toBe('In practice, use tools to make better use of AI.');
+    expect(humanizeText('in today’s ever-changing world, utilize the process.'))
+      .toBe('in practice, use the process.');
   });
 
   it('keeps modality and destination in the post-sharpen plan', () => {
