@@ -15,6 +15,7 @@
  * Legacy comments below remain in Portuguese from v3.1 and are being translated progressively.
  */
 import rawConfig from './dani_skills_config.json';
+import { resolveOptics, type OpticalRequest } from './opticsCatalog';
 
 /* ───────────────────────── TIPOS ───────────────────────── */
 export type ModelKind = 'video' | 'image' | 'audio' | 'platform' | 'pipeline' | 'llm';
@@ -511,6 +512,8 @@ export const getAdapter = (engineId: string) => ADAPTERS.find(a => a.engine_id =
 /** Cinematic intent as data (Shot DNA). One spec compiles into many engine dialects. */
 export interface ShotSpec {
   shot_id: string; story_function?: string;
+  /** Optional optical intent; compiler emits generic optical language, not a real lens brand. */
+  optics?: OpticalRequest;
   subject: string; action: string; emotion?: string; location: string; time?: string;
   camera: { size?: string; fov_degrees: number; movement?: string; device?: string; angle?: string; axis?: string; screen_direction?: string };
   lighting: string;
@@ -521,7 +524,7 @@ export interface ShotSpec {
   continuity?: { characters?: string[]; locations?: string[]; props?: string[]; time?: string; weather?: string; wardrobe?: string; light_direction?: string };
   references?: string[]; needs_native_audio?: boolean;
 }
-export interface CompiledShot { engine: ModelSpec; adapter?: EngineAdapter; prompt: string; negative?: string; warnings: string[]; deliveryGate?: QualityDeliveryGate }
+export interface CompiledShot { engine: ModelSpec; adapter?: EngineAdapter; prompt: string; negative?: string; warnings: string[]; opticalNotes?: string[]; deliveryGate?: QualityDeliveryGate }
 
 /** Parse explicit beat timestamps only; unsupported notation is left for human review. */
 export function validateShotTiming(shot: ShotSpec): { errors: string[]; parsedBeats: { index: number; seconds: number }[] } {
@@ -625,6 +628,22 @@ export function compileShot(shot: ShotSpec, engineId: string): CompiledShot | un
   const structure = adapter?.structure ?? engine.grammar.structure;
   const dialect = adapter?.dialect ?? 'single_paragraph';
   const blocks = structure.map(key => ({ key, text: blockFor(key, shot, st) })).filter(b => b.text);
+  const opticalResolution = shot.optics ? resolveOptics({
+    ...shot.optics,
+    movement: shot.optics.movement ?? shot.camera.movement,
+    engine: shot.optics.engine ?? (engine.kind === 'image' ? 'generic' : 'video'),
+  }) : undefined;
+  const opticalPrompt = opticalResolution ? [
+    `${opticalResolution.requestedFocalLengthMm}mm focal length`,
+    `${opticalResolution.lens.family.replace(/-/g, ' ')}`,
+    shot.optics?.aperture ? `aperture ${shot.optics.aperture}` : undefined,
+    shot.optics?.depthOfField ? `${shot.optics.depthOfField} depth of field` : undefined,
+    shot.optics?.sensorFormat && shot.optics.sensorFormat !== 'unknown' ? `${shot.optics.sensorFormat} sensor format` : undefined,
+    shot.optics?.anamorphic ? 'anamorphic optical characteristics; specify squeeze ratio only when verified' : undefined,
+  ].filter(Boolean).join(', ') : '';
+  if (opticalResolution?.compatibility === 'verify-image-circle-and-mount') warnings.push('OPTICS_COMPATIBILITY: verify sensor image circle and lens mount before treating this as a real-camera configuration.');
+  if (opticalResolution?.compatibility === 'unknown-format') warnings.push('OPTICS_FORMAT: sensor format is unspecified; optical compatibility remains unassessed.');
+  if (opticalResolution) warnings.push('OPTICS_CATALOG: optical intent resolved; branded lens names are omitted from prompt output unless Brand Mode (G9) is explicitly handled.');
   let prompt: string;
   switch (dialect) {
     case 'twelve_block': prompt = structure.map(key => `${key.replace(/_/g, ' ').toUpperCase()}: ${blockFor(key, shot, st) ?? '[definir]'}`).join('\n'); break;
@@ -635,6 +654,7 @@ export function compileShot(shot: ShotSpec, engineId: string): CompiledShot | un
     case 'platform_ui': prompt = blocks.map(b => `${b.key}: ${b.text}`).join('\n'); break;
     default: prompt = blocks.map(b => b.text).join('. ') + '.';
   }
+  if (opticalPrompt) prompt = [prompt, opticalPrompt].filter(Boolean).join('. ');
   if (adapter && /zh/i.test(adapter.notes)) warnings.push('NOTE: Chinese-native engine — an optional short Chinese keyword line can help (verify on platform).');
   const slop = cinemaSlop(prompt).map(i => `${i.id}: ${i.message}`);
   const modality: Modality = engine.kind === 'image' ? 'image' : engine.kind === 'audio' ? 'audio' : 'video';
@@ -648,7 +668,7 @@ export function compileShot(shot: ShotSpec, engineId: string): CompiledShot | un
   const qualityWarnings = [`QUALITY_LOOP: ${effectiveQualityStatus}; AntiSlopScore ${qa.antiSlopScore}`,
     ...qa.findings.map(x => `QUALITY: ${x}`), ...qa.fixes.map(x => `QUALITY_FIX: ${x}`)];
   if (effectiveQualityStatus === 'REGENERATE') qualityWarnings.push('QUALITY_GATE: revise this shot only; do not regenerate the whole sequence.');
-  return { engine, adapter, prompt, negative: st.negatives || undefined, warnings: [...warnings, ...slop, ...qualityWarnings] };
+  return { engine, adapter, prompt, negative: st.negatives || undefined, warnings: [...warnings, ...slop, ...qualityWarnings], opticalNotes: opticalResolution ? [...opticalResolution.opticalNotes, ...opticalResolution.caveats] : undefined };
 }
 /** Compile a shot and enforce the delivery policy. Drafting remains available through compileShot(). */
 export function compileShotForDelivery(shot: ShotSpec, engineId: string, policy: QualityGatePolicy = {}): CompiledShot | undefined {
