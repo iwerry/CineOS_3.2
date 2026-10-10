@@ -924,7 +924,7 @@ export function antiSlop(text: string, modality: Modality): AntiSlopResult {
   const rhythm = evidence.temporalStructure ? 10 : 3;
   const cliché = Math.max(0, 10 - Math.min(10, hits.length * 3));
   const score = specificity + originality + technical + humanity + materiality + rhythm + cliché;
-  const status: AntiSlopStatus = score >= 90 ? 'PASS' : score >= 80 ? 'POLISH' : 'REGENERATE';
+  const status: AntiSlopStatus = hits.some(hit => hit.severity === 'error') ? 'REGENERATE' : score >= 90 ? 'PASS' : score >= 80 ? 'POLISH' : 'REGENERATE';
   return { modality, score, status, hits, dimensions: { specificity, originality, technical, humanity, materiality, rhythm, absence_of_cliches: cliché } };
 }
 
