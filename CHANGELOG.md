@@ -1,7 +1,19 @@
 # Changelog
 
 ## 3.3.0 — Cinematic Intelligence Architecture (2026-10-03)
-Credits: Daniel Rodrigues · Daniel Rodrigues
+Credits: Daniel Rodrigues
+
+### Maintenance update — 2026-10-10
+
+#### Added
+- Quality Loop diagnostics for Hardness, Anti-Slop scoring, Smart Sharpen, Humanize Text and modality-specific Post-Sharpen plans.
+- Delivery enforcement APIs: `qualityDeliveryGate`, `assertDeliverable`, `compilePromptForDelivery` and `compileShotForDelivery`.
+- Automated regression tests for quality-loop behavior, delivery gates and integration paths.
+- Reproducible Node dependency installation through the committed npm lockfile.
+
+#### Changed
+- CI now uses `npm ci`, then runs unit/integration tests, the Python contract validator, TypeScript type-checking and dependency advisory reporting.
+- Updated the audit document reference to `DANI_SKILLS_AUDIT_v3.3.md`.
 
 ### Added
 - Skills 59–75 (Cinematic Grammar, Cinematography Director, Acting Director 2.0, Sound Cinema Engine, AI Artifact Detector, Cinema Audit + Slop, Project Bible & Memory, Shot DNA + Prompt Compiler, Model Intelligence, Reference Intelligence, Edit Engine, Continuity + Asset Graph, Software Workflow Bridge, Deliverables Studio, Code-Driven Animation, Production Learning Loop, Micro-Drama Showrunner).
@@ -10,7 +22,7 @@ Credits: Daniel Rodrigues · Daniel Rodrigues
 - Profiles 19–22; 7 pipelines; 13 routes; gates G10–G13; 22 commands.
 - Tables: `director_profiles`, `design_tokens`, `cinema_slop`, `audit_dimensions`, `artifact_checks`, `engine_benchmark`, `model_intelligence`, `continuity_checks`, `project_bible_files`, `software_tools`, `deliverable_formats`, `learning_loop`; 15 new templates.
 - TS: `compileShot`, `compileShotForAll`, `modelIntelligence`, `cinemaSlop`, `lintCinema`, `cinemaAudit`, `polishPlan`, `artifactVerdict`, `continuityCheck`, `sequenceContinuity`, `AssetGraph`, `directorProfile`, `designToken`, `gateG10`.
-- Docs: `ARCHITECTURE.md`, `DANI_SKILLS_AUDIT_v3.1.md`, `TOOLKIT_2026.md`, `UNIVERSAL_PROMPT.md`, `PROJECT_BIBLE_TEMPLATE/`, `scripts/validate_contract.py`.
+- Docs: `ARCHITECTURE.md`, `DANI_SKILLS_AUDIT_v3.3.md`, `TOOLKIT_2026.md`, `UNIVERSAL_PROMPT.md`, `PROJECT_BIBLE_TEMPLATE/`, `scripts/validate_contract.py`.
 
 ### Changed
 - `BaseSkill.md` rewritten in English; protocol now reads project memory first and ends with audit/polish/learning.
