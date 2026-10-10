@@ -38,7 +38,8 @@ describe('delivery wrappers', () => {
       action: 'walks toward a metal gate',
       camera: 'slow lateral track',
       lighting: '5600K dawn skylight with warm practical lamps',
-      physics: 'footfalls compress water into small ripples'
+      physics: 'footfalls compress water into small ripples',
+      durationS: 6
     };
     const out = compilePromptForDelivery(req);
     expect(out.warnings.some(w => w.startsWith('QUALITY_LOOP: PASS'))).toBe(true);
