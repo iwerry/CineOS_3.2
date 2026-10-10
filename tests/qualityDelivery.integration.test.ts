@@ -3,7 +3,8 @@ import {
   compilePrompt,
   compilePromptForDelivery,
   compileShot,
-  compileShotForDelivery
+  compileShotForDelivery,
+  validateShotTiming
 } from '../skillsData';
 
 const minimalShot = {
@@ -16,7 +17,53 @@ const minimalShot = {
 };
 
 describe('delivery wrappers', () => {
-  it('blocks a weak shot at the delivery boundary by default', () => {
+
+  it('flags acting beats that exceed duration or run backwards in time', () => {
+    const base = {
+      shot_id: 'timing-qa',
+      subject: 'A courier',
+      action: 'crosses the wet courtyard and opens a gate',
+      location: 'a stone courtyard at dawn',
+      camera: { fov_degrees: 47, movement: 'slow lateral track' },
+      lighting: '5600K skylight',
+      duration_s: 6,
+      acting_beats: [
+        { t: '0s', beat: 'enters frame' },
+        { t: '4.5s', beat: 'reaches the gate' },
+        { t: '7s', beat: 'opens the gate' }
+      ]
+    };
+    const overrun = validateShotTiming(base);
+    expect(overrun.errors.some(error => error.startsWith('TIMING_BEYOND_DURATION'))).toBe(true);
+
+    const outOfOrder = validateShotTiming({
+      ...base,
+      duration_s: 8,
+      acting_beats: [
+        { t: '4s', beat: 'reaches the gate' },
+        { t: '2s', beat: 'turns toward the gate' }
+      ]
+    });
+    expect(outOfOrder.errors.some(error => error.startsWith('TIMING_ORDER_CONFLICT'))).toBe(true);
+  });
+
+  it('blocks delivery when explicit beat timestamps contradict shot duration', () => {
+    const shot = {
+      shot_id: 'timing-gate',
+      subject: 'A courier',
+      action: 'crosses a wet stone courtyard, pauses, then opens a metal gate',
+      location: 'an enclosed courtyard at dawn',
+      camera: { fov_degrees: 47, movement: 'slow lateral track' },
+      lighting: '5600K dawn skylight',
+      duration_s: 5,
+      acting_beats: [
+        { t: '0s', beat: 'crosses the courtyard' },
+        { t: '6s', beat: 'opens the gate' }
+      ]
+    };
+    expect(() => compileShotForDelivery(shot, 'veo_3_1')).toThrow(/QUALITY_GATE_BLOCKED: REGENERATE/);
+  });
+\n  it('blocks a weak shot at the delivery boundary by default', () => {
     expect(() => compileShotForDelivery(minimalShot, 'veo_3_1'))
       .toThrow(/^QUALITY_GATE_BLOCKED: /);
   });
