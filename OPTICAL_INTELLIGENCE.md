@@ -28,6 +28,35 @@ const anamorphicOptions = listLenses({
 });
 ```
 
+## Shot compiler integration
+
+`ShotSpec` accepts an optional `optics` request. `compileShot()` resolves it through the catalog and appends generic optical instructions to the prompt. It uses the **selected catalog focal length**, not blindly the requested number.
+
+```ts
+import { compileShot } from './skillsData';
+
+const compiled = compileShot({
+  shot_id: 'portrait-01',
+  subject: 'A ceramic artist',
+  action: 'turns a clay bowl toward the window',
+  location: 'a working ceramics studio',
+  camera: { fov_degrees: 47, movement: 'slow push-in' },
+  lighting: '5600K window daylight',
+  optics: {
+    intent: 'portrait',
+    focalLengthMm: 85,
+    sensorFormat: 'full-frame',
+    aperture: 'T2.0',
+    depthOfField: 'shallow',
+  },
+}, 'veo_3_1');
+
+console.log(compiled?.prompt);
+console.log(compiled?.opticalNotes);
+```
+
+The shot compiler intentionally emits generic family, focal-length and depth-of-field language rather than injecting a real lens manufacturer into a prompt. Keep branded equipment references behind Brand Mode (G9). The standalone `resolveOptics()` API still returns the catalog selection and its verification caveats for planning and diagnostics.
+
 ## Resolver inputs
 
 | Field | Meaning |
