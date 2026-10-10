@@ -4,6 +4,7 @@
 - `opticsCatalog.ts`: structured lens-family catalog, camera-format references, optical intent types, deterministic `resolveOptics()` resolver and `listLenses()` filtering.
 - `OPTICAL_INTELLIGENCE.md`: API usage, optical decision rules, prompt examples and verification workflow.
 - `tests/opticsCatalog.test.ts`: regression tests for catalog integrity, resolver output, anamorphic intent, format caveats and T-stop notation.
+- Integrates optional `ShotSpec.optics` into `compileShot()` with catalog-resolved focal length, generic prompt language, compatibility caveats and brand-safe output behind G9.
 
 ### Guardrails
 - Explicitly distinguishes sensor-format plausibility from verified mount/image-circle compatibility.
@@ -28,6 +29,7 @@ Credits: Daniel Rodrigues
 
 #### Technical consistency QA
 - Validates explicit `acting_beats` timestamps against `duration_s` and beat order; contradictions force `REGENERATE` at the shot delivery gate.
+- Adds regression coverage for over-duration beats, out-of-order timestamps and optical prompt integration.
 - Detects FOV values labeled in millimeters rather than degrees and conflicting shutter angles within one shot.
 - Contradictions produce explicit error findings, reduce technical score credit, and have regression tests.
 
