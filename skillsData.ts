@@ -874,13 +874,37 @@ export function antiSlop(text: string, modality: Modality): AntiSlopResult {
   const empty = text.match(EMPTY_ADJECTIVES) ?? [];
   empty.forEach((term, i) => hits.push({ id: `EMPTY_ADJECTIVE_${i + 1}`, severity: 'warn', message: `empty adjective: ${term}`, fix: 'replace adjective with an observable production parameter' }));
   for (const rule of MODALITY_SLOP[modality]) if (rule.pattern.test(text)) hits.push({ id: rule.id, severity: 'warn', message: `formula detected for ${modality}`, fix: rule.fix });
-  const specificity = Math.max(0, 20 - Math.min(20, hits.length * 4));
-  const originality = Math.max(0, 20 - Math.min(20, hits.length * 3));
-  const technical = /FOV|\b\d{3,4}\s*K\b|Kelvin|180°|shutter|fps|dB|Hz|duration|beats|HEX/i.test(text) ? 15 : 8;
-  const humanity = /gesture|behavior|dialogue|voice|perspective|distance|context|specific|character|audience/i.test(text) ? 15 : 8;
-  const materiality = /texture|material|grain|acoustic|reverb|skin|surface|fabric|metal|wood/i.test(text) ? 10 : 5;
-  const rhythm = /timing|rhythm|beat|duration|cut|pause|silence|pace/i.test(text) ? 10 : 5;
-  const cliché = Math.max(0, 10 - Math.min(10, hits.length * 2));
+  // Evidence-aware deterministic heuristic: vocabulary alone must not produce a PASS.
+  const evidence = {
+    observableAction: /\b(cross(?:es|ed|ing)?|walk(?:s|ed|ing)?|run(?:s|ning)?|turn(?:s|ed|ing)?|open(?:s|ed|ing)?|close(?:s|d|ing)?|push(?:es|ed|ing)?|pull(?:s|ed|ing)?|fall(?:s|en|ing)?|compress(?:es|ed|ing)?|break(?:s|ing)?|drift(?:s|ed|ing)?|flicker(?:s|ed|ing)?|speaks|whispers|pauses|moves|stops|accelerates|decelerates|cuts|fades)\b/i.test(text),
+    subjectOrSource: /\b(courier|person|character|subject|vehicle|door|light|camera|voice|speaker|footstep|engine|wind|water|object|performer|narrator|music|sound|rain|crowd|hand|face|animal|product|device)\b/i.test(text),
+    settingOrPerspective: /\b(in|inside|outside|across|through|behind|beside|at|from|foreground|background|close-up|wide shot|overhead|eye-level|room|courtyard|street|hallway|studio|forest|coast|surface|distance|perspective)\b/i.test(text),
+    measurableConstraint: /\b\d+(?:\.\d+)?\s*(?:degrees?|°|mm|cm|m|seconds?|secs?|s|fps|hz|khz|db|k|kelvin|%)\b|\b180°\b/i.test(text),
+    causalRelation: /\b(because|causes?|so that|therefore|as a result|compress(?:es|ed)? into|driven by|motivated by|in response to|while|until)\b/i.test(text),
+    explicitConstraint: /\b(only|single|one|maintain|preserve|fixed|locked|remains|without|consistent|exactly|must)\b/i.test(text),
+    temporalStructure: /\b(first|then|before|after|until|pause|beat|timing|rhythm|duration|cut|hold|silence|pace|at \d+(?:\.\d+)?s)\b/i.test(text),
+    materialResponse: /\b(water|metal|wood|fabric|glass|skin|stone|dust|grain|surface|texture|reflection|ripples?|condensation|friction|reverb|acoustic)\b/i.test(text)
+  };
+  const evidenceCount = Object.values(evidence).filter(Boolean).length;
+  const specificity = Math.min(20, 2 + evidenceCount * 3);
+  // Originality is credited for grounded combinations, not merely for avoiding banned phrases.
+  const groundedPairs = Number(evidence.observableAction && evidence.subjectOrSource)
+    + Number(evidence.settingOrPerspective && evidence.materialResponse)
+    + Number(evidence.causalRelation && evidence.temporalStructure)
+    + Number(evidence.measurableConstraint && evidence.explicitConstraint);
+  const originality = Math.min(20, 4 + groundedPairs * 4);
+  const technicalPattern: Record<Modality, RegExp> = {
+    image: /\b(FOV|degrees?|Kelvin|\d{3,4}\s*K|aperture|focal length|HEX|light source|key light|fill light|shadow direction|aspect ratio)\b/i,
+    video: /\b(FOV|degrees?|Kelvin|\d{3,4}\s*K|180°|shutter|fps|frame rate|camera|lens|cut|duration|seconds?|tracking|pan|tilt|dolly)\b/i,
+    audio: /\b(dB|Hz|kHz|LUFS|seconds?|duration|reverb|acoustic|distance|perspective|stereo|mono|transient|dynamic range|silence|source)\b/i,
+    text: /\b(audience|claim|example|source|evidence|specific|paragraph|headline|word count|tone|voice|structure|context|fact)\b/i,
+    script: /\b(scene|beat|dialogue|character|action|INT\.|EXT\.|slugline|duration|pause|cut|motivation|stakes|subtext)\b/i
+  };
+  const technical = technicalPattern[modality].test(text) && (evidence.measurableConstraint || /\b(camera|lens|light source|key light|fill light|aspect ratio|frame rate|tracking|pan|tilt|dolly|dB|Hz|kHz|LUFS|reverb|acoustic|stereo|mono|audience|claim|example|source|evidence|word count|scene|beat|dialogue|INT\.|EXT\.)\b/i.test(text)) ? 15 : 6;
+  const humanity = evidence.observableAction && (evidence.subjectOrSource || evidence.causalRelation) ? 15 : evidence.observableAction || evidence.causalRelation ? 10 : 4;
+  const materiality = evidence.materialResponse ? 10 : 3;
+  const rhythm = evidence.temporalStructure ? 10 : 3;
+  const cliché = Math.max(0, 10 - Math.min(10, hits.length * 3));
   const score = specificity + originality + technical + humanity + materiality + rhythm + cliché;
   const status: AntiSlopStatus = score >= 90 ? 'PASS' : score >= 80 ? 'POLISH' : 'REGENERATE';
   return { modality, score, status, hits, dimensions: { specificity, originality, technical, humanity, materiality, rhythm, absence_of_cliches: cliché } };
