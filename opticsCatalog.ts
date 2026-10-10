@@ -49,6 +49,7 @@ export interface OpticalRequest {
 export interface OpticalResolution {
   lens: LensProfile;
   requestedFocalLengthMm: number;
+  selectedFocalLengthMm: number;
   sensorFormat: SensorFormat;
   compatibility: 'format-plausible' | 'verify-image-circle-and-mount' | 'unknown-format';
   opticalNotes: string[];
@@ -136,6 +137,7 @@ export function resolveOptics(request: OpticalRequest = {}): OpticalResolution {
   return {
     lens,
     requestedFocalLengthMm: focal,
+    selectedFocalLengthMm: selectedFocal,
     sensorFormat: format,
     compatibility,
     opticalNotes: [...lens.character],
