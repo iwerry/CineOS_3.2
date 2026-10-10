@@ -48,6 +48,30 @@ describe('Quality Loop regression coverage', () => {
     expect(antiSlop('A courier moves.', 'video').status).toBe('REGENERATE');
   });
 
+  it('flags incompatible camera notation and conflicting shutter angles', () => {
+    const invalidFov = antiSlop(
+      'A courier crosses the courtyard. FOV 47mm, 5600K skylight, 180° shutter. The courier pauses for 2 seconds before the cut.',
+      'video'
+    );
+    expect(invalidFov.hits.some(hit => hit.id === 'FOV_UNIT_CONFLICT' && hit.severity === 'error')).toBe(true);
+    expect(invalidFov.status).toBe('REGENERATE');
+
+    const conflictingShutter = antiSlop(
+      'A courier crosses the courtyard. FOV 47 degrees, 180° shutter and 90° shutter angle. Footsteps compress water into ripples; then the courier pauses for 2 seconds.',
+      'video'
+    );
+    expect(conflictingShutter.hits.some(hit => hit.id === 'SHUTTER_ANGLE_CONFLICT')).toBe(true);
+    expect(conflictingShutter.status).toBe('REGENERATE');
+  });
+
+  it('does not mistake FOV degrees for a shutter-angle conflict', () => {
+    const valid = antiSlop(
+      'A courier crosses the courtyard. FOV 47°, 5600K skylight, 180° shutter. Footsteps compress water into ripples; then the courier pauses for 2 seconds.',
+      'video'
+    );
+    expect(valid.hits.some(hit => hit.id === 'SHUTTER_ANGLE_CONFLICT')).toBe(false);
+  });
+
   it('scores technical evidence according to the requested modality', () => {
     const video = antiSlop('FOV 47 degrees, 180° shutter at 24 fps.', 'video');
     const audio = antiSlop('FOV 47 degrees, 180° shutter at 24 fps.', 'audio');
