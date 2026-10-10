@@ -892,7 +892,7 @@ export function antiSlop(text: string, modality: Modality): AntiSlopResult {
     + Number(evidence.settingOrPerspective && evidence.materialResponse)
     + Number(evidence.causalRelation && evidence.temporalStructure)
     + Number(evidence.measurableConstraint && evidence.explicitConstraint);
-  const originality = Math.min(20, 4 + groundedPairs * 4);
+  const originality = Math.min(20, 9 + groundedPairs * 4);
   const technicalPattern: Record<Modality, RegExp> = {
     image: /\b(FOV|degrees?|Kelvin|\d{3,4}\s*K|aperture|focal length|HEX|light source|key light|fill light|shadow direction|aspect ratio)\b/i,
     video: /\b(FOV|degrees?|Kelvin|\d{3,4}\s*K|180°|shutter|fps|frame rate|camera|lens|cut|duration|seconds?|tracking|pan|tilt|dolly)\b/i,
