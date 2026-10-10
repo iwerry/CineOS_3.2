@@ -19,8 +19,11 @@ const videoInput = {
 describe('Quality Loop regression coverage', () => {
   it('returns UNASSESSED for empty or whitespace-only material', () => {
     expect(antiSlop('', 'video').status).toBe('UNASSESSED');
-    expect(antiSlopScore('', 'video')).toBe(76);
+    expect(antiSlop('', 'video').score).toBe('UNASSESSED');
+    expect(antiSlopScore('', 'video')).toBe('UNASSESSED');
     expect(antiSlop('   ', 'text').status).toBe('UNASSESSED');
+    expect(qualityLoop(videoInput, '   ').status).toBe('UNASSESSED');
+    expect(qualityLoop(videoInput, '   ').antiSlopScore).toBe('UNASSESSED');
   });
 
   it('detects empty adjectives instead of treating them as production detail', () => {
