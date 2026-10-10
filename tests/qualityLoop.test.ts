@@ -38,7 +38,7 @@ describe('Quality Loop regression coverage', () => {
 
   it('requires grounded subject/action/context evidence for PASS', () => {
     const coherent = antiSlop(
-      'A courier crosses a wet stone courtyard at dawn. FOV 47 degrees, 5600K skylight, 180° shutter. Footfalls compress water into ripples.',
+      'A courier crosses a wet stone courtyard at dawn. FOV 47 degrees, 5600K skylight, 180° shutter. Footfalls compress water into ripples; the courier pauses for 2 seconds before the cut.',
       'video'
     );
     expect(coherent.status).toBe('PASS');
