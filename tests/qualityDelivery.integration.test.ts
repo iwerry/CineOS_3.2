@@ -34,8 +34,8 @@ describe('delivery wrappers', () => {
     const req = {
       engineId: 'veo_3_1',
       subject: 'A courier crosses a wet stone courtyard',
-      setting: 'an enclosed courtyard at dawn',
-      action: 'walks toward a metal gate',
+      setting: 'a wet stone courtyard enclosed at dawn',
+      action: 'walks toward a metal gate, pauses for 2 seconds, then opens it',
       camera: 'slow lateral track',
       lighting: '5600K dawn skylight with warm practical lamps',
       physics: 'footfalls compress water into small ripples',
