@@ -165,15 +165,13 @@ Escala 0–100:
 | Ritmo / edição | 10 |
 | Ausência de clichês generativos | 10 |
 
-Faixas:
+Faixas implementadas:
 - **90–100:** PASS
-- **80–89:** POLISH
-- **70–79:** REVISE
-- **<70:** voltar ao Hardness
-- **<60:** não entregar
-- **dados insuficientes:** UNASSESSED
+- **80–89:** POLISH — requer revisão; entrega bloqueada por padrão.
+- **0–79:** REGENERATE — exige correção localizada; entrega bloqueada por padrão.
+- **dados insuficientes ou entrada vazia:** UNASSESSED — não atribuir score artificial; solicitar material antes de avaliar.
 
-O score é um instrumento de QA, não uma promessa de qualidade objetiva.
+O Quality Loop e o gate de entrega usam essas mesmas faixas. `REGENERATE` só pode ser entregue com uma exceção explícita e justificada; `UNASSESSED` exige avaliação ou aceitação explícita da política. O score é um instrumento de QA, não uma promessa de qualidade objetiva.
 
 ## 6. Post Sharpen
 
