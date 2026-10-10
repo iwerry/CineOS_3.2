@@ -29,6 +29,12 @@ describe('Quality Loop regression coverage', () => {
     expect(loop.fixes).toContain('Provide non-empty generated content before scoring or delivery');
   });
 
+  it('maps heuristic scores to the documented status thresholds', () => {
+    expect(antiSlop('FOV 47 degrees', 'video').status).toBe('POLISH');
+    expect(antiSlop('A courier moves.', 'video').status).toBe('REGENERATE');
+    expect(antiSlop('FOV 47 degrees, a gesture on textured metal; timing follows the pause.', 'video').status).toBe('PASS');
+  });
+
   it('detects empty adjectives instead of treating them as production detail', () => {
     const result = antiSlop('A stunning epic masterpiece', 'video');
     expect(result.hits.length).toBeGreaterThan(0);
