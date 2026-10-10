@@ -13,6 +13,11 @@ Credits: Daniel Rodrigues
 - Humanize Text replacements that preserve the original intent more accurately.
 - Reproducible Node dependency installation through the committed npm lockfile.
 
+#### Quality scoring hardening
+- Replaced keyword-only score boosts with evidence-aware deterministic features.
+- Technical evidence is modality-specific; subject/action/context and grounded detail combinations affect specificity and originality.
+- Added adversarial regression coverage so keyword stuffing cannot earn `PASS` by itself.
+
 #### Changed
 - CI now uses `npm ci`, then runs unit/integration tests, the Python contract validator, TypeScript type-checking and dependency advisory reporting.
 - Updated the audit document reference to `DANI_SKILLS_AUDIT_v3.3.md`.
