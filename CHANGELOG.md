@@ -13,6 +13,10 @@ Credits: Daniel Rodrigues
 - Humanize Text replacements that preserve the original intent more accurately.
 - Reproducible Node dependency installation through the committed npm lockfile.
 
+#### Technical consistency QA
+- Detects FOV values labeled in millimeters rather than degrees and conflicting shutter angles within one shot.
+- Contradictions produce explicit error findings, reduce technical score credit, and have regression tests.
+
 #### Quality scoring hardening
 - Replaced keyword-only score boosts with evidence-aware deterministic features.
 - Technical evidence is modality-specific; subject/action/context and grounded detail combinations affect specificity and originality.
