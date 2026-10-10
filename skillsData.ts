@@ -909,8 +909,8 @@ export function antiSlop(text: string, modality: Modality): AntiSlopResult {
     technicalConflictCount++;
   }
   if (modality === 'video') {
-    const shutterAngles = [...text.matchAll(/\b(\d{1,3})\s*°\s*(?:shutter|shutter angle)?/gi)]
-      .map(match => Number(match[1]))
+    const shutterAngles = [...text.matchAll(/\b(\d{1,3})\s*°\s*shutter\b|\bshutter(?: angle)?\s*(?:of\s*)?(\d{1,3})\s*°/gi)]
+      .map(match => Number(match[1] ?? match[2]))
       .filter(value => value > 0 && value <= 360);
     const uniqueAngles = [...new Set(shutterAngles)];
     if (uniqueAngles.length > 1) {
