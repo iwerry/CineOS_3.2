@@ -27,6 +27,7 @@ Credits: Daniel Rodrigues
 - Reproducible Node dependency installation through the committed npm lockfile.
 
 #### Technical consistency QA
+- Validates explicit `acting_beats` timestamps against `duration_s` and beat order; contradictions force `REGENERATE` at the shot delivery gate.
 - Detects FOV values labeled in millimeters rather than degrees and conflicting shutter angles within one shot.
 - Contradictions produce explicit error findings, reduce technical score credit, and have regression tests.
 
