@@ -1,3 +1,16 @@
+## 3.3.1 — Optical Intelligence (2026-10-10)
+
+### Added
+- `opticsCatalog.ts`: structured lens-family catalog, camera-format references, optical intent types, deterministic `resolveOptics()` resolver and `listLenses()` filtering.
+- `OPTICAL_INTELLIGENCE.md`: API usage, optical decision rules, prompt examples and verification workflow.
+- `tests/opticsCatalog.test.ts`: regression tests for catalog integrity, resolver output, anamorphic intent, format caveats and T-stop notation.
+
+### Guardrails
+- Explicitly distinguishes sensor-format plausibility from verified mount/image-circle compatibility.
+- Documents that generative models use equipment names as semantic cues, not guaranteed optical simulation.
+- Preserves the difference between camera position and focal length for perspective, and between f-number and T-stop.
+- Family-level data is labeled as reference material; exact SKU properties require manufacturer verification.
+
 # Changelog
 
 ## 3.3.0 — Cinematic Intelligence Architecture (2026-10-03)
