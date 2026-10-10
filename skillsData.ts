@@ -868,6 +868,9 @@ export function smartSharpen(input: HardnessInput | SharpenSpec): SharpenSpec {
 
 export function antiSlop(text: string, modality: Modality): AntiSlopResult {
   const hits: AntiSlopResult['hits'] = [];
+  if (!text.trim()) {
+    return { modality, score: 'UNASSESSED', status: 'UNASSESSED', hits, dimensions: {} };
+  }
   const empty = text.match(EMPTY_ADJECTIVES) ?? [];
   empty.forEach((term, i) => hits.push({ id: `EMPTY_ADJECTIVE_${i + 1}`, severity: 'warn', message: `empty adjective: ${term}`, fix: 'replace adjective with an observable production parameter' }));
   for (const rule of MODALITY_SLOP[modality]) if (rule.pattern.test(text)) hits.push({ id: rule.id, severity: 'warn', message: `formula detected for ${modality}`, fix: rule.fix });
@@ -879,7 +882,7 @@ export function antiSlop(text: string, modality: Modality): AntiSlopResult {
   const rhythm = /timing|rhythm|beat|duration|cut|pause|silence|pace/i.test(text) ? 10 : 5;
   const cliché = Math.max(0, 10 - Math.min(10, hits.length * 2));
   const score = specificity + originality + technical + humanity + materiality + rhythm + cliché;
-  const status: AntiSlopStatus = !text.trim() ? 'UNASSESSED' : score >= 90 ? 'PASS' : score >= 80 ? 'POLISH' : 'REGENERATE';
+  const status: AntiSlopStatus = score >= 90 ? 'PASS' : score >= 80 ? 'POLISH' : 'REGENERATE';
   return { modality, score, status, hits, dimensions: { specificity, originality, technical, humanity, materiality, rhythm, absence_of_cliches: cliché } };
 }
 
@@ -915,7 +918,7 @@ export function qualityLoop(input: HardnessInput, generatedText: string): Qualit
   const postPlan = postSharpenPlan({ modality: input.modality, destination: input.destination });
   const findings = audit.hits.map(h => h.message);
   const fixes = audit.hits.map(h => h.fix);
-  const status: AntiSlopStatus = audit.score === 'UNASSESSED' ? 'UNASSESSED' : audit.score >= 90 ? 'PASS' : audit.score >= 80 ? 'POLISH' : 'REGENERATE';
+  const status: AntiSlopStatus = audit.status;
   if (sharpened.technical.fov_degrees != null && (input.modality === 'image' || input.modality === 'video')) {
     if (!findings.includes('FOV resolved')) findings.push('FOV resolved in degrees');
   }
