@@ -158,3 +158,17 @@ Dimensions and weights live in `tables.audit_dimensions`. The pass rule is G12: 
 - Re-verify engine specs added in 3.3 (`confidence: low`, `verified_on 2026-06-30`) and the v3.1 specs older than 90 days (`staleEngines()`).
 - Optionally translate the remaining Portuguese v3.1 strings in the JSON (`triggers_pt` stays for PT routing).
 - Assimilate additional repositories (CineZine, openDesign, Hugovdd/skills, openclaw marketplace) once their contents are provided; each addition should land as a style, skill, pipeline, table or adapter — never as a loose file.
+
+
+## Optical Intelligence layer
+
+The additive `opticsCatalog.ts` module resolves narrative intent and requested focal length into a family-level lens reference, prompt tokens, optical notes and explicit caveats. It includes camera-format references and test coverage in `tests/opticsCatalog.test.ts`.
+
+The module does not silently claim exact physical compatibility. A lens record's format list is a planning hint, not a mount or image-circle guarantee. Manufacturer links are starting points; SKU-level specifications require individual verification. Generative model adapters receive semantic prompt cues, not simulated optical metadata.
+
+Current API:
+- `resolveOptics(request)`: deterministic lens-family selection and prompt construction.
+- `listLenses(filters)`: catalog filtering by family, intent and format.
+- `LENS_CATALOG` / `CAMERA_FORMATS`: structured family and camera-format reference data.
+
+This layer is intentionally additive to `compileShot()`; it can be composed into shot planning without changing legacy shot contracts.
