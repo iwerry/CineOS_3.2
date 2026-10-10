@@ -608,7 +608,9 @@ function blockFor(key: string, s: ShotSpec, st: ReturnType<typeof resolveShotSty
  */
 export function compileShot(shot: ShotSpec, engineId: string): CompiledShot | undefined {
   const engine = getModel(engineId); if (!engine) return undefined;
-  const adapter = getAdapter(engineId); const warnings: string[] = []; const st = resolveShotStyle(shot);\n  const timingQA = validateShotTiming(shot);\n  warnings.push(...timingQA.errors);
+  const adapter = getAdapter(engineId); const warnings: string[] = []; const st = resolveShotStyle(shot);
+  const timingQA = validateShotTiming(shot);
+  warnings.push(...timingQA.errors);
   // Feasibility Veto (G3) and engine limits
   if (shot.camera.fov_degrees >= 94 && (shot.emotion || shot.acting_beats?.length)) warnings.push('VETO: micro-acting at FOV >= 94 degrees — raise the shot size or lower the FOV.');
   if (engine.status === 'sunsetting') warnings.push(`ENGINE_SUNSET: ${engine.name} is sunsetting — do not start new pipelines on it.`);
@@ -642,7 +644,8 @@ export function compileShot(shot: ShotSpec, engineId: string): CompiledShot | un
     technical: { fov_degrees: shot.camera.fov_degrees, shutter_angle: 180, fps: engine.fps ?? CONFIG.defaults.fps },
     constraints: ['Preserve shot continuity', 'Keep one dominant camera device per short shot', 'Positive-only production instructions']
   }, prompt);
-  const effectiveQualityStatus: AntiSlopStatus = timingQA.errors.length ? 'REGENERATE' : qa.status;\n  const qualityWarnings = [`QUALITY_LOOP: ${effectiveQualityStatus}; AntiSlopScore ${qa.antiSlopScore}`,
+  const effectiveQualityStatus: AntiSlopStatus = timingQA.errors.length ? 'REGENERATE' : qa.status;
+  const qualityWarnings = [`QUALITY_LOOP: ${effectiveQualityStatus}; AntiSlopScore ${qa.antiSlopScore}`,
     ...qa.findings.map(x => `QUALITY: ${x}`), ...qa.fixes.map(x => `QUALITY_FIX: ${x}`)];
   if (effectiveQualityStatus === 'REGENERATE') qualityWarnings.push('QUALITY_GATE: revise this shot only; do not regenerate the whole sequence.');
   return { engine, adapter, prompt, negative: st.negatives || undefined, warnings: [...warnings, ...slop, ...qualityWarnings] };
