@@ -29,10 +29,30 @@ describe('Quality Loop regression coverage', () => {
     expect(loop.fixes).toContain('Provide non-empty generated content before scoring or delivery');
   });
 
-  it('maps heuristic scores to the documented status thresholds', () => {
-    expect(antiSlop('FOV 47 degrees', 'video').status).toBe('POLISH');
+  it('does not reward technical keyword stuffing as a quality pass', () => {
+    const keywordSoup = antiSlop('FOV 47 degrees, gesture, textured metal, timing, pause, 5600K, 180° shutter.', 'video');
+    expect(keywordSoup.status).not.toBe('PASS');
+    expect(keywordSoup.dimensions.humanity).toBe(4);
+    expect(keywordSoup.dimensions.specificity).toBeLessThan(20);
+  });
+
+  it('requires grounded subject/action/context evidence for PASS', () => {
+    const coherent = antiSlop(
+      'A courier crosses a wet stone courtyard at dawn. FOV 47 degrees, 5600K skylight, 180° shutter. Footfalls compress water into ripples.',
+      'video'
+    );
+    expect(coherent.status).toBe('PASS');
+    expect(coherent.dimensions.specificity).toBe(20);
+    expect(coherent.dimensions.humanity).toBe(15);
+    expect(antiSlop('FOV 47 degrees', 'video').status).toBe('REGENERATE');
     expect(antiSlop('A courier moves.', 'video').status).toBe('REGENERATE');
-    expect(antiSlop('FOV 47 degrees, a gesture on textured metal; timing follows the pause.', 'video').status).toBe('PASS');
+  });
+
+  it('scores technical evidence according to the requested modality', () => {
+    const video = antiSlop('FOV 47 degrees, 180° shutter at 24 fps.', 'video');
+    const audio = antiSlop('FOV 47 degrees, 180° shutter at 24 fps.', 'audio');
+    expect(video.dimensions.technical).toBe(15);
+    expect(audio.dimensions.technical).toBe(6);
   });
 
   it('detects empty adjectives instead of treating them as production detail', () => {
